@@ -9,6 +9,7 @@ import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Musket;
+import org.ragingzombies.flintnpowder.item.guns.flintlocks.SingleActionRevolver;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -21,6 +22,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> MUSKET = ITEMS.register("musket",
             () -> new Musket(new Musket.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SINGLEACTIONREVOLVER = ITEMS.register("single_action_revolver",
+            () -> new SingleActionRevolver(new SingleActionRevolver.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> CASTIRONROUNDSHOT = ITEMS.register("castironroundshot",
             () -> new CastIronRoundshot(new CastIronRoundshot.Properties().stacksTo(32)));
     public static final RegistryObject<Item> SHOTGUNSHELL = ITEMS.register("shotgunshell",

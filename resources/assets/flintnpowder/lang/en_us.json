@@ -5,5 +5,15 @@
   "item.flintnpowder.flintlockbase": "Flintlock test base bobobob",
   "item.flintnpowder.baseammo": "Base ammo test",
   "item.flintnpowder.musket": "Musket",
+  "item.flintnpowder.single_action_revolver": "Single Action Revolver",
+  "item.flintnpowder.single_action_revolver.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
+  "item.flintnpowder.single_action_revolver.description_2": "§2Calibre: Pistol Round",
+  "item.flintnpowder.single_action_revolver.description_1": "§2Two handed: Empty Offhand Required",
+  "item.flintnpowder.single_action_revolver.description_4": "",
+  "item.flintnpowder.single_action_revolver.description_3": "§26 Rounds capacity",
+
+
+  "item.flintnpowder.chamberopen": "[CHAMBER OPEN]",
+
   "item.flintnpowder.castironroundshot": "Cast Iron Roundshot"
 }

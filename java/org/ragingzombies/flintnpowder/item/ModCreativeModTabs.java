@@ -30,6 +30,7 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("fnp.creativetab.firearms"))
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.MUSKET.get());
+                        pOutput.accept(ModItems.SINGLEACTIONREVOLVER.get());
                         pOutput.accept(ModItems.RAMROD.get());
                     }))
                     .build());

@@ -23,13 +23,11 @@ public class GunBase extends Item {
         return false;
     }
 
-    public boolean tryShoot(Level pLevel, LivingEntity pPlayer) {
+    public boolean tryShoot(Level pLevel, LivingEntity pPlayer, InteractionHand pUsedHand) {
         return true;
     }
 
-    public void onTryFailure(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
-
-    }
+    public void onTryFailure(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) { }
 
     public float damageModifier() {
         return 1;

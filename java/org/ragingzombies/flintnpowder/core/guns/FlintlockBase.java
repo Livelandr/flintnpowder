@@ -81,7 +81,7 @@ public class FlintlockBase extends GunBase {
 
             // If everything is done - shoot
             if (gunStack.getTag().getBoolean("IsCocked")) {
-                if (tryShoot(pLevel, pPlayer)) {
+                if (tryShoot(pLevel, pPlayer, pUsedHand)) {
                     Shoot(pLevel, pPlayer, gunStack);
                 } else {
                     onTryFailure(pLevel, pPlayer, gunStack);

@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
@@ -24,8 +25,8 @@ public class ShotgunShell extends BaseAmmo {
             float angle = rand.nextFloat((float) (2.0F*Math.PI));
             float radius = rand.nextFloat(25);
 
-            Snowball snowball = new Snowball(level, shooter);
-            snowball.shootFromRotation(shooter, shooter.getXRot() + (float)(Math.cos(angle)*radius), shooter.getYRot() + (float)(Math.sin(angle)*radius), 0.0F, 2F, 0F);
+            Arrow snowball = new Arrow(level, shooter);
+            snowball.shootFromRotation(shooter, shooter.getXRot() + (float)(Math.cos(angle)*radius), shooter.getYRot() + (float)(Math.sin(angle)*radius), 0.0F, 15F, 0F);
 
             level.addFreshEntity(snowball);
         }
