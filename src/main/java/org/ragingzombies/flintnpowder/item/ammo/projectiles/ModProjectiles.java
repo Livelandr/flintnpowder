@@ -22,6 +22,13 @@ public class ModProjectiles {
                     .updateInterval(15)
                     .build("cast_iron_roundshot_projectile"));
 
+    public static final RegistryObject<EntityType<SteelRoundshotProjectile>> STEELROUNDSHOTPROJECTILE =
+            PROJECTILES.register("steel_roundshot_projectile", () -> EntityType.Builder.<SteelRoundshotProjectile>of(SteelRoundshotProjectile::new, MobCategory.MISC)
+                    .sized(0.5f,0.5f)
+                    .clientTrackingRange(5)
+                    .updateInterval(15)
+                    .build("steel_roundshot_projectile"));
+
     public static final RegistryObject<EntityType<CopperRoundshotProjectile>> COPPERROUNDSHOTPROJECTILE =
             PROJECTILES.register("copper_roundshot_projectile", () -> EntityType.Builder.<CopperRoundshotProjectile>of(CopperRoundshotProjectile::new, MobCategory.MISC)
                     .sized(0.5f,0.5f)

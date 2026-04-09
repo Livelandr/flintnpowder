@@ -14,6 +14,7 @@ import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Flinter;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Musket;
+import org.ragingzombies.flintnpowder.item.guns.flintlocks.Pistol;
 import org.ragingzombies.flintnpowder.item.guns.pumpaction.PumpActionShotgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.SingleActionRevolver;
 
@@ -31,6 +32,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> MUSKET = ITEMS.register("musket",
             () -> new Musket(new Musket.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> PISTOL = ITEMS.register("pistol",
+            () -> new Pistol(new Pistol.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FLINTER = ITEMS.register("flinter",
             () -> new Flinter(new Flinter.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SINGLEACTIONREVOLVER = ITEMS.register("single_action_revolver",
@@ -39,6 +42,8 @@ public class ModItems {
             () -> new PumpActionShotgun(new PumpActionShotgun.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CASTIRONROUNDSHOT = ITEMS.register("castironroundshot",
+            () -> new CastIronRoundshot(new CastIronRoundshot.Properties().stacksTo(32)));
+    public static final RegistryObject<Item> STEELROUNDSHOT = ITEMS.register("steel_roundshot",
             () -> new CastIronRoundshot(new CastIronRoundshot.Properties().stacksTo(32)));
     public static final RegistryObject<Item> COPPERROUNDSHOT = ITEMS.register("copper_roundshot",
             () -> new CopperRoundshot(new CopperRoundshot.Properties().stacksTo(32)));

@@ -35,9 +35,19 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
                 }
         );
+        // Pistol
+        ItemProperties.register(
+                ModItems.PISTOL.get(),
+                new ResourceLocation(MOD_ID, "pistol_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
+                }
+        );
 
         // Cast Iron Roundshot Projectile
         EntityRenderers.register(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), ThrownItemRenderer::new);
+        // Steel Roundshot Projectile
+        EntityRenderers.register(ModProjectiles.STEELROUNDSHOTPROJECTILE.get(), ThrownItemRenderer::new);
         // Copper Roundshot Projectile
         EntityRenderers.register(ModProjectiles.COPPERROUNDSHOTPROJECTILE.get(), ThrownItemRenderer::new);
         // Buckshot Projectile
