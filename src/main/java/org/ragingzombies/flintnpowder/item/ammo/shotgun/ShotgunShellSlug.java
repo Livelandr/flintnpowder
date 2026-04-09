@@ -34,11 +34,4 @@ public class ShotgunShellSlug extends BaseAmmo {
         float angleX = rand.nextFloat(5.0F);
         OffsetEntityCamera(shooter,(-30+(angleX-2))*gun.recoilModifierX(),(angleX-2)*gun.recoilModifierY());
     }
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
-        pTooltipComponents.add(Component.translatable("flintnpowder.bullet_description"));
-
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-    }
 }

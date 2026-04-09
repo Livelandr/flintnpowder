@@ -34,6 +34,7 @@ public class BaseAmmo extends Item {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (!customDescription) {
             pTooltipComponents.add(Component.literal(""));
+            pTooltipComponents.add(Component.translatable("flintnpowder.bullet_description"));
             pTooltipComponents.add(Component.translatable("flintnpowder.projectile_damage")
                     .append(String.valueOf(Math.round(this.damage))).withStyle(ChatFormatting.DARK_GREEN));
         }

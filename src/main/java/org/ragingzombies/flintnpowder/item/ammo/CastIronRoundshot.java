@@ -8,6 +8,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.guns.GunBase;
@@ -15,6 +16,8 @@ import org.ragingzombies.flintnpowder.item.ModItems;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.CastIronRoundshotProjectile;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 import static org.ragingzombies.flintnpowder.core.util.CameraWork.OffsetEntityCamera;
@@ -39,12 +42,5 @@ public class CastIronRoundshot extends BaseAmmo {
         OffsetEntityCamera(shooter,(-15+(angleX-2))*gun.recoilModifierX(),(angleX-2)*gun.recoilModifierY());
 
         level.addFreshEntity(proj);
-    }
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
-        pTooltipComponents.add(Component.translatable("flintnpowder.bullet_description"));
-
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

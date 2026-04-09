@@ -101,11 +101,11 @@ public class GunBase extends Item {
     }
 
     // Attachments
-    public boolean checkAttachment(Item attachment) {
+    public boolean checkAttachment(ItemStack gun, Item attachment) {
         return false;
     }
 
-    public void addAttachment(AttachmentBase attachment) {
+    public void setAttachment(ItemStack gun, AttachmentBase attachment) {
 
     }
 

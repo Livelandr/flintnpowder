@@ -16,7 +16,7 @@
   "fnp.creativetab.ammunition": "Flint'N'Powder - Ammunition",
   "item.flintnpowder.ramrod": "Ramrod",
 
-  "flintnpowder.ammo": "§7When shot from a firearm:"
+  "flintnpowder.bullet_description": "§7When shot from a firearm:",
   
   "item.flintnpowder.musket": "Musket",
   "item.flintnpowder.musket.description_0": "§6Flintlock: No flint and steel is required to fire",
@@ -41,6 +41,7 @@
   "item.flintnpowder.shotgunshell": "12 Gauge Shotgun Shell",
   "item.flintnpowder.shotgunshellslug": "12 Gauge Slug Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",
+  "item.flintnpowder.shotgunshelldragon.description": "Shoots with burning powder",
   "item.flintnpowder.pistol_round": "Pistol Round",
 
   "item.flintnpowder.flinter": "Flinter",
