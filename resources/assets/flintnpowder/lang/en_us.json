@@ -1,10 +1,26 @@
 {
+  "flintnpowder.gunpowder": "Gunpowder: ",
+  "flintnpowder.no_payload": "No ammo",
+  "flintnpowder.payload": "Ammo: ",
+
+  "flintnpowder.chamberopen": "[CHAMBER OPEN]",
+  "flintnpowder.uncocked": "[UNCOCKED]",
+
+  "flintnpowder.not_stuffed": "Not stuffed",
+  "flintnpowder.ready_to_shoot": "Ready to shoot",
+
+  "flintnpowder.ammo": "Ammo: ",
+  "flintnpowder.projectile_damage": "Projectile damage: ",
+
   "fnp.creativetab.firearms": "Flint'N'Powder - Firearms",
   "fnp.creativetab.ammunition": "Flint'N'Powder - Ammunition",
   "item.flintnpowder.ramrod": "Ramrod",
-  "item.flintnpowder.flintlockbase": "Flintlock test base bobobob",
-  "item.flintnpowder.baseammo": "Base ammo test",
+
   "item.flintnpowder.musket": "Musket",
+  "item.flintnpowder.musket.description_0": "§6Flintlock: No flint and steel is required to fire",
+  "item.flintnpowder.musket.description_1": "§2Calibre: Cast Iron Roundshot, Steel Roundshot",
+  "item.flintnpowder.musket.description_2": "§2Two handed: Empty Offhand required",
+
   "item.flintnpowder.single_action_revolver": "Single Action Revolver",
   "item.flintnpowder.single_action_revolver.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
   "item.flintnpowder.single_action_revolver.description_2": "§2Calibre: Pistol Round",
@@ -12,8 +28,23 @@
   "item.flintnpowder.single_action_revolver.description_4": "",
   "item.flintnpowder.single_action_revolver.description_3": "§26 Rounds capacity",
 
+  "item.flintnpowder.shotgun": "Pump Action Shotgun",
+  "item.flintnpowder.shotgun.description_3": "§26 Rounds capacity",
+  "item.flintnpowder.shotgun.description_2": "§2Calibre: Shotgun Shell",
+  "item.flintnpowder.shotgun.description_1": "§2Two handed: Empty Offhand required",
+  "item.flintnpowder.shotgun.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
 
-  "item.flintnpowder.chamberopen": "[CHAMBER OPEN]",
+  "item.flintnpowder.copper_roundshot": "Copper Roundshot",
+  "item.flintnpowder.castironroundshot": "Cast Iron Roundshot",
+  "item.flintnpowder.shotgunshell": "12 Gauge Shotgun Shell",
+  "item.flintnpowder.shotgunshellslug": "12 Gauge Slug Shotgun Shell",
+  "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",
+  "item.flintnpowder.pistol_round": "Pistol Round",
 
-  "item.flintnpowder.castironroundshot": "Cast Iron Roundshot"
+  "item.flintnpowder.flinter": "Flinter",
+  "item.flintnpowder.flinter.description_0": "§6Hole and steel: Flint is required to fire",
+  "item.flintnpowder.flinter.description_1": "§2Uses stick as a ramrod",
+  "item.flintnpowder.flinter.description_2": "§420% chance to fire",
+  "item.flintnpowder.flinter.description_3": "§2Calibre: Copper Roundshot",
+  "item.flintnpowder.flinter.description_4": ""
 }

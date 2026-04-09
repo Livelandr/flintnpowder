@@ -1,7 +1,8 @@
 package org.ragingzombies.flintnpowder.core.guns;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -9,9 +10,13 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlazelockBase extends GunBase {
     public BlazelockBase(Properties pProperties) {
@@ -20,25 +25,29 @@ public class BlazelockBase extends GunBase {
 
     public int maxAmmo = 2;
 
-    public void onChamberOpen(Level pLevel, LivingEntity shooter, InteractionHand pUsedHand) {
+    public void onChamberOpen(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
+
+        setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, shootCooldownTicks);
         }
     }
 
-    public void onChamberClose(Level pLevel, LivingEntity shooter, InteractionHand pUsedHand) {
+    public void onChamberClose(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
+
+        setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, shootCooldownTicks);
         }
     }
 
-    public void onAmmoInsert(Level pLevel, LivingEntity shooter, InteractionHand pUsedHand) {
+    public void onAmmoInsert(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
@@ -47,19 +56,51 @@ public class BlazelockBase extends GunBase {
         }
     }
 
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
-        int curAmmo = gunStack.getTag().getInt("Ammo");
-        ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType" + curAmmo));
+    public int GetMaxAmmoAmount(ItemStack gun) {
+        return ((BlazelockBase) gun.getItem()).maxAmmo;
+    }
 
-        curAmmo--;
-        gunStack.getTag().putInt("Ammo", curAmmo);
+    public int GetAmmoAmount(ItemStack gun) {
+        return gun.getTag().getInt("Ammo");
+    }
 
-        if (curAmmo == 0) gunStack.getTag().putBoolean("ShootReady", false);
+    public void AddAmmo(ItemStack gun, ItemStack ammo) {
+        int curAmmo = gun.getTag().getInt("Ammo");
+        curAmmo++;
+        gun.getTag().putInt("Ammo", curAmmo);
+
+        CompoundTag ammoData = ammo.serializeNBT();
+        gun.getTag().put("AmmoType" + curAmmo, ammoData);
+
+        ammo.shrink(1);
+    }
+
+    public BaseAmmo GetFirstAmmo(ItemStack gun) {
+        int curAmmo = gun.getTag().getInt("Ammo");
+        ItemStack ammoData = ItemStack.of((CompoundTag) gun.getTag().get("AmmoType" + curAmmo));
 
         BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
+
+        curAmmo--;
+        gun.getTag().putInt("Ammo", curAmmo);
+
+        return ammo;
+    }
+
+    @Override
+    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+        BaseAmmo ammo = GetFirstAmmo(gunStack);
+
         ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
 
-        onShoot(pLevel, pPlayer, gunStack);
+        if (GetAmmoAmount(gunStack) == 0) gunStack.getTag().putBoolean("ShootReady", false);
+    }
+
+    @Override
+    public boolean tryShoot(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
+        if (GetAmmoAmount(gun) == 0) return false;
+
+        return true;
     }
 
     @Override
@@ -74,52 +115,94 @@ public class BlazelockBase extends GunBase {
             secondItemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
 
 
-        if (!pLevel.isClientSide()) {
 
+        if (!pLevel.isClientSide()) {
             if (!gunStack.hasTag()) gunStack.setTag(new CompoundTag());
 
             // If everything is done - shoot
             if (gunStack.getTag().getBoolean("ShootReady")) {
-                if (tryShoot(pLevel, pPlayer, pUsedHand)) {
-                    Shoot(pLevel, pPlayer, gunStack);
-                } else {
-                    onTryFailure(pLevel, pPlayer, gunStack);
+                if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
+                    if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
+                        Shoot(pLevel, pPlayer, gunStack);
+                        onShoot(pLevel, pPlayer, gunStack);
+                    } else {
+                        onTryFailure(pLevel, pPlayer, gunStack);
+                        gunStack.getTag().putBoolean("ShootReady", false);
+                    }
                 }
             } else {
+                // If chamber opened - try to insert ammo, or close
                 if (gunStack.getTag().getBoolean("ChamberOpen")) {
-                    if (gunStack.getTag().getInt("Ammo") < maxAmmo) {
+                    // If ammo is less than max
+                    if (GetAmmoAmount(gunStack) < maxAmmo) {
                         if (checkAmmo(secondItemStack.getItem())) {
-                            int curAmmo = gunStack.getTag().getInt("Ammo");
-                            curAmmo++;
-                            gunStack.getTag().putInt("Ammo", curAmmo);
-
-                            secondItemStack.shrink(1);
-
-                            CompoundTag ammoData = secondItemStack.serializeNBT();
-                            gunStack.getTag().put("AmmoType" + curAmmo, ammoData);
-
-                            onAmmoInsert(pLevel, pPlayer, pUsedHand);
+                            AddAmmo(gunStack, secondItemStack);
+                            onAmmoInsert(pLevel, pPlayer, gunStack, pUsedHand);
                         } else {
                             gunStack.getTag().putBoolean("ChamberOpen", false);
-                            onChamberClose(pLevel, pPlayer, pUsedHand);
-                            if (gunStack.getTag().getInt("Ammo") > 0) {
-                                gunStack.getTag().putBoolean("ShootReady", true);
-                            }
+                            onChamberClose(pLevel, pPlayer, gunStack, pUsedHand);
+                            gunStack.getTag().putBoolean("ShootReady", true);
                         }
                     } else {
                         gunStack.getTag().putBoolean("ChamberOpen", false);
-                        onChamberClose(pLevel, pPlayer, pUsedHand);
+                        onChamberClose(pLevel, pPlayer, gunStack, pUsedHand);
                         gunStack.getTag().putBoolean("ShootReady", true);
                     }
+
+                    return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
                 } else {
-                    onChamberOpen(pLevel, pPlayer, pUsedHand);
+                    onChamberOpen(pLevel, pPlayer, gunStack, pUsedHand);
                     gunStack.getTag().putBoolean("ChamberOpen", true);
                 }
 
 
-
             }
         }
+
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+    }
+
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+
+        // Ammo + Chamber open
+        if (pLevel != null && pStack.hasTag() ) {
+            long time = pLevel.getGameTime();
+
+            if (GetAmmoAmount(pStack) > 0) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.ammo").withStyle(ChatFormatting.WHITE).append(
+                        Component.literal( String.valueOf(GetAmmoAmount(pStack)) ).append(
+                                Component.literal("/").append(
+                                        Component.literal(String.valueOf(GetMaxAmmoAmount(pStack)))))));
+
+                // Output all loaded ammo
+                for (int i = 0; i < GetAmmoAmount(pStack); i++) {
+                    ItemStack ammoData = ItemStack.of((CompoundTag) pStack.getTag().get("AmmoType" + (i+1)));
+
+                    pTooltipComponents.add(Component.literal(String.valueOf(i+1)).append(Component.literal(": ")).append(ammoData.getDisplayName()));
+                }
+            } else {
+                ChatFormatting format;
+                if (time % 10 < 5) {
+                    format = ChatFormatting.WHITE;
+                } else {
+                    format = ChatFormatting.DARK_RED;
+                }
+                pTooltipComponents.add(Component.translatable("flintnpowder.no_payload").withStyle(format));
+            }
+
+            if (pStack.getTag().getBoolean("ChamberOpen")) {
+                ChatFormatting format;
+                if (time % 10 < 5) {
+                    format = ChatFormatting.WHITE;
+                } else {
+                    format = ChatFormatting.DARK_RED;
+                }
+                pTooltipComponents.add(Component.translatable("flintnpowder.chamberopen").withStyle(format));
+            }
+        }
+
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

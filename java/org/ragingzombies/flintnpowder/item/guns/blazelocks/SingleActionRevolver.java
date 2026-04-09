@@ -1,4 +1,4 @@
-package org.ragingzombies.flintnpowder.item.guns.flintlocks;
+package org.ragingzombies.flintnpowder.item.guns.blazelocks;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -12,22 +12,21 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.ShotgunShell;
+import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
+import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
-import java.awt.*;
 import java.util.List;
 
 public class SingleActionRevolver extends BlazelockBase {
     public SingleActionRevolver(Properties pProperties) {
         super(pProperties);
         maxAmmo = 6;
-        shootCooldownTicks = 10;
+        shootCooldownTicks = 15;
     }
 
     @Override
-    public boolean tryShoot(Level pLevel, LivingEntity pPlayer, InteractionHand pUsedHand) {
+    public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
         ItemStack secondItemStack;
         if (pUsedHand == InteractionHand.MAIN_HAND)
             secondItemStack = pPlayer.getItemInHand(InteractionHand.OFF_HAND);
@@ -40,34 +39,48 @@ public class SingleActionRevolver extends BlazelockBase {
     }
 
     @Override
-    public void onAmmoInsert(Level pLevel, LivingEntity shooter, InteractionHand pUsedHand) {
+    public void onAmmoInsert(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 4);
+            ply.getCooldowns().addCooldown(this, 5);
         }
     }
 
     @Override
     public boolean checkAmmo(Item ammo){
-        if (ammo instanceof CastIronRoundshot) {
-            return true;
-        }
-        if (ammo instanceof ShotgunShell) {
+        if (ammo instanceof PistolRound) {
             return true;
         }
 
         return false;
     }
+    @Override
+    public float accuracyModifier(){
+        return 2.5F;
+    }
+
+    @Override
+    public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 3.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+
+        if (shooter instanceof Player) {
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+        }
+    }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_4"));
+        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_2"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_3"));
+        pTooltipComponents.add(Component.literal(""));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

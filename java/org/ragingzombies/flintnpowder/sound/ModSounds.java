@@ -15,6 +15,22 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> RAMROD = registerSoundEvents("ramrod");
     public static final RegistryObject<SoundEvent> GUNSWING = registerSoundEvents("gunswing");
     public static final RegistryObject<SoundEvent> MUSKETFIRE = registerSoundEvents("musketfire");
+    public static final RegistryObject<SoundEvent> BULLETHIT = registerSoundEvents("bullethit");
+
+    public static final RegistryObject<SoundEvent> FLINTPRIME = registerSoundEvents("flintprime");
+    public static final RegistryObject<SoundEvent> FLINTSTRIKE = registerSoundEvents("flintstrike");
+
+    public static final RegistryObject<SoundEvent> SHOTGUNPUMPBACK = registerSoundEvents("shotgunpumpbackward");
+    public static final RegistryObject<SoundEvent> SHOTGUNRELOAD = registerSoundEvents("shotgunshell");
+    public static final RegistryObject<SoundEvent> SHOTGUNPUMPFORW = registerSoundEvents("shotgunpumpforward");
+    public static final RegistryObject<SoundEvent> SHOTGUNSHOT = registerSoundEvents("autoshotgun");
+
+    public static final RegistryObject<SoundEvent> RIFLERELOAD = registerSoundEvents("rifleround");
+
+    public static final RegistryObject<SoundEvent> PISTOLSHOOT = registerSoundEvents("pistol");
+
+
+
 
     public static RegistryObject<SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Flintnpowder.MOD_ID, name)));
