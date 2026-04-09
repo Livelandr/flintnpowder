@@ -13,7 +13,7 @@ import static org.ragingzombies.flintnpowder.core.util.CameraWork.OffsetEntityCa
 public class CopperRoundshot extends BaseAmmo {
     public CopperRoundshot(Properties pProperties) {
         super(pProperties);
-        this.damage = 6;
+        this.damage = 15;
     }
 
     @Override

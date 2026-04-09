@@ -1,8 +1,12 @@
 package org.ragingzombies.flintnpowder.item.guns.blazelocks;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -70,6 +74,42 @@ public class SingleActionRevolver extends BlazelockBase {
                 ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 2.0F, 1.0F, 0);
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.PISTOLDISTANTSHOOT.get(), SoundSource.NEUTRAL, 8.0F, 1.0F, 0);
+
+        // Particles
+        if (!pLevel.isClientSide()) {
+            ServerLevel sLevel = (ServerLevel) pLevel;
+            //Second index is your particle count. DO. NOT. TOUCH. pParticleCount.
+            //I'm dead serious. I know it might be weird that the particle count is not the actual particle count, but just trust the process and don't touch it.
+            //Thank you.
+            for (int index0 = 0; index0 < 25; index0++) {
+                double speed = 0.15;
+                double spread = 0.32;
+
+                sLevel.sendParticles(
+                        ParticleTypes.FLAME,
+                        shooter.getX(), shooter.getY() + shooter.getEyeHeight() * 0.6, shooter.getZ(),
+                        0,
+                        shooter.getDeltaMovement().x + shooter.getLookAngle().x * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().y + shooter.getLookAngle().y * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().z + shooter.getLookAngle().z * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        1.0
+                );
+            }
+            for (int index1 = 0; index1 < 15; index1++) {
+                double speed = 0.22;
+                double spread = 0.28;
+
+                sLevel.sendParticles(
+                        ParticleTypes.LARGE_SMOKE,
+                        shooter.getX(), shooter.getY() + shooter.getEyeHeight() * 0.5, shooter.getZ(),
+                        0,
+                        shooter.getDeltaMovement().x + shooter.getLookAngle().x * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().y + shooter.getLookAngle().y * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().z + shooter.getLookAngle().z * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        1.0
+                );
+            }
+        }
 
         if (shooter instanceof Player) {
             ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);

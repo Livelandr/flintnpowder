@@ -91,19 +91,35 @@ public class Flinter extends FlintlockBase {
         // Particles
         if (!pLevel.isClientSide()) {
             ServerLevel sLevel = (ServerLevel) pLevel;
-
-            for (int i = 0; i < 7; i++) {
-                double speed = 0.15;
-                double spread = 0.02;
+            //Second index is your particle count. DO. NOT. TOUCH. pParticleCount.
+            //I'm dead serious. I know it might be weird that the particle count is not the actual particle count, but just trust the process and don't touch it.
+            //Thank you.
+            for (int index0 = 0; index0 < 25; index0++) {
+                double speed = 0.55;
+                double spread = 0.12;
 
                 sLevel.sendParticles(
                         ParticleTypes.POOF,
                         shooter.getX(), shooter.getY() + shooter.getEyeHeight() * 0.6, shooter.getZ(),
-                        25,
-                        shooter.getDeltaMovement().x * speed + Mth.nextDouble(RandomSource.create(), -spread, spread),
-                        shooter.getDeltaMovement().y * speed + Mth.nextDouble(RandomSource.create(), -spread, spread),
-                        shooter.getDeltaMovement().z * speed + Mth.nextDouble(RandomSource.create(), -spread, spread),
-                        0.5
+                        0,
+                        shooter.getDeltaMovement().x + shooter.getLookAngle().x * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().y + shooter.getLookAngle().y * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().z + shooter.getLookAngle().z * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        1.0
+                );
+            }
+            for (int index1 = 0; index1 < 15; index1++) {
+                double speed = 0.22;
+                double spread = 0.28;
+
+                sLevel.sendParticles(
+                        ParticleTypes.LARGE_SMOKE,
+                        shooter.getX(), shooter.getY() + shooter.getEyeHeight() * 0.5, shooter.getZ(),
+                        0,
+                        shooter.getDeltaMovement().x + shooter.getLookAngle().x * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().y + shooter.getLookAngle().y * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        shooter.getDeltaMovement().z + shooter.getLookAngle().z * speed + Mth.nextDouble(RandomSource.create(), spread * (-1), spread),
+                        1.0
                 );
             }
         }

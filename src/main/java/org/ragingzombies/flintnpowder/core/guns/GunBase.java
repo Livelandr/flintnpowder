@@ -21,6 +21,9 @@ public class GunBase extends Item {
 
     public int cooldownTicks = 20;
     public int shootCooldownTicks = 20;
+    public int gunpowderCooldownTicks = 20;
+    public int ramrodCooldownTicks = 20;
+    public int reloadPitch = 1;
 
     public GunBase(Properties pProperties) {
         super(pProperties);
@@ -118,9 +121,10 @@ public class GunBase extends Item {
     public float recoilModifierY() {
         return 1;
     }
-    public float accuracyModifier() {
-        return 1;
-    }
+    public float accuracyModifier() { return 1; }
+    public float gunpowderCooldown() { return 20; }
+    public float ramrodCooldown() { return 60; }
+
 
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {}
 

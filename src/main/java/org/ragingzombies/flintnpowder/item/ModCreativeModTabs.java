@@ -21,6 +21,7 @@ public class ModCreativeModTabs {
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(Items.GUNPOWDER);
                         pOutput.accept(ModItems.CASTIRONROUNDSHOT.get());
+                        pOutput.accept(ModItems.STEELROUNDSHOT.get());
                         pOutput.accept(ModItems.COPPERROUNDSHOT.get());
                         pOutput.accept(ModItems.SHOTGUNSHELL.get());
                         pOutput.accept(ModItems.SHOTGUNSHELLSLUG.get());
@@ -35,6 +36,7 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("fnp.creativetab.firearms"))
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.MUSKET.get());
+                        pOutput.accept(ModItems.PISTOL.get());
                         pOutput.accept(ModItems.FLINTER.get());
                         pOutput.accept(ModItems.SINGLEACTIONREVOLVER.get());
                         pOutput.accept(ModItems.PUMPACTIONSHOTGUN.get());

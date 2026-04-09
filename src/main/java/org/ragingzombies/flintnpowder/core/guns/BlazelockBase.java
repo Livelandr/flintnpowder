@@ -171,7 +171,7 @@ public class BlazelockBase extends GunBase {
             long time = pLevel.getGameTime();
 
             if (GetAmmoAmount(pStack) > 0) {
-                pTooltipComponents.add(Component.translatable("flintnpowder.ammo").withStyle(ChatFormatting.WHITE).append(
+                pTooltipComponents.add(Component.translatable("flintnpowder.ammo").withStyle(ChatFormatting.GRAY).append(
                         Component.literal( String.valueOf(GetAmmoAmount(pStack)) ).append(
                                 Component.literal("/").append(
                                         Component.literal(String.valueOf(GetMaxAmmoAmount(pStack)))))));
@@ -185,7 +185,7 @@ public class BlazelockBase extends GunBase {
             } else {
                 ChatFormatting format;
                 if (time % 10 < 5) {
-                    format = ChatFormatting.WHITE;
+                    format = ChatFormatting.GRAY;
                 } else {
                     format = ChatFormatting.DARK_RED;
                 }
@@ -195,7 +195,7 @@ public class BlazelockBase extends GunBase {
             if (pStack.getTag().getBoolean("ChamberOpen")) {
                 ChatFormatting format;
                 if (time % 10 < 5) {
-                    format = ChatFormatting.WHITE;
+                    format = ChatFormatting.GRAY;
                 } else {
                     format = ChatFormatting.DARK_RED;
                 }
