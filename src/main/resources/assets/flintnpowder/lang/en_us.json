@@ -16,6 +16,8 @@
   "fnp.creativetab.ammunition": "Flint'N'Powder - Ammunition",
   "item.flintnpowder.ramrod": "Ramrod",
 
+  "flintnpowder.ammo": "§7When shot from a firearm:"
+  
   "item.flintnpowder.musket": "Musket",
   "item.flintnpowder.musket.description_0": "§6Flintlock: No flint and steel is required to fire",
   "item.flintnpowder.musket.description_1": "§2Calibre: Cast Iron Roundshot, Steel Roundshot",
