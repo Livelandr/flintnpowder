@@ -53,7 +53,7 @@ public class Flinter extends FlintlockBase {
     @Override
     public boolean tryShoot(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                SoundEvents.FLINTANDSTEEL_USE, SoundSource.NEUTRAL, 10.0F, 1.0F, 0);
+                SoundEvents.FLINTANDSTEEL_USE, SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (pPlayer instanceof Player) {
             ((Player) pPlayer).getCooldowns().addCooldown(this, 20);
@@ -66,7 +66,7 @@ public class Flinter extends FlintlockBase {
     @Override
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, 35);
@@ -80,8 +80,11 @@ public class Flinter extends FlintlockBase {
 
     @Override
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
+
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 7.0F, 1.0F, 0);
+                ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 2.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.PISTOLDISTANTSHOOT.get(), SoundSource.NEUTRAL, 8.0F, 1.0F, 0);
 
         setReloadAnimation(gunStack);
 

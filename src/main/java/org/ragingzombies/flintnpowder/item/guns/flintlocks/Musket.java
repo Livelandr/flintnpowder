@@ -33,10 +33,14 @@ public class Musket extends FlintlockBase {
     @Override
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 4.0F, 1.0F, 0);
+                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.MUSKETFIRE.get(), SoundSource.NEUTRAL, 7.0F, 1.0F, 0);
+                ModSounds.MUSKETFIRE.get(), SoundSource.NEUTRAL, 3.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F, 0);
+
+
 
         setReloadAnimation(gunStack);
 

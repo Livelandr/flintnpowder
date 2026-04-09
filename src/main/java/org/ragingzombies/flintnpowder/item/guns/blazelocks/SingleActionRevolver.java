@@ -64,9 +64,12 @@ public class SingleActionRevolver extends BlazelockBase {
     @Override
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 3.0F, 1.0F, 0);
+                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
+
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+                ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 2.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.PISTOLDISTANTSHOOT.get(), SoundSource.NEUTRAL, 8.0F, 1.0F, 0);
 
         if (shooter instanceof Player) {
             ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);

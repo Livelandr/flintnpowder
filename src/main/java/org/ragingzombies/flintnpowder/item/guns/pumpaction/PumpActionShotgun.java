@@ -81,6 +81,21 @@ public class PumpActionShotgun extends PumpActionBase {
         return true;
     }
 
+
+    @Override
+    public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.SHOTGUNSHOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 10.0F, 1.0F, 0);
+
+        if (shooter instanceof Player) {
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+        }
+    }
+
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),

@@ -33,8 +33,5 @@ public class ShotgunShellSlug extends BaseAmmo {
         // Recoil
         float angleX = rand.nextFloat(5.0F);
         OffsetEntityCamera(shooter,(-30+(angleX-2))*gun.recoilModifierX(),(angleX-2)*gun.recoilModifierY());
-
-        level.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.SHOTGUNSHOT.get(), SoundSource.NEUTRAL, 10.0F, 1.0F, 0);
     }
 }
