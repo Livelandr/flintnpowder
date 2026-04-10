@@ -15,7 +15,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
-import org.ragingzombies.flintnpowder.item.ModItems;
+import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
@@ -93,7 +94,7 @@ public class PumpActionShotgun extends PumpActionBase {
 
     @Override
     public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
-        return (attachment == ModItems.SILENCER.get());
+        return (attachment == ModItemsAttachments.SILENCER.get());
     }
 
     @Override

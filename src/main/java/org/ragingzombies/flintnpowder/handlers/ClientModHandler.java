@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.ragingzombies.flintnpowder.item.ModItems;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 
 import static org.ragingzombies.flintnpowder.Flintnpowder.MOD_ID;
@@ -21,7 +21,7 @@ public class ClientModHandler {
     public static void onClientSetup(FMLClientSetupEvent event) {
         // Shotgun
         ItemProperties.register(
-                ModItems.PUMPACTIONSHOTGUN.get(),
+                ModItemsGuns.PUMPACTIONSHOTGUN.get(),
                 new ResourceLocation(MOD_ID, "shotgun_pumping"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("IsUncocked") ? 1.0F : 0.0F;
@@ -29,14 +29,14 @@ public class ClientModHandler {
         );
         // Musket
         ItemProperties.register(
-                ModItems.MUSKET.get(),
+                ModItemsGuns.MUSKET.get(),
                 new ResourceLocation(MOD_ID, "musket_primed"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
                 }
         );
         ItemProperties.register(
-                ModItems.MUSKET.get(),
+                ModItemsGuns.MUSKET.get(),
                 new ResourceLocation(MOD_ID, "musket_bayonet"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
@@ -44,7 +44,7 @@ public class ClientModHandler {
         );
         // Pistol
         ItemProperties.register(
-                ModItems.PISTOL.get(),
+                ModItemsGuns.PISTOL.get(),
                 new ResourceLocation(MOD_ID, "pistol_primed"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;

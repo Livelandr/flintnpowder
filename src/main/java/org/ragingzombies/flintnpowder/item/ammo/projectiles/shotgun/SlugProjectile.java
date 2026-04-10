@@ -15,7 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.item.ModItems;
+import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
@@ -56,12 +57,12 @@ public class SlugProjectile extends AbstractArrow implements ItemSupplier {
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(ModItems.CASTIRONROUNDSHOT.get());
+        return new ItemStack(ModItemsAmmo.CASTIRONROUNDSHOT.get());
     }
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(ModItems.CASTIRONROUNDSHOT.get());
+        return new ItemStack(ModItemsAmmo.CASTIRONROUNDSHOT.get());
     }
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {

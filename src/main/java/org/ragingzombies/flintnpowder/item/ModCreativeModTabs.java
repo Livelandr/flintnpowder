@@ -9,6 +9,10 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.ModItems;
+import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
@@ -20,13 +24,13 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("fnp.creativetab.ammunition"))
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(Items.GUNPOWDER);
-                        pOutput.accept(ModItems.CASTIRONROUNDSHOT.get());
-                        pOutput.accept(ModItems.STEELROUNDSHOT.get());
-                        pOutput.accept(ModItems.COPPERROUNDSHOT.get());
-                        pOutput.accept(ModItems.SHOTGUNSHELL.get());
-                        pOutput.accept(ModItems.SHOTGUNSHELLSLUG.get());
-                        pOutput.accept(ModItems.SHOTGUNSHELLDRAGON.get());
-                        pOutput.accept(ModItems.PISTOLROUND.get());
+                        pOutput.accept(ModItemsAmmo.CASTIRONROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.STEELROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.COPPERROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.SHOTGUNSHELL.get());
+                        pOutput.accept(ModItemsAmmo.SHOTGUNSHELLSLUG.get());
+                        pOutput.accept(ModItemsAmmo.SHOTGUNSHELLDRAGON.get());
+                        pOutput.accept(ModItemsAmmo.PISTOLROUND.get());
                         // Empty
                     }))
                     .build());
@@ -35,14 +39,14 @@ public class ModCreativeModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.FNPTABICON.get()))
                     .title(Component.translatable("fnp.creativetab.firearms"))
                     .displayItems(((pParameters, pOutput) -> {
-                        pOutput.accept(ModItems.MUSKET.get());
-                        pOutput.accept(ModItems.PISTOL.get());
-                        pOutput.accept(ModItems.FLINTER.get());
-                        pOutput.accept(ModItems.SINGLEACTIONREVOLVER.get());
-                        pOutput.accept(ModItems.PUMPACTIONSHOTGUN.get());
+                        pOutput.accept(ModItemsGuns.MUSKET.get());
+                        pOutput.accept(ModItemsGuns.PISTOL.get());
+                        pOutput.accept(ModItemsGuns.FLINTER.get());
+                        pOutput.accept(ModItemsGuns.SINGLEACTIONREVOLVER.get());
+                        pOutput.accept(ModItemsGuns.PUMPACTIONSHOTGUN.get());
                         pOutput.accept(ModItems.RAMROD.get());
-                        pOutput.accept(ModItems.SILENCER.get());
-                        pOutput.accept(ModItems.BAYONET.get());
+                        pOutput.accept(ModItemsAttachments.SILENCER.get());
+                        pOutput.accept(ModItemsAttachments.BAYONET.get());
                     }))
                     .build());
 

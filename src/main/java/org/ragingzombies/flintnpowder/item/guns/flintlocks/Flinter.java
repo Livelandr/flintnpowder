@@ -16,10 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ModItems;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -93,7 +90,8 @@ public class Flinter extends FlintlockBase {
             ServerLevel sLevel = (ServerLevel) pLevel;
             //Second index is your particle count. DO. NOT. TOUCH. pParticleCount.
             //I'm dead serious. I know it might be weird that the particle count is not the actual particle count, but just trust the process and don't touch it.
-            //Thank you.
+            //Thank you. (shnorfpf)
+            // hiii :3 (livelandr)
             for (int index0 = 0; index0 < 25; index0++) {
                 double speed = 0.55;
                 double spread = 0.12;

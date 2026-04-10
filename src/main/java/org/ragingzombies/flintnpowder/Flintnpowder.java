@@ -7,10 +7,11 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.ragingzombies.flintnpowder.item.ModCreativeModTabs;
-import org.ragingzombies.flintnpowder.item.ModItems;
+import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 import org.ragingzombies.flintnpowder.core.network.PacketHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
@@ -29,7 +30,12 @@ public class Flintnpowder {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModTabs.register(modEventBus);
+
         ModItems.register(modEventBus);
+        ModItemsGuns.register(modEventBus);
+        ModItemsAmmo.register(modEventBus);
+        ModItemsAttachments.register(modEventBus);
+
         ModSounds.register(modEventBus);
         ModProjectiles.register(modEventBus);
 

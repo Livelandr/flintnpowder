@@ -16,7 +16,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
-import org.ragingzombies.flintnpowder.item.ModItems;
 import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 

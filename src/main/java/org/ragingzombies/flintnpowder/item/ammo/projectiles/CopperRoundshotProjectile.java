@@ -15,7 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.item.ModItems;
+import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 public class CopperRoundshotProjectile extends AbstractArrow implements ItemSupplier {
@@ -55,12 +56,12 @@ public class CopperRoundshotProjectile extends AbstractArrow implements ItemSupp
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(ModItems.COPPERROUNDSHOT.get());
+        return new ItemStack(ModItemsAmmo.COPPERROUNDSHOT.get());
     }
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(ModItems.COPPERROUNDSHOT.get());
+        return new ItemStack(ModItemsAmmo.COPPERROUNDSHOT.get());
     }
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
