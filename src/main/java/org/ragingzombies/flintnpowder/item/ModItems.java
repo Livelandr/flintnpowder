@@ -12,6 +12,7 @@ import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
+import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
 import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Flinter;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Musket;
@@ -59,10 +60,10 @@ public class ModItems {
     public static final RegistryObject<Item> SHOTGUNSHELLDRAGON = ITEMS.register("shotgunshelldragon",
             () -> new ShotgunShellDragon(new ShotgunShellDragon.Properties().stacksTo(32)));
 
-
     public static final RegistryObject<Item> SILENCER = ITEMS.register("silencer",
-            () -> new Silencer(
-                    new Silencer.Properties().stacksTo(1)));
+            () -> new Silencer(new Silencer.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BAYONET = ITEMS.register("bayonet",
+            () -> new Bayonet(new Bayonet.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

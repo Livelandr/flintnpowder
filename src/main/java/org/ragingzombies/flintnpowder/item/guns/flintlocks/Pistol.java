@@ -86,7 +86,7 @@ public class Pistol extends FlintlockBase {
         }
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gunStack));
         }
     }
 

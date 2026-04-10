@@ -32,7 +32,7 @@ public class BlazelockBase extends GunBase {
         setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, shootCooldownTicks);
+            ply.getCooldowns().addCooldown(this, shootCooldown(ply, gun));
         }
     }
 
@@ -43,7 +43,7 @@ public class BlazelockBase extends GunBase {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, shootCooldownTicks);
+            ply.getCooldowns().addCooldown(this, shootCooldown(ply, gun));
         }
     }
 
@@ -52,7 +52,7 @@ public class BlazelockBase extends GunBase {
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, shootCooldownTicks);
+            ply.getCooldowns().addCooldown(this, shootCooldown(ply, gun));
         }
     }
 

@@ -21,6 +21,9 @@
   "item.flintnpowder.silencer": "Silencer",
   "item.flintnpowder.silencer.description": "§2Makes a quieter gunshot sound",
 
+  "item.flintnpowder.bayonet": "Bayonet",
+  "item.flintnpowder.bayonet.description": "§2Increases melee damage and distance",
+
   "flintnpowder.bullet_description": "§7When shot from a firearm:",
 
   "item.flintnpowder.musket": "Musket",
@@ -43,6 +46,7 @@
 
   "item.flintnpowder.copper_roundshot": "Copper Roundshot",
   "item.flintnpowder.castironroundshot": "Cast Iron Roundshot",
+  "item.flintnpowder.steelroundshot": "Cast Iron Roundshot",
   "item.flintnpowder.shotgunshell": "12 Gauge Shotgun Shell",
   "item.flintnpowder.shotgunshellslug": "12 Gauge Slug Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",

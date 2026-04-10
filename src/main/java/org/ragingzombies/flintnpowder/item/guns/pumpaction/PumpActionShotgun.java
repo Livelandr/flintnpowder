@@ -100,7 +100,7 @@ public class PumpActionShotgun extends PumpActionBase {
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gunStack));
         }
 
         if (!isAttachmentValidAndEnabled(gunStack, "Silencer")) {
@@ -178,7 +178,7 @@ public class PumpActionShotgun extends PumpActionBase {
         setReloadAnimation(gun);
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gun));
         }
     }
 
@@ -199,8 +199,6 @@ public class PumpActionShotgun extends PumpActionBase {
 
             totalAttach++;
         }
-
-
 
         if (totalAttach > 0) {
             pTooltipComponents.add(Component.literal(""));

@@ -14,7 +14,7 @@ import static org.ragingzombies.flintnpowder.core.util.CameraWork.OffsetEntityCa
 public class SteelRoundshot extends BaseAmmo {
     public SteelRoundshot(Properties pProperties) {
         super(pProperties);
-        this.damage = 18;
+        this.damage = 21;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class SteelRoundshot extends BaseAmmo {
 
         proj.damage = this.damage * gun.damageModifier();
         proj.setOwner(shooter);
-        proj.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 10F, 4F * gun.accuracyModifier());
+        proj.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 10F, 2F * gun.accuracyModifier());
 
         // Recoil
         Random rand = new Random();

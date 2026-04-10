@@ -51,7 +51,7 @@
   "overrides": [
     {
       "predicate": {
-        "flintnpowder:bayonet_musket_primed": 1
+        "flintnpowder:musket_primed": 1
       },
       "model": "flintnpowder:item/bayonet_musket_0"
     }

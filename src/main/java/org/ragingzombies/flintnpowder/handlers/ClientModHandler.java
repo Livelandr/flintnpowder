@@ -35,6 +35,13 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
                 }
         );
+        ItemProperties.register(
+                ModItems.MUSKET.get(),
+                new ResourceLocation(MOD_ID, "musket_bayonet"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
+                }
+        );
         // Pistol
         ItemProperties.register(
                 ModItems.PISTOL.get(),

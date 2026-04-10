@@ -53,7 +53,7 @@ public class FlintlockBase extends GunBase {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, shootCooldownTicks);
+            ply.getCooldowns().addCooldown(this, shootCooldown(ply, gun));
         }
     }
 

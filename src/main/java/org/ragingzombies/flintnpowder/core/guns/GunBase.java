@@ -30,7 +30,6 @@ public class GunBase extends Item {
         super(pProperties);
     }
 
-
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -93,6 +92,10 @@ public class GunBase extends Item {
     }
     public void setReloadAnimation(ItemStack gun) {
         gun.getOrCreateTag().putBoolean("IsAiming", false);
+    }
+
+    public int shootCooldown(LivingEntity ply, ItemStack gun) {
+        return shootCooldownTicks;
     }
 
     public boolean checkAmmo(Item ammo) {
