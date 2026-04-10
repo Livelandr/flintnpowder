@@ -4,6 +4,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.guns.GunBase;
+import org.ragingzombies.flintnpowder.core.util.CameraWork;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.CastIronRoundshotProjectile;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.SteelRoundshotProjectile;
 
@@ -23,7 +24,7 @@ public class SteelRoundshot extends BaseAmmo {
 
         proj.damage = this.damage * gun.damageModifier();
         proj.setOwner(shooter);
-        proj.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 10F, 2F * gun.accuracyModifier());
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewX(shooter), 0.0F, 10F, 2F * gun.accuracyModifier());
 
         // Recoil
         Random rand = new Random();
