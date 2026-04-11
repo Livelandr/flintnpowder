@@ -80,6 +80,7 @@ public class BaseMagazine extends Item {
     public ItemStack extractLastAmmo(ItemStack mag) {
         int curAmmo = getAmmo(mag);
         ItemStack ammo = getLastAmmo(mag);
+        ammo.setCount(1);
         mag.getTag().putInt("AmmoCount", curAmmo-1);
         onAmmoExtract(mag);
         return ammo;

@@ -31,7 +31,7 @@ public class ModItemsAmmo {
             () -> new ShotgunShellDragon(new ShotgunShellDragon.Properties().stacksTo(32)));
 
     public static final RegistryObject<Item> HANDGUNMAG = ITEMS.register("handgunmag",
-            () -> new HandgunMag(new HandgunMag.Properties().stacksTo(8)));
+            () -> new HandgunMag(new HandgunMag.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
