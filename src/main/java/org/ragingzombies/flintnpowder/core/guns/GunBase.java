@@ -1,6 +1,7 @@
 package org.ragingzombies.flintnpowder.core.guns;
 
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -11,12 +12,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.attachments.AttachmentBase;
+import org.ragingzombies.flintnpowder.handlers.AttachmentRenderer;
+import org.ragingzombies.flintnpowder.handlers.ClientModHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
+
+import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
 
 public class GunBase extends Item {
 
@@ -26,9 +37,13 @@ public class GunBase extends Item {
     public int ramrodCooldownTicks = 20;
     public int reloadPitch = 1;
 
+    public static List<Class> allowedAmmo = new ArrayList<>();
+    public static List<Class> allowedAttachments = new ArrayList<>();
+
     public GunBase(Properties pProperties) {
         super(pProperties);
     }
+
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -73,6 +88,12 @@ public class GunBase extends Item {
                 }
             });
 
+            /*
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return ClientModHandler.getRenderer();
+            }
+            */
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
                 if (!itemStack.isEmpty()) {
@@ -98,12 +119,31 @@ public class GunBase extends Item {
         return shootCooldownTicks;
     }
 
+    public static void addAllowedAmmo(Class ammo) {
+        allowedAmmo.add(ammo);
+    }
+
+    public static void addAllowedAttachment(Class ammo) {
+        allowedAttachments.add(ammo);
+    }
+
     public boolean checkAmmo(Item ammo) {
+        for (Class a : allowedAmmo) {
+            if (ammo.getClass() == a) {
+                return true;
+            }
+        }
+
         return false;
     }
 
-    // Attachments
     public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
+        for (Class a : allowedAttachments) {
+            if (attachment.getClass() == a) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -114,7 +154,6 @@ public class GunBase extends Item {
         // Return old attachment
         if (isAttachmentValidAndEnabled(gun, attachType)) {
             detachAttachment(ply, gun, attachType);
-            onAttachmentDetach(ply, gun, attachType);
         }
 
         CompoundTag newAttachments = new CompoundTag();
@@ -134,6 +173,7 @@ public class GunBase extends Item {
     public void detachAttachment(Player ply, ItemStack gun, String type) {
         ItemStack detached = getAttachmentStack(gun, type);
         ((AttachmentBase) detached.getItem()).onDetach(ply, detached, gun);
+        onAttachmentDetach(ply, gun, type);
         ply.getInventory().add(detached);
         gun.getOrCreateTag().getCompound("Attachments").getCompound(type).putBoolean("enabled", false);
     }
@@ -193,8 +233,6 @@ public class GunBase extends Item {
         return 1;
     }
     public float accuracyModifier() { return 1; }
-    public float gunpowderCooldown() { return 20; }
-    public float ramrodCooldown() { return 60; }
 
 
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {}
@@ -216,4 +254,25 @@ public class GunBase extends Item {
             ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
         }
     }
+
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        int totalAttach = 0;
+        for (String type : attachmentTypes) {
+            if (isAttachmentValidAndEnabled(pStack, type)) {
+                ItemStack item = getAttachmentStack(pStack, type);
+                pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
+                item.getItem().appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+
+                totalAttach++;
+            }
+        }
+        if (totalAttach > 0) {
+            pTooltipComponents.add(Component.literal(""));
+        }
+
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+    }
+
 }

@@ -15,7 +15,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
+import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
+import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
 import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
@@ -28,26 +31,17 @@ import java.util.List;
 public class PumpActionShotgun extends PumpActionBase {
     public PumpActionShotgun(Properties pProperties) {
         super(pProperties);
-    }
 
-    @Override
-    public boolean checkAmmo(Item ammo) {
-        if (ammo instanceof ShotgunShell) {
-            return true;
-        }
-        if (ammo instanceof ShotgunShellSlug) {
-            return true;
-        }
-        if (ammo instanceof ShotgunShellDragon) {
-            return true;
-        }
+        addAllowedAmmo(ShotgunShell.class);
+        addAllowedAmmo(ShotgunShellSlug.class);
+        addAllowedAmmo(ShotgunShellDragon.class);
 
-        return false;
+        addAllowedAttachment(Silencer.class);
     }
 
     @Override
     public float accuracyModifier() {
-        return 2;
+        return 2 * super.accuracyModifier();
     }
 
     @Override
@@ -90,11 +84,6 @@ public class PumpActionShotgun extends PumpActionBase {
         if (GetAmmoAmount(gun) == 0) return false;
 
         return true;
-    }
-
-    @Override
-    public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
-        return (attachment == ModItemsAttachments.SILENCER.get());
     }
 
     @Override
@@ -191,19 +180,6 @@ public class PumpActionShotgun extends PumpActionBase {
         pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_2"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_3"));
         pTooltipComponents.add(Component.literal(""));
-
-        int totalAttach = 0;
-        if (isAttachmentValidAndEnabled(pStack, "Silencer")) {
-            ItemStack item = getAttachmentStack(pStack, "Silencer");
-            pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
-            item.getItem().appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-
-            totalAttach++;
-        }
-
-        if (totalAttach > 0) {
-            pTooltipComponents.add(Component.literal(""));
-        }
 
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

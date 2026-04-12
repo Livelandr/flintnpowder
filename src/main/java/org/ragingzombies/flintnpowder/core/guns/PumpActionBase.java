@@ -139,6 +139,7 @@ public class PumpActionBase extends GunBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
         // Ammo + Chamber open
         if (pLevel != null && pStack.hasTag() ) {

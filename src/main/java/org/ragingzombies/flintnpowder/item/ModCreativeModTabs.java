@@ -49,6 +49,8 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.RAMROD.get());
                         pOutput.accept(ModItemsAttachments.SILENCER.get());
                         pOutput.accept(ModItemsAttachments.BAYONET.get());
+                        pOutput.accept(ModItemsAttachments.HIGHPROFILEOPTIC.get());
+                        pOutput.accept(ModItemsAttachments.LOWPROFILEOPTIC.get());
                     }))
                     .build());
 

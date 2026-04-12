@@ -17,7 +17,9 @@ import org.ragingzombies.flintnpowder.core.guns.MagfedBase;
 import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
+import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
 import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -27,23 +29,16 @@ public class SemiPistol extends MagfedBase {
     public SemiPistol(Properties pProperties) {
         super(pProperties);
         shootCooldownTicks = 10;
-    }
 
-    @Override
-    public boolean checkMagazine(ItemStack mag) {
-        if (mag.getItem() instanceof HandgunMag) return true;
+        addAllowedMagazine(HandgunMag.class);
 
-        return false;
-    }
-
-    @Override
-    public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
-        return (attachment == ModItemsAttachments.SILENCER.get());
+        addAllowedAttachment(LowProfileOptic.class);
+        addAllowedAttachment(Silencer.class);
     }
 
     @Override
     public float accuracyModifier() {
-        return 1;
+        return 1 * super.accuracyModifier();
     }
 
     @Override
@@ -62,28 +57,6 @@ public class SemiPistol extends MagfedBase {
                 ModSounds.PISTOLCOCKFORWARD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         setAimAnimation(gun);
-
-        if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 15);
-        }
-    }
-
-    @Override
-    public void onMagExtract(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.PISTOLMAGIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
-
-        setReloadAnimation(gun);
-
-        if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 15);
-        }
-    }
-
-    @Override
-    public void onMagInsert(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.PISTOLMAGIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, 15);
@@ -133,19 +106,6 @@ public class SemiPistol extends MagfedBase {
         pTooltipComponents.add(Component.translatable("item.flintnpowder.handgun_pistol.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.handgun_pistol.description_1"));
         pTooltipComponents.add(Component.literal(""));
-
-        int totalAttach = 0;
-        if (isAttachmentValidAndEnabled(pStack, "Silencer")) {
-            ItemStack item = getAttachmentStack(pStack, "Silencer");
-            pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
-            item.getItem().appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-
-            totalAttach++;
-        }
-
-        if (totalAttach > 0) {
-            pTooltipComponents.add(Component.literal(""));
-        }
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

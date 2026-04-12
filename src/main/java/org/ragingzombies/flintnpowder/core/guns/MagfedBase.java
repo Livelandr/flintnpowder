@@ -18,6 +18,7 @@ import org.ragingzombies.flintnpowder.core.ammo.BaseMagazine;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MagfedBase extends GunBase {
@@ -25,7 +26,19 @@ public class MagfedBase extends GunBase {
         super(pProperties);
     }
 
+    public static List<Class> allowedMags = new ArrayList<>();
+
+    public static void addAllowedMagazine(Class mag) {
+        allowedMags.add(mag);
+    }
+
     public boolean checkMagazine(ItemStack mag) {
+        for (Class a : allowedMags) {
+            if (mag.getItem().getClass() == a) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -202,6 +215,7 @@ public class MagfedBase extends GunBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
         // Ammo + Chamber open
         if (pLevel != null && pStack.hasTag() ) {
@@ -245,7 +259,5 @@ public class MagfedBase extends GunBase {
             }
 
         }
-
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

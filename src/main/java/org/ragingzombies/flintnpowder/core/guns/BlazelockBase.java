@@ -24,11 +24,22 @@ public class BlazelockBase extends GunBase {
     }
 
     public int maxAmmo = 2;
+    public boolean needCocking = false;
+
+    public void onCocking(Level pLevel, LivingEntity shooter, ItemStack gun) {
+        pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+                ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
+
+        if (shooter instanceof Player ply) {
+            ply.getCooldowns().addCooldown(this, shootCooldown(ply, gun));
+        }
+    }
 
     public void onChamberOpen(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
+        gun.getTag().putBoolean("IsCocked", false);
         setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
@@ -91,6 +102,7 @@ public class BlazelockBase extends GunBase {
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
+        gunStack.getTag().putBoolean("IsCocked", false);
         ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
 
         if (GetAmmoAmount(gunStack) == 0) gunStack.getTag().putBoolean("ShootReady", false);
@@ -120,18 +132,24 @@ public class BlazelockBase extends GunBase {
             // Attachment
             if (checkAttachmentComparability(pPlayer, gunStack, secondItemStack.getItem())) {
                 this.setAttachment(pPlayer, gunStack, secondItemStack);
+
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
             }
 
             // If everything is done - shoot
             if (gunStack.getTag().getBoolean("ShootReady")) {
                 if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
-                    if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
-                        Shoot(pLevel, pPlayer, gunStack);
-                        onShoot(pLevel, pPlayer, gunStack);
+                    if (!needCocking || gunStack.getTag().getBoolean("IsCocked")) {
+                        if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
+                            Shoot(pLevel, pPlayer, gunStack);
+                            onShoot(pLevel, pPlayer, gunStack);
+                        } else {
+                            onTryFailure(pLevel, pPlayer, gunStack);
+                            gunStack.getTag().putBoolean("ShootReady", false);
+                        }
                     } else {
-                        onTryFailure(pLevel, pPlayer, gunStack);
-                        gunStack.getTag().putBoolean("ShootReady", false);
+                        gunStack.getTag().putBoolean("IsCocked", true);
+                        onCocking(pLevel, pPlayer, gunStack);
                     }
                 }
             } else {
@@ -167,6 +185,7 @@ public class BlazelockBase extends GunBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
         // Ammo + Chamber open
         if (pLevel != null && pStack.hasTag() ) {
@@ -203,8 +222,20 @@ public class BlazelockBase extends GunBase {
                 }
                 pTooltipComponents.add(Component.translatable("flintnpowder.chamberopen").withStyle(format));
             }
-        }
 
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+            if (this.needCocking && pStack.getTag().getBoolean("ShootReady")) {
+                if (pStack.getTag().getBoolean("IsCocked")) {
+                    pTooltipComponents.add(Component.translatable("flintnpowder.cocked").withStyle(ChatFormatting.GREEN));
+                } else {
+                    ChatFormatting format;
+                    if (time % 10 < 5) {
+                        format = ChatFormatting.DARK_RED;
+                    } else {
+                        format = ChatFormatting.GRAY;
+                    }
+                    pTooltipComponents.add(Component.translatable("flintnpowder.uncocked").withStyle(format));
+                }
+            }
+        }
     }
 }

@@ -27,6 +27,9 @@ public class SingleActionRevolver extends BlazelockBase {
         super(pProperties);
         maxAmmo = 6;
         shootCooldownTicks = 15;
+        needCocking = true;
+
+        addAllowedAmmo(PistolRound.class);
     }
 
     @Override
@@ -52,6 +55,7 @@ public class SingleActionRevolver extends BlazelockBase {
         }
     }
 
+    /*
     @Override
     public boolean checkAmmo(Item ammo){
         if (ammo instanceof PistolRound) {
@@ -59,11 +63,11 @@ public class SingleActionRevolver extends BlazelockBase {
         }
 
         return false;
-    }
+    }*/
 
     @Override
     public float accuracyModifier(){
-        return 2.5F;
+        return 2.5F * super.accuracyModifier();
     }
 
     @Override

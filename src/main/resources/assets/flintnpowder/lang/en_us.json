@@ -1,4 +1,8 @@
 {
+
+  "key.categories.flintnpowder": "Flint'n'Powder",
+  "key.flintnpowder.zoomaim": "Aim gun",
+
   "flintnpowder.gunpowder": "Gunpowder: ",
   "flintnpowder.payload": "Ammo: ",
   "flintnpowder.no_payload": "No ammo",
@@ -11,6 +15,7 @@
 
   "flintnpowder.chamberopen": "[CHAMBER OPEN]",
   "flintnpowder.uncocked": "[UNCOCKED]",
+  "flintnpowder.cocked": "[COCKED]",
 
   "flintnpowder.not_stuffed": "Not stuffed",
   "flintnpowder.ready_to_shoot": "Ready to shoot",
@@ -31,6 +36,12 @@
   "item.flintnpowder.bayonet.description": "§2Increases melee damage and distance",
 
   "flintnpowder.bullet_description": "§7When shot from a firearm:",
+
+  "item.flintnpowder.hpoptic": "High Profile Optic",
+  "item.flintnpowder.hpoptic.description": "§2Allow too zoom to big distances",
+
+  "item.flintnpowder.lpoptic": "Low Profile Optic",
+  "item.flintnpowder.lpoptic.description": "§2Allow too zoom to small distances",
 
   "item.flintnpowder.musket": "Musket",
   "item.flintnpowder.musket.description_0": "§6Flintlock: No flint and steel is required to fire",

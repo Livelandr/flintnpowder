@@ -18,6 +18,8 @@ import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
+import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
+import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -29,11 +31,14 @@ public class Pistol extends FlintlockBase {
         shootCooldownTicks = 10;
         gunpowderCooldownTicks = 15;
         ramrodCooldownTicks = 40;
+
+        addAllowedAmmo(CastIronRoundshot.class);
+        addAllowedAmmo(CopperRoundshot.class);
     }
 
     @Override
     public float accuracyModifier() {
-        return 2;
+        return 2 * super.accuracyModifier();
     }
 
     @Override
@@ -44,8 +49,6 @@ public class Pistol extends FlintlockBase {
                 ModSounds.PISTOLDISTANTSHOOT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F, 0);
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.FLINTSTRIKE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
-
-
 
         setReloadAnimation(gunStack);
 
@@ -88,18 +91,6 @@ public class Pistol extends FlintlockBase {
         if (shooter instanceof Player) {
             ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gunStack));
         }
-    }
-
-    @Override
-    public boolean checkAmmo(Item ammo) {
-        if (ammo instanceof CopperRoundshot) {
-            return true;
-        }
-        if (ammo instanceof CastIronRoundshot) {
-            return true;
-        }
-
-        return false;
     }
 
     @Override

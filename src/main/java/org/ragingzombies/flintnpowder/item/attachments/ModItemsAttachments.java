@@ -15,6 +15,10 @@ public class ModItemsAttachments {
             () -> new Silencer(new Silencer.Properties().stacksTo(1)));
     public static final RegistryObject<Item> BAYONET = ITEMS.register("bayonet",
             () -> new Bayonet(new Bayonet.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HIGHPROFILEOPTIC = ITEMS.register("hpoptic",
+            () -> new HighProfileOptic(new HighProfileOptic.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> LOWPROFILEOPTIC = ITEMS.register("lpoptic",
+            () -> new LowProfileOptic(new LowProfileOptic.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

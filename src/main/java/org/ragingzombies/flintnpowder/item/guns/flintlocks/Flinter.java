@@ -17,6 +17,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
 import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
+import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -27,11 +28,13 @@ public class Flinter extends FlintlockBase {
     public Flinter(Properties pProperties) {
         super(pProperties);
         shootCooldownTicks = 25;
+
+        addAllowedAmmo(CopperRoundshot.class);
     }
 
     @Override
     public float accuracyModifier() {
-        return 2.5F;
+        return 2.5F * super.accuracyModifier();
     }
 
     @Override
@@ -121,15 +124,6 @@ public class Flinter extends FlintlockBase {
                 );
             }
         }
-    }
-
-    @Override
-    public boolean checkAmmo(Item ammo) {
-        if (ammo instanceof CopperRoundshot) {
-            return true;
-        }
-
-        return false;
     }
 
     @Override

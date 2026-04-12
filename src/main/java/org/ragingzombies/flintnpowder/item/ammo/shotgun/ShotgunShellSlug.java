@@ -27,7 +27,7 @@ public class ShotgunShellSlug extends BaseAmmo {
 
         proj.damage = this.damage * gun.damageModifier();
         proj.setOwner(shooter);
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 3F, 1.1F * gun.accuracyModifier());
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 25F, 0F * gun.accuracyModifier());
 
         level.addFreshEntity(proj);
 

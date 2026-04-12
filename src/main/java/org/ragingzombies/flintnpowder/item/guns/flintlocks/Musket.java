@@ -22,6 +22,10 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
+import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
+import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
+import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
+import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
 import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
@@ -31,6 +35,8 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+
+import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
 
 public class Musket extends FlintlockBase {
 
@@ -45,6 +51,13 @@ public class Musket extends FlintlockBase {
         shootCooldownTicks = 20;
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
+
+        addAllowedAmmo(CastIronRoundshot.class);
+        addAllowedAmmo(SteelRoundshot.class);
+
+        addAllowedAttachment(Bayonet.class);
+        addAllowedAttachment(HighProfileOptic.class);
+        addAllowedAttachment(LowProfileOptic.class);
 
         this.lazyAttributeMap = Lazy.of(() -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -84,7 +97,7 @@ public class Musket extends FlintlockBase {
 
     @Override
     public float accuracyModifier() {
-        return 1;
+        return 1 * super.accuracyModifier();
     }
 
     @Override
@@ -95,11 +108,6 @@ public class Musket extends FlintlockBase {
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, 35);
         }
-    }
-
-    @Override
-    public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
-        return (attachment == ModItemsAttachments.BAYONET.get());
     }
 
     @Override
@@ -155,38 +163,12 @@ public class Musket extends FlintlockBase {
     }
 
     @Override
-    public boolean checkAmmo(Item ammo) {
-        if (ammo instanceof CastIronRoundshot) {
-            return true;
-
-        }
-        if (ammo instanceof SteelRoundshot) {
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_2"));
         pTooltipComponents.add(Component.literal(""));
-
-        int totalAttach = 0;
-        if (isAttachmentValidAndEnabled(pStack, "Underbarrel")) {
-            ItemStack item = getAttachmentStack(pStack, "Underbarrel");
-            pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
-            item.getItem().appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-
-            totalAttach++;
-        }
-
-        if (totalAttach > 0) {
-            pTooltipComponents.add(Component.literal(""));
-        }
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

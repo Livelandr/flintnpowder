@@ -21,12 +21,17 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
+
 public class FlintlockBase extends GunBase {
     public FlintlockBase(Properties pProperties) {
         super(pProperties);
     }
 
     public int GunpowderRequired = 1;
+
+    public float gunpowderCooldown() { return 20; }
+    public float ramrodCooldown() { return 60; }
 
     public void onGunpowder(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
@@ -154,6 +159,7 @@ public class FlintlockBase extends GunBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
 
         // Statuses
         if (pLevel != null) {
@@ -179,6 +185,5 @@ public class FlintlockBase extends GunBase {
 
 
         }
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }
