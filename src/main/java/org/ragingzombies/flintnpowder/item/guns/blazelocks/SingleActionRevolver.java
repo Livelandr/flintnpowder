@@ -56,16 +56,6 @@ public class SingleActionRevolver extends BlazelockBase {
         }
     }
 
-    /*
-    @Override
-    public boolean checkAmmo(Item ammo){
-        if (ammo instanceof PistolRound) {
-            return true;
-        }
-
-        return false;
-    }*/
-
     @Override
     public float accuracyModifier(UUID ply){
         return 2.5F * super.accuracyModifier(ply);

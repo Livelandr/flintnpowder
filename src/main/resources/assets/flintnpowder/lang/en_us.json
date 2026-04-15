@@ -70,7 +70,9 @@
   "item.flintnpowder.shotgunshellslug": "12 Gauge Slug Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon.description": "Shoots with burning powder",
+
   "item.flintnpowder.pistol_round": "Pistol Round",
+  "item.flintnpowder.rifle_round": "Rifle Round",
 
   "item.flintnpowder.flinter": "Flinter",
   "item.flintnpowder.flinter.description_0": "§6Hole and steel: Flint is required to fire",
@@ -91,6 +93,12 @@
   "item.flintnpowder.arquebus.description_1": "§4Unable to fire underwater",
   "item.flintnpowder.arquebus.description_2": "§2Calibre: Copper Roundshot, Cast Iron Roundshot",
   "item.flintnpowder.arquebus.description_3": "",
+
+  "item.flintnpowder.trapdoor_rifle": "Trapdoor Rifle",
+  "item.flintnpowder.trapdoor_rifle.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
+  "item.flintnpowder.trapdoor_rifle.description_1": "§2Two handed: Empty Offhand required",
+  "item.flintnpowder.trapdoor_rifle.description_2": "§2Calibre: Rifle Round",
+  "item.flintnpowder.trapdoor_rifle.description_3": "",
 
   "item.flintnpowder.pistol": "Pistol",
   "item.flintnpowder.pistol.description_0": "§6Flintlock: No flint and steel is required to fire",

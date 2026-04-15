@@ -58,6 +58,21 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
                 }
         );
+        // Trapdoor
+        ItemProperties.register(
+                ModItemsGuns.TRAPDOORRIFLE.get(),
+                new ResourceLocation(MOD_ID, "trapdoor_rifle_opened"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("ChamberOpen") ? 1.0F : 0.0F;
+                }
+        );
+        ItemProperties.register(
+                ModItemsGuns.TRAPDOORRIFLE.get(),
+                new ResourceLocation(MOD_ID, "trapdoor_rifle_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("ShootReady") ? 1.0F : 0.0F;
+                }
+        );
         // Pistol
         ItemProperties.register(
                 ModItemsGuns.PISTOL.get(),
