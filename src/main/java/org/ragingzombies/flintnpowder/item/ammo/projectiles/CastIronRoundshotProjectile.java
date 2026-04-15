@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -55,12 +56,12 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(ModItemsAmmo.CASTIRONROUNDSHOT.get());
+        return new ItemStack(Items.AIR);
     }
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(ModItemsAmmo.CASTIRONROUNDSHOT.get());
+        return new ItemStack(Items.AIR);
     }
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {

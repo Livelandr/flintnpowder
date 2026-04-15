@@ -25,6 +25,7 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
@@ -37,8 +38,8 @@ public class GunBase extends Item {
     public int ramrodCooldownTicks = 20;
     public int reloadPitch = 1;
 
-    public static List<Class> allowedAmmo = new ArrayList<>();
-    public static List<Class> allowedAttachments = new ArrayList<>();
+    public List<Class> allowedAmmo = new ArrayList<>();
+    public List<Class> allowedAttachments = new ArrayList<>();
 
     public GunBase(Properties pProperties) {
         super(pProperties);
@@ -88,12 +89,12 @@ public class GunBase extends Item {
                 }
             });
 
-            /*
+
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return ClientModHandler.getRenderer();
             }
-            */
+
             @Override
             public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
                 if (!itemStack.isEmpty()) {
@@ -119,16 +120,17 @@ public class GunBase extends Item {
         return shootCooldownTicks;
     }
 
-    public static void addAllowedAmmo(Class ammo) {
+    public void addAllowedAmmo(Class ammo) {
         allowedAmmo.add(ammo);
     }
 
-    public static void addAllowedAttachment(Class ammo) {
+    public void addAllowedAttachment(Class ammo) {
         allowedAttachments.add(ammo);
     }
 
     public boolean checkAmmo(Item ammo) {
         for (Class a : allowedAmmo) {
+            Flintnpowder.LOGGER.info(a.getName());
             if (ammo.getClass() == a) {
                 return true;
             }
@@ -139,6 +141,7 @@ public class GunBase extends Item {
 
     public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
         for (Class a : allowedAttachments) {
+            Flintnpowder.LOGGER.info(a.getName());
             if (attachment.getClass() == a) {
                 return true;
             }
@@ -226,13 +229,16 @@ public class GunBase extends Item {
     public float damageModifier() {
         return 1;
     }
-    public float recoilModifierX() {
+
+    public float recoilModifierX(UUID id) {
         return 1;
     }
-    public float recoilModifierY() {
+    public float recoilModifierY(UUID id) {
         return 1;
     }
-    public float accuracyModifier() { return 1; }
+    public float accuracyModifier(UUID id) {
+        return 1;
+    }
 
 
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {}

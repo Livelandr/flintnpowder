@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -37,15 +38,17 @@ public class ShotgunShellDragon extends BaseAmmo {
 
             proj.setOwner(shooter);
             proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
-                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 2F,5 * gun.accuracyModifier());
+                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 2F,5 * gun.accuracyModifier(shooter.getUUID()));
             proj.SetDamage(0.0F * gun.damageModifier());
 
             level.addFreshEntity(proj);
         }
 
         // Recoil
-        float angleX = rand.nextFloat(4.0F);
-        OffsetEntityCamera(shooter,(-25+(angleX-2))*gun.recoilModifierX(),(angleX-2)*gun.recoilModifierY());
+        if (shooter instanceof Player) {
+            float angleX = rand.nextFloat(4.0F);
+            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+        }
     }
 
     @Override

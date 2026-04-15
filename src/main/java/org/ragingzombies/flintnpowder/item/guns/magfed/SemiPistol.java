@@ -24,6 +24,7 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 
 public class SemiPistol extends MagfedBase {
     public SemiPistol(Properties pProperties) {
@@ -37,8 +38,8 @@ public class SemiPistol extends MagfedBase {
     }
 
     @Override
-    public float accuracyModifier() {
-        return 1 * super.accuracyModifier();
+    public float accuracyModifier(UUID ply) {
+        return 1 * super.accuracyModifier(ply);
     }
 
     @Override

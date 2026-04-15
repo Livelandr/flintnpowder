@@ -10,14 +10,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
 import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
+import org.ragingzombies.flintnpowder.item.ammo.CopperVolleyshot;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -25,19 +24,17 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class Flinter extends FlintlockBase {
-    public Flinter(Properties pProperties) {
+public class Volleygun extends FlintlockBase {
+    public Volleygun(Properties pProperties) {
         super(pProperties);
         shootCooldownTicks = 25;
-
         noCock = true;
-
-        addAllowedAmmo(CopperRoundshot.class);
+        addAllowedAmmo(CopperVolleyshot.class);
     }
 
     @Override
     public float accuracyModifier(UUID ply) {
-        return 2.5F * super.accuracyModifier(ply);
+        return 2F * super.accuracyModifier(ply);
     }
 
     @Override

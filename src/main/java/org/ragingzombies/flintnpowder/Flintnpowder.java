@@ -3,11 +3,15 @@ package org.ragingzombies.flintnpowder;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.core.jmx.Server;
+import org.ragingzombies.flintnpowder.core.util.PlayerSpecificModifiers;
+import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.item.ModCreativeModTabs;
 import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
@@ -40,6 +44,8 @@ public class Flintnpowder {
         ModProjectiles.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(PlayerSpecificModifiers.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(ServerTickHandler.INSTANCE);
         modEventBus.addListener(this::addCreative);
 
         PacketHandler.register();
@@ -55,4 +61,5 @@ public class Flintnpowder {
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("Starting Flint'n'Powder...");
     }
+
 }

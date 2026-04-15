@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -55,12 +56,12 @@ public class SteelRoundshotProjectile extends AbstractArrow implements ItemSuppl
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(ModItemsAmmo.STEELROUNDSHOT.get());
+        return new ItemStack(Items.AIR);
     }
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(ModItemsAmmo.STEELROUNDSHOT.get());
+        return new ItemStack(Items.AIR);
     }
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {

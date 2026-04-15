@@ -28,6 +28,7 @@ public class FlintlockBase extends GunBase {
         super(pProperties);
     }
 
+    public boolean noCock = false;
     public int GunpowderRequired = 1;
 
     public float gunpowderCooldown() { return 20; }
@@ -45,6 +46,8 @@ public class FlintlockBase extends GunBase {
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+
+        setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, ramrodCooldownTicks);
@@ -103,7 +106,7 @@ public class FlintlockBase extends GunBase {
             }
 
             // If everything is done - shoot
-            if (gunStack.getTag().getBoolean("IsCocked")) {
+            if (gunStack.getTag().getBoolean("IsCocked") || (noCock && gunStack.getTag().getBoolean("IsStuffed"))) {
                 if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                     if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
                         Shoot(pLevel, pPlayer, gunStack);
@@ -142,7 +145,7 @@ public class FlintlockBase extends GunBase {
                     }
                 } else {
                     // Try to cock
-                    if (!gunStack.getTag().getBoolean("IsCocked")) {
+                    if (!gunStack.getTag().getBoolean("IsCocked") && !noCock) {
                         gunStack.getTag().putBoolean("IsCocked", true);
 
                         onCock(pLevel, pPlayer, gunStack, pUsedHand);
