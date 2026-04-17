@@ -30,7 +30,7 @@ public class PistolRound extends BaseAmmo {
         proj.damage = this.damage * gun.damageModifier();
         proj.setOwner(shooter);
 
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 2F * gun.accuracyModifier(shooter.getUUID()));
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 7F, 2F * gun.accuracyModifier(shooter.getUUID()));
 
         // Recoil
 

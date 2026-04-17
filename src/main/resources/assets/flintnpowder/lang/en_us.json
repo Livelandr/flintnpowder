@@ -26,6 +26,7 @@
 
   "flintnpowder.guninfoshift": "§6Hold [SHIFT] to view information about comparable ammo and attachments.",
   "flintnpowder.guninfoattachment": "§2Comparable attachment: ",
+  "flintnpowder.guninfonoattachment": "§4No comparable attachments",
   "flintnpowder.guninfoammo": "§2Comparable ammo: ",
 
   "fnp.creativetab.firearms": "Flint'N'Powder - Firearms",
@@ -57,7 +58,6 @@
   "item.flintnpowder.single_action_revolver.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
   "item.flintnpowder.single_action_revolver.description_2": "§2Calibre: Pistol Round",
   "item.flintnpowder.single_action_revolver.description_1": "§2Two handed: Empty Offhand Required",
-  "item.flintnpowder.single_action_revolver.description_4": "",
   "item.flintnpowder.single_action_revolver.description_3": "§26 Rounds capacity",
 
   "item.flintnpowder.shotgun": "Pump Action Shotgun",
@@ -71,6 +71,11 @@
 
   "item.flintnpowder.castironroundshot": "Cast Iron Roundshot",
   "item.flintnpowder.steel_roundshot": "Steel Roundshot",
+
+  "item.flintnpowder.golden_roundshot": "Fool's Gold Roundshot",
+  "item.flintnpowder.golden_roundshot.description_0": "§4Only a fool would think that this bullet is soft",
+  "item.flintnpowder.golden_roundshot.description_1": "§2+1 living entity piercing",
+
   "item.flintnpowder.shotgunshell": "12 Gauge Shotgun Shell",
   "item.flintnpowder.shotgunshellslug": "12 Gauge Slug Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",
@@ -85,39 +90,34 @@
   "item.flintnpowder.flinter.description_0": "§6Hole and steel: Flint is required to fire",
   "item.flintnpowder.flinter.description_1": "§2Uses stick as a ramrod",
   "item.flintnpowder.flinter.description_2": "§420% chance to fire",
-  "item.flintnpowder.flinter.description_3": "§2Calibre: Copper Roundshot",
-  "item.flintnpowder.flinter.description_4": "",
 
   "item.flintnpowder.volleygun": "Volley Gun",
   "item.flintnpowder.volleygun.description_0": "§6Hole and steel: Flint is required to fire",
   "item.flintnpowder.volleygun.description_1": "§2Uses stick as a ramrod",
   "item.flintnpowder.volleygun.description_2": "§420% chance to fire",
-  "item.flintnpowder.volleygun.description_4": "",
-  "item.flintnpowder.volleygun.description_3": "§2Caliber: Copper Volleyshot",
 
   "item.flintnpowder.arquebus": "Arquebus",
   "item.flintnpowder.arquebus.description_0": "§6Matchlock: Requires flint and steel to fire",
   "item.flintnpowder.arquebus.description_1": "§4Unable to fire underwater",
-  "item.flintnpowder.arquebus.description_2": "§2Calibre: Copper Roundshot, Cast Iron Roundshot",
-  "item.flintnpowder.arquebus.description_3": "",
+
+  "item.flintnpowder.rifle": "Rifle",
+  "item.flintnpowder.rifle.description_0": "§6Flintlock: No flint and steel is required to fire",
+  "item.flintnpowder.rifle.description_1": "§2Two handed: Empty Offhand required",
+  "item.flintnpowder.rifle.description_2": "§2+10% Projectile Damage",
 
   "item.flintnpowder.trapdoor_rifle": "Trapdoor Rifle",
   "item.flintnpowder.trapdoor_rifle.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
   "item.flintnpowder.trapdoor_rifle.description_1": "§2Two handed: Empty Offhand required",
-  "item.flintnpowder.trapdoor_rifle.description_2": "§2Calibre: Rifle Round",
   "item.flintnpowder.trapdoor_rifle.description_3": "",
 
   "item.flintnpowder.break_action_coachgun": "Break Action Coachgun",
   "item.flintnpowder.break_action_coachgun.description_0": "§6Blazelock: No need for additional gunpowder or ramrod",
   "item.flintnpowder.break_action_coachgun.description_1": "§2Two handed: Empty Offhand required",
-  "item.flintnpowder.break_action_coachgun.description_2": "§2Calibre: Shotgun Shell",
   "item.flintnpowder.break_action_coachgun.description_3": "§22 Rounds capacity",
 
   "item.flintnpowder.pistol": "Pistol",
   "item.flintnpowder.pistol.description_0": "§6Flintlock: No flint and steel is required to fire",
-  "item.flintnpowder.pistol.description_1": "§2Calibre: Copper Roundshot",
 
   "item.flintnpowder.handgun_pistol": "Blowback Handgun",
-  "item.flintnpowder.handgun_pistol.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
-  "item.flintnpowder.handgun_pistol.description_1": "§2Calibre: Pistol Round Magazine"
+  "item.flintnpowder.handgun_pistol.description_0": "§6Endlock: No need for additional gunpowder or ramrod"
 }

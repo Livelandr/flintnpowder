@@ -16,22 +16,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.ModItems;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
-public class PistolRoundProjectile extends AbstractArrow implements ItemSupplier {
+public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemSupplier {
 
+    private int entsPierced = 0;
     public float damage = 1;
 
-    public PistolRoundProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
+    public FoolsGoldRoundshotProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public PistolRoundProjectile(Level pLevel) {
-        super(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), pLevel);
+    public FoolsGoldRoundshotProjectile(Level pLevel) {
+        super(ModProjectiles.STEELROUNDSHOTPROJECTILE.get(), pLevel);
     }
-    public PistolRoundProjectile(Level pLevel, LivingEntity livingEntity) {
-        super(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), livingEntity, pLevel);
+    public FoolsGoldRoundshotProjectile(Level pLevel, LivingEntity livingEntity) {
+        super(ModProjectiles.STEELROUNDSHOTPROJECTILE.get(), livingEntity, pLevel);
+        this.setPierceLevel((byte) 1);
     }
 
     @Override
@@ -40,18 +40,16 @@ public class PistolRoundProjectile extends AbstractArrow implements ItemSupplier
 
         if (!level().isClientSide()) {
             Vec3 motion = this.getDeltaMovement();
-            for (int i = 0; i < 5; i++) {
-                double offset = i * 0.2;
-                ((ServerLevel) this.level()).sendParticles(
-                        ParticleTypes.SMOKE,
-                        this.getX() - motion.x * offset,
-                        this.getY() - motion.y * offset + 0.1,
-                        this.getZ() - motion.z * offset,
-                        1,
-                        motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
-                        0.06
-                );
-            }
+
+            ((ServerLevel) this.level()).sendParticles(
+                    ParticleTypes.FIREWORK,
+                    this.getX() - motion.x,
+                    this.getY() - motion.y + 0.1,
+                    this.getZ() - motion.z,
+                    1,
+                    motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
+                    0.06
+            );
         }
     }
 
@@ -71,11 +69,11 @@ public class PistolRoundProjectile extends AbstractArrow implements ItemSupplier
 
     void collisionParticles() {
         ((ServerLevel) this.level()).sendParticles(
-                ParticleTypes.POOF,
+                ParticleTypes.LARGE_SMOKE,
                 this.getX(),
                 this.getY(),
                 this.getZ(),
-                2,
+                10,
                 0.05, 0.05, 0.05,
                 0.06
         );
@@ -89,7 +87,7 @@ public class PistolRoundProjectile extends AbstractArrow implements ItemSupplier
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
             collisionParticles();
-            this.discard();
+            //this.discard();
         }
 
         super.onHitBlock(pResult);
@@ -104,10 +102,13 @@ public class PistolRoundProjectile extends AbstractArrow implements ItemSupplier
             pResult.getEntity().hurt(dmg, damage + (float) speed);
 
             collisionParticles();
-            this.discard();
+            damage /= 1.25;
+            if (++entsPierced > 1) {
+                this.discard();
+            }
         }
 
-        super.onHitEntity(pResult);
+        //super.onHitEntity(pResult);
     }
 
 }

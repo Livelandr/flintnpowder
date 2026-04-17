@@ -74,6 +74,14 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("ChamberOpen") ? 1.0F : 0.0F;
                 }
         );
+        // Rifle
+        ItemProperties.register(
+                ModItemsGuns.RIFLE.get(),
+                new ResourceLocation(MOD_ID, "rifle_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
+                }
+        );
         // Trapdoor
         ItemProperties.register(
                 ModItemsGuns.TRAPDOORRIFLE.get(),

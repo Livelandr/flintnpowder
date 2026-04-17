@@ -10,10 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
 import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
@@ -32,6 +29,11 @@ public class SingleActionRevolver extends BlazelockBase {
         needCocking = true;
 
         addAllowedAmmo(ModItemsAmmo.PISTOLROUND.get());
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack pStack) {
+        return Rarity.RARE;
     }
 
     @Override
@@ -119,7 +121,6 @@ public class SingleActionRevolver extends BlazelockBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_2"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_3"));
         pTooltipComponents.add(Component.literal(""));
 

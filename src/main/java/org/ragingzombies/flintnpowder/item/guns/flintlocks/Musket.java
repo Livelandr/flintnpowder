@@ -169,9 +169,7 @@ public class Musket extends FlintlockBase {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_0"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_2"));
-        pTooltipComponents.add(Component.literal(""));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

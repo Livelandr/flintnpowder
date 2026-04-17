@@ -9,10 +9,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
 import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
@@ -44,6 +41,11 @@ public class PumpActionShotgun extends PumpActionBase {
     @Override
     public float accuracyModifier(UUID ply) {
         return 2 * super.accuracyModifier(ply);
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack pStack) {
+        return Rarity.EPIC;
     }
 
     @Override
@@ -179,9 +181,7 @@ public class PumpActionShotgun extends PumpActionBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_2"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.shotgun.description_3"));
-        pTooltipComponents.add(Component.literal(""));
 
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

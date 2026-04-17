@@ -24,6 +24,8 @@ public class ModItemsAmmo {
             () -> new CopperRoundshot(new CopperRoundshot.Properties().stacksTo(32)));
     public static final RegistryObject<Item> COPPERVOLLEYSHOT = ITEMS.register("copper_volleyshot",
             () -> new CopperVolleyshot(new CopperVolleyshot.Properties().stacksTo(32)));
+    public static final RegistryObject<Item> FOOLSGOLDROUNDSHOT = ITEMS.register("golden_roundshot",
+            () -> new FoolsGoldRoundshot(new FoolsGoldRoundshot.Properties().stacksTo(32)));
 
     public static final RegistryObject<Item> FLAMINGBUCKSHOT = ITEMS.register("flaming_buckshot",
             () -> new FlamingBuckshot(new FlamingBuckshot.Properties().stacksTo(32)));
