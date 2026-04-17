@@ -135,9 +135,6 @@ public class Flinter extends FlintlockBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.flinter.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.flinter.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.flinter.description_2"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.flinter.description_3"));
-        pTooltipComponents.add(Component.literal(""));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

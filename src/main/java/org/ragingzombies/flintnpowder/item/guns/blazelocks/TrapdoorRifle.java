@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
@@ -41,6 +42,11 @@ public class TrapdoorRifle extends BlazelockBase {
     }
 
     @Override
+    public Rarity getRarity(ItemStack pStack) {
+        return Rarity.RARE;
+    }
+
+    @Override
     public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
         ItemStack secondItemStack;
         if (pUsedHand == InteractionHand.MAIN_HAND)
@@ -65,7 +71,7 @@ public class TrapdoorRifle extends BlazelockBase {
 
     @Override
     public float accuracyModifier(UUID ply){
-        return 0F * super.accuracyModifier(ply);
+        return 1.25F * super.accuracyModifier(ply);
     }
 
     @Override
@@ -123,8 +129,6 @@ public class TrapdoorRifle extends BlazelockBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_2"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_3"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

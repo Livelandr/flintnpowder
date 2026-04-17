@@ -129,10 +129,6 @@ public class Arquebus extends FlintlockBase {
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.arquebus.description_0"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.arquebus.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.arquebus.description_2"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.arquebus.description_3"));
-        pTooltipComponents.add(Component.literal(""));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

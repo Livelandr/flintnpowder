@@ -40,6 +40,10 @@ public class ModItemsGuns {
     public static final RegistryObject<Item> ARQUEBUS = ITEMS.register("arquebus",
             () -> new Arquebus(new Arquebus.Properties().stacksTo(1)));
 
+
+    public static final RegistryObject<Item> RIFLE = ITEMS.register("rifle",
+            () -> new Rifle(new Rifle.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> SINGLEACTIONREVOLVER = ITEMS.register("single_action_revolver",
             () -> new SingleActionRevolver(new SingleActionRevolver.Properties().stacksTo(1)));
     public static final RegistryObject<Item> BREAKACTIONCOACHGUN = ITEMS.register("break_action_coachgun",

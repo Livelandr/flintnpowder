@@ -27,7 +27,7 @@ public class RifleRound extends BaseAmmo {
         proj.damage = this.damage * gun.damageModifier();
         proj.setOwner(shooter);
 
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 25F, 0.5F * gun.accuracyModifier(shooter.getUUID()));
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 15F, 0.5F * gun.accuracyModifier(shooter.getUUID()));
 
         // Recoil
 

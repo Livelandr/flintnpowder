@@ -133,9 +133,6 @@ public class Volleygun extends FlintlockBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.volleygun.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.volleygun.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.volleygun.description_2"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.volleygun.description_3"));
-        pTooltipComponents.add(Component.literal(""));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

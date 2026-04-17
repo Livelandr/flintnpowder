@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
@@ -38,6 +39,11 @@ public class BreakActionCoachgun extends BlazelockBase {
         addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELL.get());
         addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLSLUG.get());
         addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLDRAGON.get());
+    }
+
+    @Override
+    public Rarity getRarity(ItemStack pStack) {
+        return Rarity.RARE;
     }
 
     @Override
@@ -118,7 +124,6 @@ public class BreakActionCoachgun extends BlazelockBase {
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_1"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_2"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_3"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

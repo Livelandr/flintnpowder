@@ -31,15 +31,15 @@ public class FlintlockBase extends GunBase {
     public boolean noCock = false;
     public int GunpowderRequired = 1;
 
-    public float gunpowderCooldown() { return 20; }
-    public float ramrodCooldown() { return 60; }
+    public int gunpowderCooldown(Player ply, ItemStack gunStack) { return gunpowderCooldownTicks; }
+    public int ramrodCooldown(Player ply, ItemStack gunStack) { return ramrodCooldownTicks; }
 
     public void onGunpowder(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                 SoundEvents.SAND_BREAK, SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, gunpowderCooldownTicks);
+            ply.getCooldowns().addCooldown(this, gunpowderCooldown(ply, gun));
         }
     }
 
@@ -50,7 +50,7 @@ public class FlintlockBase extends GunBase {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, ramrodCooldownTicks);
+            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
         }
     }
 

@@ -251,7 +251,7 @@ public class GunBase extends Item {
                 ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gunStack));
         }
     }
 
@@ -260,13 +260,14 @@ public class GunBase extends Item {
                 ModSounds.RIFLERELOAD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldownTicks);
+            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gun));
         }
     }
 
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        pTooltipComponents.add(Component.literal(""));
 
         int totalAttach = 0;
         for (String type : attachmentTypes) {
@@ -294,9 +295,13 @@ public class GunBase extends Item {
 
             pTooltipComponents.add(Component.literal(""));
 
-            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachment"));
-            for (Item ammo : allowedAttachments) {
-                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            if (!allowedAttachments.isEmpty()) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachment"));
+                for (Item ammo : allowedAttachments) {
+                    pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+                }
+            } else {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfonoattachment"));
             }
 
             pTooltipComponents.add(Component.literal(""));
