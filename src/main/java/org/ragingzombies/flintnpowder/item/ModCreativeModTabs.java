@@ -36,6 +36,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsAmmo.PISTOLROUND.get());
                         pOutput.accept(ModItemsAmmo.RIFLEROUND.get());
                         pOutput.accept(ModItemsAmmo.HANDGUNMAG.get());
+                        pOutput.accept(ModItemsAmmo.EXTENDEDHANDGUNMAG.get());
                         // Empty
                     }))
                     .build());
@@ -44,6 +45,7 @@ public class ModCreativeModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.FNPTABICON.get()))
                     .title(Component.translatable("fnp.creativetab.firearms"))
                     .displayItems(((pParameters, pOutput) -> {
+                        pOutput.accept(ModItemsGuns.LOGCANNON.get());
                         pOutput.accept(ModItemsGuns.MUSKET.get());
                         pOutput.accept(ModItemsGuns.PISTOL.get());
                         pOutput.accept(ModItemsGuns.FLINTER.get());
@@ -55,7 +57,9 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsGuns.TRAPDOORRIFLE.get());
                         pOutput.accept(ModItemsGuns.BREAKACTIONCOACHGUN.get());
                         pOutput.accept(ModItemsGuns.PUMPACTIONSHOTGUN.get());
+                        pOutput.accept(ModItemsGuns.BOLTACTIONRIFLE.get());
                         pOutput.accept(ModItemsGuns.SEMIAUTOPISTOL.get());
+                        pOutput.accept(ModItemsGuns.OPENBOLTSUBMACHINEGUN.get());
                         pOutput.accept(ModItems.RAMROD.get());
                         pOutput.accept(ModItemsAttachments.SILENCER.get());
                         pOutput.accept(ModItemsAttachments.BAYONET.get());

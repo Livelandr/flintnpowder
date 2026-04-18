@@ -121,9 +121,7 @@ public class BreakActionCoachgun extends BlazelockBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_0"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.break_action_coachgun.description_3"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);

@@ -1,6 +1,7 @@
 package org.ragingzombies.flintnpowder.core.guns;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -21,14 +22,16 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
+
 public class MagfedBase extends GunBase {
     public MagfedBase(Properties pProperties) {
         super(pProperties);
     }
 
-    public static List<Item> allowedMags = new ArrayList<>();
+    public List<Item> allowedMags = new ArrayList<>();
 
-    public static void addAllowedMagazine(Item mag) {
+    public void addAllowedMagazine(Item mag) {
         allowedMags.add(mag);
     }
 
@@ -213,9 +216,50 @@ public class MagfedBase extends GunBase {
     }
 
 
+
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+        //super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+
+        pTooltipComponents.add(Component.literal(""));
+
+        int totalAttach = 0;
+        for (String type : attachmentTypes) {
+            if (isAttachmentValidAndEnabled(pStack, type)) {
+                ItemStack item = getAttachmentStack(pStack, type);
+                pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
+                item.getItem().appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
+
+                totalAttach++;
+            }
+        }
+        if (totalAttach > 0) {
+            pTooltipComponents.add(Component.literal(""));
+        }
+
+
+        if (!Screen.hasShiftDown()) {
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoshift"));
+            pTooltipComponents.add(Component.literal(""));
+        } else {
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoammo"));
+            for (Item ammo : allowedMags) {
+                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            }
+
+            pTooltipComponents.add(Component.literal(""));
+
+            if (!allowedAttachments.isEmpty()) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachment"));
+                for (Item ammo : allowedAttachments) {
+                    pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+                }
+            } else {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfonoattachment"));
+            }
+
+            pTooltipComponents.add(Component.literal(""));
+        }
 
         // Ammo + Chamber open
         if (pLevel != null && pStack.hasTag() ) {

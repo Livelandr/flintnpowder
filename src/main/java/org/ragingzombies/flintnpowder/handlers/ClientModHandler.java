@@ -58,6 +58,21 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
                 }
         );
+        // Bolt Action Rifle
+        ItemProperties.register(
+                ModItemsGuns.BOLTACTIONRIFLE.get(),
+                new ResourceLocation(MOD_ID, "bolt_action_rifle_bolting"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsUncocked") ? 1.0F : 0.0F;
+                }
+        );
+        ItemProperties.register(
+                ModItemsGuns.BOLTACTIONRIFLE.get(),
+                new ResourceLocation(MOD_ID, "bolt_action_bayonet"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
+                }
+        );
         // Blunderbuss
         ItemProperties.register(
                 ModItemsGuns.BLUNDERBUSS.get(),
@@ -109,6 +124,21 @@ public class ClientModHandler {
         ItemProperties.register(
                 ModItemsGuns.SEMIAUTOPISTOL.get(),
                 new ResourceLocation(MOD_ID, "slider"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
+                }
+        );
+        // Open Bolt
+        ItemProperties.register(
+                ModItemsGuns.OPENBOLTSUBMACHINEGUN.get(),
+                new ResourceLocation(MOD_ID, "open_bolt_smg_magless"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveMag") ? 0.0F : 1.0F;
+                }
+        );
+        ItemProperties.register(
+                ModItemsGuns.OPENBOLTSUBMACHINEGUN.get(),
+                new ResourceLocation(MOD_ID, "open_bolt_smg_primed"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
                 }

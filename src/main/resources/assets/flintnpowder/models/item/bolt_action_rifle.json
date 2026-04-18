@@ -51,9 +51,22 @@
   "overrides": [
     {
       "predicate": {
+        "flintnpowder:bolt_action_bayonet": 1
+      },
+      "model": "flintnpowder:item/bayonet_bolt_action_rifle"
+    },
+    {
+      "predicate": {
         "flintnpowder:bolt_action_rifle_bolting": 1
       },
       "model": "flintnpowder:item/bolt_action_rifle_0"
+    },
+    {
+      "predicate": {
+        "flintnpowder:bolt_action_bayonet": 1,
+        "flintnpowder:bolt_action_rifle_bolting": 1
+      },
+      "model": "flintnpowder:item/bayonet_bolt_action_rifle_0"
     }
   ]
 }

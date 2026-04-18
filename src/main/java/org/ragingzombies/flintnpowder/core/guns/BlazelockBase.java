@@ -157,7 +157,7 @@ public class BlazelockBase extends GunBase {
                 // If chamber opened - try to insert ammo, or close
                 if (gunStack.getTag().getBoolean("ChamberOpen")) {
                     // If ammo is less than max
-                    if (GetAmmoAmount(gunStack) < maxAmmo) {
+                    if (GetAmmoAmount(gunStack) < GetMaxAmmoAmount(gunStack)) {
                         if (checkAmmo(secondItemStack.getItem())) {
                             AddAmmo(gunStack, secondItemStack);
                             onAmmoInsert(pLevel, pPlayer, gunStack, pUsedHand);

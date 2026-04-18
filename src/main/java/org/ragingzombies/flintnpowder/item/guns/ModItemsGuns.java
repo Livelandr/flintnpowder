@@ -17,13 +17,19 @@ import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.BreakActionCoachgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.TrapdoorRifle;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.*;
+import org.ragingzombies.flintnpowder.item.guns.magfed.OpenBoltSubmachineGun;
 import org.ragingzombies.flintnpowder.item.guns.magfed.SemiPistol;
+import org.ragingzombies.flintnpowder.item.guns.other.LogCannon;
+import org.ragingzombies.flintnpowder.item.guns.pumpaction.BoltActionRifle;
 import org.ragingzombies.flintnpowder.item.guns.pumpaction.PumpActionShotgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.SingleActionRevolver;
 
 public class ModItemsGuns {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Flintnpowder.MOD_ID);
+
+    public static final RegistryObject<Item> LOGCANNON = ITEMS.register("log_cannon",
+            () -> new LogCannon(new LogCannon.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> MUSKET = ITEMS.register("musket",
             () -> new Musket(new Musket.Properties().stacksTo(1)));
@@ -44,6 +50,9 @@ public class ModItemsGuns {
     public static final RegistryObject<Item> RIFLE = ITEMS.register("rifle",
             () -> new Rifle(new Rifle.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> BOLTACTIONRIFLE = ITEMS.register("bolt_action_rifle",
+            () -> new BoltActionRifle(new BoltActionRifle.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> SINGLEACTIONREVOLVER = ITEMS.register("single_action_revolver",
             () -> new SingleActionRevolver(new SingleActionRevolver.Properties().stacksTo(1)));
     public static final RegistryObject<Item> BREAKACTIONCOACHGUN = ITEMS.register("break_action_coachgun",
@@ -56,6 +65,8 @@ public class ModItemsGuns {
 
     public static final RegistryObject<Item> SEMIAUTOPISTOL = ITEMS.register("handgun_pistol",
             () -> new SemiPistol(new SemiPistol.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> OPENBOLTSUBMACHINEGUN = ITEMS.register("open_bolt_smg",
+            () -> new OpenBoltSubmachineGun(new OpenBoltSubmachineGun.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

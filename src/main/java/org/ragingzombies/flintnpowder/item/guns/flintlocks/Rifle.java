@@ -115,7 +115,6 @@ public class Rifle extends FlintlockBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.rifle.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.rifle.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.rifle.description_2"));

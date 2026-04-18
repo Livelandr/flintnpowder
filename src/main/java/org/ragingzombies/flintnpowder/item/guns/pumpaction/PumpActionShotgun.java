@@ -64,7 +64,7 @@ public class PumpActionShotgun extends PumpActionBase {
     @Override
     public void OnCockStart(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.SHOTGUNPUMPBACK.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+                ModSounds.SHOTGUNPUMPBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         if (shooter instanceof Player) {
             ((Player) shooter).getCooldowns().addCooldown(this, 8);
@@ -74,7 +74,7 @@ public class PumpActionShotgun extends PumpActionBase {
     @Override
     public void OnCockEnd(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand){
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.SHOTGUNPUMPFORW.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+                ModSounds.SHOTGUNPUMPFORW.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
 
         setAimAnimation(gun);
 

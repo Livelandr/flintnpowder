@@ -11,6 +11,7 @@
   "flintnpowder.magempty": "Magazine empty",
 
   "item.flintnpowder.handgunmag": "Handgun Magazine",
+  "item.flintnpowder.extendedhandgunmag": "Extended Handgun Magazine",
 
 
   "flintnpowder.chamberopen": "[CHAMBER OPEN]",
@@ -47,6 +48,14 @@
 
   "item.flintnpowder.lpoptic": "Low Profile Optic",
   "item.flintnpowder.lpoptic.description": "§2Allow too zoom to small distances",
+
+
+  "item.flintnpowder.log_cannon": "Log Cannon",
+  "item.flintnpowder.log_cannon.description_0": "§6Hole and steel: Flint is required to fire",
+  "item.flintnpowder.log_cannon.description_1": "§2Calibre: Cobblestone",
+  "item.flintnpowder.log_cannon.description_2": "§2Pre-Loaded, no need for reloading",
+  "item.flintnpowder.log_cannon.description_3": "§410% chance to fire",
+  "item.flintnpowder.log_cannon.description_4": "§4Single use, fire and forget.",
 
   "item.flintnpowder.blunderbuss": "Blunderbuss",
   "item.flintnpowder.musket": "Musket",
@@ -115,9 +124,18 @@
   "item.flintnpowder.break_action_coachgun.description_1": "§2Two handed: Empty Offhand required",
   "item.flintnpowder.break_action_coachgun.description_3": "§22 Rounds capacity",
 
+  "item.flintnpowder.bolt_action_rifle": "Bolt Action Rifle",
+  "item.flintnpowder.bolt_action_rifle.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
+  "item.flintnpowder.bolt_action_rifle.description_1": "§2Two handed: Empty Offhand required",
+
   "item.flintnpowder.pistol": "Pistol",
   "item.flintnpowder.pistol.description_0": "§6Flintlock: No flint and steel is required to fire",
 
   "item.flintnpowder.handgun_pistol": "Blowback Handgun",
-  "item.flintnpowder.handgun_pistol.description_0": "§6Endlock: No need for additional gunpowder or ramrod"
+  "item.flintnpowder.handgun_pistol.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
+  "item.flintnpowder.handgun_pistol.description_1": "§2Two handed: Empty Offhand required",
+
+  "item.flintnpowder.open_bolt_smg": "Open Bolt Submachine Gun",
+  "item.flintnpowder.open_bolt_smg.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
+  "item.flintnpowder.open_bolt_smg.description_1": "§4-20% Projectile damage"
 }

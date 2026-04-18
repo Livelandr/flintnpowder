@@ -8,32 +8,25 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
 import org.ragingzombies.flintnpowder.core.guns.MagfedBase;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
 import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
-import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
 import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
-import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class SemiPistol extends MagfedBase {
-    public SemiPistol(Properties pProperties) {
+public class OpenBoltSubmachineGun extends MagfedBase {
+    public OpenBoltSubmachineGun(Properties pProperties) {
         super(pProperties);
-        shootCooldownTicks = 10;
+        shootCooldownTicks = 1;
 
-        addAllowedMagazine(ModItemsAmmo.HANDGUNMAG.get());
+        addAllowedMagazine(ModItemsAmmo.EXTENDEDHANDGUNMAG.get());
 
         addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
         addAllowedAttachment(ModItemsAttachments.SILENCER.get());
@@ -41,7 +34,7 @@ public class SemiPistol extends MagfedBase {
 
     @Override
     public float accuracyModifier(UUID ply) {
-        return 1 * super.accuracyModifier(ply);
+        return 1.2F * super.accuracyModifier(ply);
     }
 
     @Override
@@ -64,6 +57,16 @@ public class SemiPistol extends MagfedBase {
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, 15);
         }
+    }
+
+    @Override
+    public float damageModifier() {
+        return 0.8F*super.damageModifier();
+    }
+
+    @Override
+    public float recoilModifierX(UUID id) {
+        return 0.25F*super.recoilModifierX(id);
     }
 
     @Override
@@ -110,8 +113,8 @@ public class SemiPistol extends MagfedBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.handgun_pistol.description_0"));
-        pTooltipComponents.add(Component.translatable("item.flintnpowder.handgun_pistol.description_1"));
+        pTooltipComponents.add(Component.translatable("item.flintnpowder.open_bolt_smg.description_0"));
+        pTooltipComponents.add(Component.translatable("item.flintnpowder.open_bolt_smg.description_1"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }

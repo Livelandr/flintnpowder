@@ -126,7 +126,6 @@ public class TrapdoorRifle extends BlazelockBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.trapdoor_rifle.description_1"));
 

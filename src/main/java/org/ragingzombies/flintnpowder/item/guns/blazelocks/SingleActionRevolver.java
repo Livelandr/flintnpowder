@@ -118,7 +118,6 @@ public class SingleActionRevolver extends BlazelockBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_0"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_1"));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.single_action_revolver.description_3"));

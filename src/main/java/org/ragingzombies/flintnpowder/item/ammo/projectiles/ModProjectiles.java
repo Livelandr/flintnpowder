@@ -64,6 +64,14 @@ public class ModProjectiles {
                     .updateInterval(5)
                     .build("pistolround_projectile"));
 
+    public static final RegistryObject<EntityType<TheRockProjectile>> THEROCKPROJECTILE =
+            PROJECTILES.register("therock_projectile", () -> EntityType.Builder.<TheRockProjectile>of(TheRockProjectile::new, MobCategory.MISC)
+                    .sized(0.025f,0.025f)
+                    .clientTrackingRange(4)
+                    .updateInterval(5)
+                    .build("therock_projectile"));
+
+
 
 
     public static void register(IEventBus eventBus) {PROJECTILES.register(eventBus);}

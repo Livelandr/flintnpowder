@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.item.ammo.magazines.ExtendedHandgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
@@ -44,6 +45,8 @@ public class ModItemsAmmo {
 
     public static final RegistryObject<Item> HANDGUNMAG = ITEMS.register("handgunmag",
             () -> new HandgunMag(new HandgunMag.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> EXTENDEDHANDGUNMAG = ITEMS.register("extendedhandgunmag",
+            () -> new ExtendedHandgunMag(new ExtendedHandgunMag.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

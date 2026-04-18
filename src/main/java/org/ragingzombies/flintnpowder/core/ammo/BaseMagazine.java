@@ -1,6 +1,7 @@
 package org.ragingzombies.flintnpowder.core.ammo;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaseMagazine extends Item {
-    public static List<Item> allowedAmmo = new ArrayList<>();
+    public List<Item> allowedAmmo = new ArrayList<>();
 
     public static int maxAmmo = 30;
 
@@ -28,7 +29,7 @@ public class BaseMagazine extends Item {
         super(pProperties);
     }
 
-    public static void addAllowedAmmo(Item ammo) {
+    public void addAllowedAmmo(Item ammo) {
         allowedAmmo.add(ammo);
     }
 
@@ -161,7 +162,21 @@ public class BaseMagazine extends Item {
                 }
             } else {
                 pTooltipComponents.add(Component.translatable("flintnpowder.magempty").withStyle(ChatFormatting.RED));
+                pTooltipComponents.add(Component.translatable("flintnpowder.ammo").append(
+                        String.valueOf(getAmmo(pStack))).append("/").append(String.valueOf(getMaxAmmo())).withStyle(ChatFormatting.GRAY));
             }
+            pTooltipComponents.add(Component.literal(""));
+        }
+
+        if (!Screen.hasShiftDown()) {
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoshift"));
+            pTooltipComponents.add(Component.literal(""));
+        } else {
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoammo"));
+            for (Item ammo : allowedAmmo) {
+                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            }
+
             pTooltipComponents.add(Component.literal(""));
         }
 

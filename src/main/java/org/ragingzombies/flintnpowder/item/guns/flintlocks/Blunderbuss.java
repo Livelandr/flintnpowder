@@ -110,7 +110,6 @@ public class Blunderbuss extends FlintlockBase {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("item.flintnpowder.musket.description_2"));
 
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
