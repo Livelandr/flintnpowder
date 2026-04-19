@@ -13,6 +13,7 @@
   "item.flintnpowder.handgunmag": "Handgun Magazine",
   "item.flintnpowder.extendedhandgunmag": "Extended Handgun Magazine",
 
+  "flintnpowder.incendiary": "§6Incendiary: Sets blocks and entities on fire",
 
   "flintnpowder.chamberopen": "[CHAMBER OPEN]",
   "flintnpowder.uncocked": "[UNCOCKED]",
@@ -108,6 +109,17 @@
   "item.flintnpowder.arquebus": "Arquebus",
   "item.flintnpowder.arquebus.description_0": "§6Matchlock: Requires flint and steel to fire",
   "item.flintnpowder.arquebus.description_1": "§4Unable to fire underwater",
+
+  "item.flintnpowder.greek_fire": "Greek Fire",
+  "item.flintnpowder.greek_fire.description_0": "§6Matchlock: Requires flint and steel to fire",
+  "item.flintnpowder.greek_fire.description_1": "§4Unable to fire underwater",
+  "item.flintnpowder.greek_fire.description_2": "§4Heavy weapon: Slows down on use",
+  "item.flintnpowder.greek_fire.description_3": "§2Can be used as a hefty club",
+
+  "item.flintnpowder.greek_fire_buckshot": "Flaming Grapeshot",
+
+  "item.flintnpowder.greek_fire_charge": "Oil Flameshot",
+  "item.flintnpowder.greek_fire_charge.description_1": "§2Fires a short, rapid burst of flaming chunks",
 
   "item.flintnpowder.rifle": "Rifle",
   "item.flintnpowder.rifle.description_0": "§6Flintlock: No flint and steel is required to fire",

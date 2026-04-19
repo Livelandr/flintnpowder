@@ -30,6 +30,8 @@ public class FlintlockBase extends GunBase {
 
     public boolean noCock = false;
     public int GunpowderRequired = 1;
+    public int ramrodCooldownTicks = 20;
+    public int gunpowderCooldownTicks = 20;
 
     public int gunpowderCooldown(Player ply, ItemStack gunStack) { return gunpowderCooldownTicks; }
     public int ramrodCooldown(Player ply, ItemStack gunStack) { return ramrodCooldownTicks; }

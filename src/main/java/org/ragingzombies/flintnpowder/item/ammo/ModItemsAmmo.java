@@ -36,6 +36,11 @@ public class ModItemsAmmo {
     public static final RegistryObject<Item> RIFLEROUND = ITEMS.register("rifle_round",
             () -> new RifleRound(new RifleRound.Properties().stacksTo(32)));
 
+    public static final RegistryObject<Item> FLAMINGGRAPESHOT = ITEMS.register("greek_fire_buckshot",
+            () -> new FlamingGrapeshot(new FlamingGrapeshot.Properties().stacksTo(32)));
+    public static final RegistryObject<Item> OILFLAMESHOT = ITEMS.register("greek_fire_charge",
+            () -> new OilFlameshot(new OilFlameshot.Properties().stacksTo(32)));
+
     public static final RegistryObject<Item> SHOTGUNSHELL = ITEMS.register("shotgunshell",
             () -> new ShotgunShell(new ShotgunShell.Properties().stacksTo(32)));
     public static final RegistryObject<Item> SHOTGUNSHELLSLUG = ITEMS.register("shotgunshellslug",

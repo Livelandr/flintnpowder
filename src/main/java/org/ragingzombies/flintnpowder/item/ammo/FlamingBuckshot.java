@@ -54,6 +54,7 @@ public class FlamingBuckshot extends BaseAmmo {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        pTooltipComponents.add(Component.translatable("flintnpowder.incendiary"));
         pTooltipComponents.add(Component.literal(""));
         pTooltipComponents.add(Component.translatable("flintnpowder.bullet_description"));
         pTooltipComponents.add(Component.translatable("flintnpowder.projectile_damage")

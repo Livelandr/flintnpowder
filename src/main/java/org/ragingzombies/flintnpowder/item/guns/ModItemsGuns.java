@@ -45,6 +45,8 @@ public class ModItemsGuns {
 
     public static final RegistryObject<Item> ARQUEBUS = ITEMS.register("arquebus",
             () -> new Arquebus(new Arquebus.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GREEKFIRE = ITEMS.register("greek_fire",
+            () -> new GreekFire(new GreekFire.Properties().stacksTo(1)));
 
 
     public static final RegistryObject<Item> RIFLE = ITEMS.register("rifle",

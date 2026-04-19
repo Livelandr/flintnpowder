@@ -39,8 +39,6 @@ public class GunBase extends Item {
 
     public int cooldownTicks = 20;
     public int shootCooldownTicks = 20;
-    public int gunpowderCooldownTicks = 20;
-    public int ramrodCooldownTicks = 20;
     public int reloadPitch = 1;
 
     public List<Item> allowedAmmo = new ArrayList<>();

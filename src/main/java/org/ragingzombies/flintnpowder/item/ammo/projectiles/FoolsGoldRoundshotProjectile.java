@@ -87,7 +87,7 @@ public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemS
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
             collisionParticles();
-            //this.discard();
+            this.discard();
         }
 
         super.onHitBlock(pResult);
