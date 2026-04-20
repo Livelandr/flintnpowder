@@ -8,27 +8,28 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.sound.ModSounds;
+import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 
-public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSupplier {
+public class CastIronBombProjectile extends AbstractArrow implements ItemSupplier {
 
-    public float damage = 1;
+    public float damage = 6;
 
-    public CastIronRoundshotProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
+    public CastIronBombProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public CastIronRoundshotProjectile(Level pLevel) {
-        super(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), pLevel);
+    public CastIronBombProjectile(Level pLevel) {
+        super(ModProjectiles.CASTIRONBOMB.get(), pLevel);
     }
-    public CastIronRoundshotProjectile(Level pLevel, LivingEntity livingEntity) {
-        super(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), livingEntity, pLevel);
+    public CastIronBombProjectile(Level pLevel, LivingEntity livingEntity) {
+        super(ModProjectiles.CASTIRONBOMB.get(), livingEntity, pLevel);
     }
 
     @Override
@@ -40,11 +41,23 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
             for (int i = 0; i < 5; i++) {
                 double offset = i * 0.2;
                 ((ServerLevel) this.level()).sendParticles(
-                        ParticleTypes.POOF,
+                        ParticleTypes.SMOKE,
                         this.getX() - motion.x * offset,
                         this.getY() - motion.y * offset + 0.1,
                         this.getZ() - motion.z * offset,
-                        1,
+                        0,
+                        motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
+                        0.06
+                );
+            }
+            for (int i = 0; i < 5; i++) {
+                double offset = i * 0.2;
+                ((ServerLevel) this.level()).sendParticles(
+                        ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                        this.getX() - motion.x * offset,
+                        this.getY() - motion.y * offset + 0.1,
+                        this.getZ() - motion.z * offset,
+                        0,
                         motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
                         0.06
                 );
@@ -54,12 +67,12 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
 
     @Override
     protected ItemStack getPickupItem() {
-        return new ItemStack(Items.AIR);
+        return new ItemStack(ModItemsAmmo.CASTIRONBOMB.get());
     }
 
     @Override
     public ItemStack getItem() {
-        return new ItemStack(Items.AIR);
+        return new ItemStack(ModItemsAmmo.CASTIRONBOMB.get());
     }
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
@@ -78,7 +91,7 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
         );
 
         this.level().playSeededSound(null, this.getX(), this.getY(), this.getZ(),
-                ModSounds.BULLETHIT.get(), SoundSource.NEUTRAL, 2.0F, 1.0F, 0);
+                SoundEvents.ANVIL_LAND, SoundSource.NEUTRAL, 2.0F, 1.0F, 0);
     }
 
 
@@ -86,7 +99,11 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
             collisionParticles();
-            this.discard();
+
+            ServerTickHandler.createTask(25, () -> {
+                this.level().explode(this, null, null, getX(), getY(), getZ(), 2f, true, Level.ExplosionInteraction.NONE);
+                this.discard();
+            });
         }
 
         super.onHitBlock(pResult);
@@ -101,7 +118,6 @@ public class CastIronRoundshotProjectile extends AbstractArrow implements ItemSu
             pResult.getEntity().hurt(dmg, damage + (float) speed);
 
             collisionParticles();
-            this.discard();
         }
 
         super.onHitEntity(pResult);

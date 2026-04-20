@@ -16,29 +16,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
-import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.SteelRoundshot;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
 
 public class Musket extends FlintlockBase {
 

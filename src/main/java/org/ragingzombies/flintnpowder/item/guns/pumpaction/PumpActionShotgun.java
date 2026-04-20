@@ -12,15 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
-import org.ragingzombies.flintnpowder.item.attachments.Silencer;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -30,6 +23,7 @@ import java.util.UUID;
 public class PumpActionShotgun extends PumpActionBase {
     public PumpActionShotgun(Properties pProperties) {
         super(pProperties);
+        needCockToReload = false;
 
         addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELL.get());
         addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLSLUG.get());

@@ -129,6 +129,12 @@
   "item.flintnpowder.greek_fire_charge": "Oil Flameshot",
   "item.flintnpowder.greek_fire_charge.description_1": "§2Fires a short, rapid burst of flaming chunks",
 
+  "item.flintnpowder.cast_iron_bomb": "Cast Iron Bomb",
+  "item.flintnpowder.cast_iron_bomb.description_0": "§2Highly explosive round, caution is advised!",
+
+  "item.flintnpowder.bruttbuss": "Bruttbuss",
+  "item.flintnpowder.bruttbuss.description_2": "§2+5% Projectile Damage",
+
   "item.flintnpowder.rifle": "Rifle",
   "item.flintnpowder.rifle.description_0": "§6Flintlock: No flint and steel is required to fire",
   "item.flintnpowder.rifle.description_1": "§2Two handed: Empty Offhand required",

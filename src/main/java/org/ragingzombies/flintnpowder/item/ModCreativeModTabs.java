@@ -10,9 +10,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.ModItems;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 
 public class ModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
@@ -31,6 +28,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsAmmo.COPPERVOLLEYSHOT.get());
                         pOutput.accept(ModItemsAmmo.HEAVYCASTIRONROUNDSHOT.get());
                         pOutput.accept(ModItemsAmmo.HEAVYSTEELROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.CASTIRONBOMB.get());
                         pOutput.accept(ModItemsAmmo.CASTIRONBUCKSHOT.get());
                         pOutput.accept(ModItemsAmmo.STEELBUCKSHOT.get());
                         pOutput.accept(ModItemsAmmo.FLAMINGBUCKSHOT.get());
@@ -63,6 +61,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsGuns.ARQUEBUS.get());
                         pOutput.accept(ModItemsGuns.RIFLE.get());
                         pOutput.accept(ModItemsGuns.BIGGAMEGUN.get());
+                        pOutput.accept(ModItemsGuns.BRUTTBUSS.get());
                         pOutput.accept(ModItemsGuns.SINGLEACTIONREVOLVER.get());
                         pOutput.accept(ModItemsGuns.TRAPDOORRIFLE.get());
                         pOutput.accept(ModItemsGuns.BREAKACTIONCOACHGUN.get());

@@ -1,4 +1,4 @@
-package org.ragingzombies.flintnpowder.item.attachments;
+package org.ragingzombies.flintnpowder.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,6 +6,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
+import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
+import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
+import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 
 public class ModItemsAttachments {
     public static final DeferredRegister<Item> ITEMS =

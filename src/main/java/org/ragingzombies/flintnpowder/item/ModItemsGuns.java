@@ -1,4 +1,4 @@
-package org.ragingzombies.flintnpowder.item.guns;
+package org.ragingzombies.flintnpowder.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,14 +6,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
-import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
-import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.BreakActionCoachgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.TrapdoorRifle;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.*;
@@ -58,6 +50,8 @@ public class ModItemsGuns {
             () -> new Rifle(new Rifle.Properties().stacksTo(1)));
     public static final RegistryObject<Item> BIGGAMEGUN = ITEMS.register("big_game",
             () -> new BigGameGun(new BigGameGun.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BRUTTBUSS = ITEMS.register("bruttbuss",
+            () -> new Bruttbuss(new Bruttbuss.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BOLTACTIONRIFLE = ITEMS.register("bolt_action_rifle",
             () -> new BoltActionRifle(new BoltActionRifle.Properties().stacksTo(1)));

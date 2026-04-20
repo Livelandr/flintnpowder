@@ -1,4 +1,4 @@
-package org.ragingzombies.flintnpowder.item.ammo;
+package org.ragingzombies.flintnpowder.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.item.ammo.*;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.ExtendedHandgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
@@ -61,6 +62,11 @@ public class ModItemsAmmo {
             () -> new HandgunMag(new HandgunMag.Properties().stacksTo(1)));
     public static final RegistryObject<Item> EXTENDEDHANDGUNMAG = ITEMS.register("handgunmagazineextended",
             () -> new ExtendedHandgunMag(new ExtendedHandgunMag.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> CASTIRONBOMB = ITEMS.register("cast_iron_bomb",
+            () -> new CastIronBomb(new CastIronBomb.Properties().stacksTo(16)));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

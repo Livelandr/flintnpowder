@@ -25,6 +25,7 @@ public class PumpActionBase extends GunBase {
         super(pProperties);
     }
 
+    public boolean needCockToReload = true;
     public int maxAmmo = 6;
 
     public void OnCockStart(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
@@ -102,7 +103,10 @@ public class PumpActionBase extends GunBase {
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
             }
 
-            if (!gunStack.getTag().getBoolean("IsUncocked")) {
+            if (!needCockToReload && checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < maxAmmo) {
+                AddAmmo(gunStack, secondItemStack);
+                onAmmo(pLevel, pPlayer, gunStack, secondItemStack, pUsedHand);
+            } else if (!gunStack.getTag().getBoolean("IsUncocked")) {
                 if (gunStack.getTag().getBoolean("ReadyToShoot")) {
                     if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                         // Shoot
@@ -117,10 +121,9 @@ public class PumpActionBase extends GunBase {
                 } else {
                     gunStack.getTag().putBoolean("IsUncocked", true);
                     OnCockStart(pLevel, pPlayer, gunStack, pUsedHand);
-
                 }
             } else {
-                if (checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < maxAmmo) {
+                if (needCockToReload && checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < maxAmmo) {
                     AddAmmo(gunStack, secondItemStack);
                     onAmmo(pLevel, pPlayer, gunStack, secondItemStack, pUsedHand);
                 } else {
@@ -129,10 +132,8 @@ public class PumpActionBase extends GunBase {
 
                     OnCockEnd(pLevel, pPlayer, gunStack, pUsedHand);
                 }
-
             }
         }
-
 
         return InteractionResultHolder.consume(pPlayer.getItemInHand(pUsedHand));
     }

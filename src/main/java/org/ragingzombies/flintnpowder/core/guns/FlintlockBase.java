@@ -15,13 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import org.ragingzombies.flintnpowder.ModItems;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
-
-import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
 
 public class FlintlockBase extends GunBase {
     public FlintlockBase(Properties pProperties) {

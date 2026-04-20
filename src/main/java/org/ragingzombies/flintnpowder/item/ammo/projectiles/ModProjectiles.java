@@ -78,6 +78,13 @@ public class ModProjectiles {
                     .updateInterval(5)
                     .build("heavycastiron_projectile"));
 
+    public static final RegistryObject<EntityType<CastIronBombProjectile>> CASTIRONBOMB =
+            PROJECTILES.register("castironbomb_projectile", () -> EntityType.Builder.<CastIronBombProjectile>of(CastIronBombProjectile::new, MobCategory.MISC)
+                    .sized(0.025f,0.025f)
+                    .clientTrackingRange(15)
+                    .updateInterval(5)
+                    .build("castironbomb_projectile"));
+
 
 
 
