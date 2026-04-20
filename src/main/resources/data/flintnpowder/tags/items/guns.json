@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "flintnpowder:musket",
+    "flintnpowder:arquebus",
+    "flintnpowder:blunderbuss",
+    "flintnpowder:pistol",
+    "flintnpowder:hand_gonne",
+    "flintnpowder:rifle",
+    "flintnpowder:big_game",
+    "flintnpowder:bruttbuss",
+    "flintnpowder:flinter",
+    "flintnpowder:bolt_action_rifle",
+    "flintnpowder:blowback_handgun",
+    "flintnpowder:open_bolt_smg",
+    "flintnpowder:closed_bolt_mag_rifle",
+    "flintnpowder:trapdoor_rifle",
+    "flintnpowder:break_action_coachgun",
+    "flintnpowder:single_action_revolver",
+    "flintnpowder:log_cannon"
+  ]
+}

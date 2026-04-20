@@ -10,15 +10,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -37,8 +34,8 @@ public class Flinter extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2.5F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2.5F * super.accuracyModifier(ply, gun);
     }
 
     @Override

@@ -14,8 +14,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -42,22 +42,24 @@ public class Rifle extends FlintlockBase {
     }
 
 
-    public float damageModifier() {
-        return 1.1F*super.damageModifier();
+    @Override
+    public float damageModifier(UUID shooter, ItemStack gun) {
+        return 1.1F*super.damageModifier(shooter, gun);
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2F * super.accuracyModifier(ply, gun);
     }
 
-    @Override
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1.0F, 0.8F, 0);
+                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+
+        setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
         }
     }
 

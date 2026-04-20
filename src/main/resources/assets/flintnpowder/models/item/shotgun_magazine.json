@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "flintnpowder:item/shotgunmagazinefull"
+    "layer0": "flintnpowder:item/shotgunmagazine"
   }
 }

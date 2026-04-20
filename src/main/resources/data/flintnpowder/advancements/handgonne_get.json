@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:hand_gonne"
+    },
+    "title": {
+      "translate": "advancements.handgonne_get.title"
+    },
+    "description": {
+      "translate": "advancements.handgonne_get.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "handgonne_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:hand_gonne"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:cast_iron_get"
+}

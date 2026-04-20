@@ -3,7 +3,6 @@ package org.ragingzombies.flintnpowder.item.guns.blazelocks;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -16,12 +15,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
-import org.ragingzombies.flintnpowder.item.ammo.RifleRound;
-import org.ragingzombies.flintnpowder.item.attachments.HighProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -70,8 +65,8 @@ public class TrapdoorRifle extends BlazelockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply){
-        return 1.25F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun){
+        return 1.25F * super.accuracyModifier(ply, gun);
     }
 
     @Override

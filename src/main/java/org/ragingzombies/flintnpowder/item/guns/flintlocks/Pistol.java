@@ -8,19 +8,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
-import org.ragingzombies.flintnpowder.item.attachments.LowProfileOptic;
-import org.ragingzombies.flintnpowder.item.attachments.Silencer;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -39,8 +31,8 @@ public class Pistol extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2 * super.accuracyModifier(ply, gun);
     }
 
     @Override

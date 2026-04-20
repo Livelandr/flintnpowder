@@ -23,8 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -46,6 +46,7 @@ public class BoltActionRifle extends PumpActionBase {
         this.shootCooldownTicks = 20;
 
         addAllowedAmmo(ModItemsAmmo.RIFLEROUND.get());
+        addAllowedAmmo(ModItemsAmmo.RIFLEROUNDCLIP.get());
 
         addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
         addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
@@ -88,8 +89,8 @@ public class BoltActionRifle extends PumpActionBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 0.5F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 0.5F * super.accuracyModifier(ply, gun);
     }
 
     @Override
@@ -196,7 +197,7 @@ public class BoltActionRifle extends PumpActionBase {
         setReloadAnimation(gun);
 
         if (shooter instanceof Player) {
-            ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gun));
+            ((Player) shooter).getCooldowns().addCooldown(this, ammoCooldown(shooter, gun));
         }
     }
 

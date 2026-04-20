@@ -13,8 +13,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.MagfedBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -33,8 +33,8 @@ public class OpenBoltSubmachineGun extends MagfedBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 1.2F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 1.2F * super.accuracyModifier(ply, gun);
     }
 
     @Override
@@ -60,13 +60,13 @@ public class OpenBoltSubmachineGun extends MagfedBase {
     }
 
     @Override
-    public float damageModifier() {
-        return 0.8F*super.damageModifier();
+    public float damageModifier(UUID shooter, ItemStack gun) {
+        return 0.8F*super.damageModifier(shooter, gun);
     }
 
     @Override
-    public float recoilModifierX(UUID id) {
-        return 0.25F*super.recoilModifierX(id);
+    public float recoilModifierX(UUID id, ItemStack gun) {
+        return 0.25F*super.recoilModifierX(id, gun);
     }
 
     @Override

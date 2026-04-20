@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 public class SteelRoundshotProjectile extends AbstractArrow implements ItemSupplier {
@@ -100,7 +99,7 @@ public class SteelRoundshotProjectile extends AbstractArrow implements ItemSuppl
             DamageSource dmg = this.damageSources().arrow( this, this.getOwner());
 
             double speed = this.getDeltaMovement().length();
-            pResult.getEntity().hurt(dmg, damage + (float) speed);
+            pResult.getEntity().hurt(dmg, damage);
 
             collisionParticles();
             this.discard();

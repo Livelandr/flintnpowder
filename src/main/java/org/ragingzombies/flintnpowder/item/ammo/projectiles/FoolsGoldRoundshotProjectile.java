@@ -87,7 +87,7 @@ public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemS
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
             collisionParticles();
-            //this.discard();
+            this.discard();
         }
 
         super.onHitBlock(pResult);
@@ -99,7 +99,7 @@ public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemS
             DamageSource dmg = this.damageSources().arrow( this, this.getOwner());
 
             double speed = this.getDeltaMovement().length();
-            pResult.getEntity().hurt(dmg, damage + (float) speed);
+            pResult.getEntity().hurt(dmg, damage);
 
             collisionParticles();
             damage /= 1.25;

@@ -3,6 +3,7 @@ package org.ragingzombies.flintnpowder.item.ammo.shotgun;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.guns.GunBase;
@@ -21,14 +22,14 @@ public class ShotgunShellSlug extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         Random rand = new Random();
 
         SlugProjectile proj = new SlugProjectile(level, shooter);
 
-        proj.damage = this.damage * gun.damageModifier();
+        proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun);
         proj.setOwner(shooter);
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 3F, 0.1F * gun.accuracyModifier(shooter.getUUID()));
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 3F, 0.1F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
         level.addFreshEntity(proj);
 
@@ -36,7 +37,7 @@ public class ShotgunShellSlug extends BaseAmmo {
 
         if (shooter instanceof Player) {
             float angleX = rand.nextFloat(5.0F);
-            OffsetEntityCamera(shooter, (-30 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+            OffsetEntityCamera(shooter, (-30 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
         }
     }
 }

@@ -5,15 +5,12 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
+import org.ragingzombies.flintnpowder.item.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
 
 import static org.ragingzombies.flintnpowder.Flintnpowder.MOD_ID;
 
@@ -143,6 +140,61 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
                 }
         );
+        // Big Game
+        ItemProperties.register(
+                ModItemsGuns.BIGGAMEGUN.get(),
+                new ResourceLocation(MOD_ID, "big_game_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
+                }
+        );
+        // Flaming Halberd
+        ItemProperties.register(
+                ModItemsGuns.FLAMINGHALBERD.get(),
+                new ResourceLocation(MOD_ID, "flaming_halberd_ready"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
+                }
+        );
+        // Bruttbuss
+        ItemProperties.register(
+                ModItemsGuns.BRUTTBUSS.get(),
+                new ResourceLocation(MOD_ID, "bruttbuss_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
+                }
+        );
+        // CLOSED BOLT BATTLE RIFLE
+        ItemProperties.register(
+                ModItemsGuns.CLOSEDBOLTBATTLERIFLE.get(),
+                new ResourceLocation(MOD_ID, "closed_bolt_mag_rifle_unloaded"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveMag") ? 0.0F : 1.0F;
+                }
+        );
+        ItemProperties.register(
+                ModItemsGuns.CLOSEDBOLTBATTLERIFLE.get(),
+                new ResourceLocation(MOD_ID, "closed_bolt_mag_rifle_priming"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
+                }
+        );
+        // GAS OPERATED SHOTGUN
+        ItemProperties.register(
+                ModItemsGuns.GASOPERATEDSHOTGUN.get(),
+                new ResourceLocation(MOD_ID, "gas_operated_shotgun_unloaded"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveMag") ? 0.0F : 1.0F;
+                }
+        );
+        ItemProperties.register(
+                ModItemsGuns.GASOPERATEDSHOTGUN.get(),
+                new ResourceLocation(MOD_ID, "gas_operated_shotgun_priming"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
+                }
+        );
+
 
         // Cast Iron Roundshot Projectile
         EntityRenderers.register(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), ThrownItemRenderer::new);
@@ -158,6 +210,12 @@ public class ClientModHandler {
         EntityRenderers.register(ModProjectiles.DRAGONBREATHPROJECTILE.get(), ThrownItemRenderer::new);
         // Pistol Projectile
         EntityRenderers.register(ModProjectiles.PISTOLROUNDPROJECTILE.get(), ThrownItemRenderer::new);
+        //
+        EntityRenderers.register(ModProjectiles.THEROCKPROJECTILE.get(), ThrownItemRenderer::new);
+        //
+        EntityRenderers.register(ModProjectiles.HEAVYCASTIRONPROJECTILE.get(), ThrownItemRenderer::new);
+
+        EntityRenderers.register(ModProjectiles.CASTIRONBOMB.get(), ThrownItemRenderer::new);
 
 
     }

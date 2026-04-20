@@ -112,7 +112,7 @@ public class TheRockProjectile extends AbstractArrow implements ItemSupplier {
             DamageSource dmg = this.damageSources().arrow( this, this.getOwner());
 
             double speed = this.getDeltaMovement().length();
-            pResult.getEntity().hurt(dmg, damage + (float) speed);
+            pResult.getEntity().hurt(dmg, damage);
             this.level().explode(this, null, null, getX(), getY(), getZ(), 1.5f, false, Level.ExplosionInteraction.NONE);
 
             collisionParticles();

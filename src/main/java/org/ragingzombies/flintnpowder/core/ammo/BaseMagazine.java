@@ -13,7 +13,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -23,7 +27,7 @@ import java.util.List;
 public class BaseMagazine extends Item {
     public List<Item> allowedAmmo = new ArrayList<>();
 
-    public static int maxAmmo = 30;
+    public int maxAmmo = 30;
 
     public BaseMagazine(Properties pProperties) {
         super(pProperties);
@@ -43,12 +47,27 @@ public class BaseMagazine extends Item {
         return false;
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == ModEnchantments.GHOST_LOADING.get() || super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 22;
+    }
+
     public void onAmmoInsert(ItemStack mag) {}
     public void onAmmoExtract(ItemStack mag) {}
 
-    public static void copyToGun(ItemStack mag, ItemStack gun) {
+    public void copyToGun(ItemStack mag, ItemStack gun) {
         gun.getTag().putInt("AmmoCount", BaseMagazine.getAmmo(mag));
-        gun.getTag().putInt("MaxAmmoCount", BaseMagazine.getMaxAmmo());
+        gun.getTag().putInt("MaxAmmoCount", ((BaseMagazine) mag.getItem()).getMaxAmmo(mag));
 
         for (int i = 0; i < BaseMagazine.getAmmo(mag); i++) {
             CompoundTag nbt = (CompoundTag) mag.getOrCreateTag().get("A"+String.valueOf(i));
@@ -103,8 +122,9 @@ public class BaseMagazine extends Item {
         return mag.getOrCreateTag().getInt("AmmoCount");
     }
 
-    public static int getMaxAmmo() {
-        return maxAmmo;
+    public int getMaxAmmo(ItemStack mag) {
+        int amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.GHOST_LOADING.get(), mag);
+        return this.maxAmmo + (int) (this.maxAmmo/4)*amoLevel;
     }
 
 
@@ -121,7 +141,7 @@ public class BaseMagazine extends Item {
 
         if (!pPlayer.isCrouching()) {
 
-            if (allowAmmo(secondItemStack) && getAmmo(magStack) < getMaxAmmo()) {
+            if (allowAmmo(secondItemStack) && getAmmo(magStack) < getMaxAmmo(magStack)) {
                 addAmmo(magStack, secondItemStack);
                 pPlayer.getCooldowns().addCooldown(this, 2);
                 if (pLevel.isClientSide()) {
@@ -151,7 +171,7 @@ public class BaseMagazine extends Item {
         if (pLevel != null) {
             if (getAmmo(pStack) > 0) {
                 pTooltipComponents.add(Component.translatable("flintnpowder.ammo").append(
-                        String.valueOf(getAmmo(pStack))).append("/").append(String.valueOf(getMaxAmmo())).withStyle(ChatFormatting.GRAY));
+                        String.valueOf(getAmmo(pStack))).append("/").append(String.valueOf(getMaxAmmo(pStack))).withStyle(ChatFormatting.GRAY));
                 pTooltipComponents.add(Component.literal(""));
 
                 pTooltipComponents.add(Component.translatable("flintnpowder.magazine"));
@@ -163,7 +183,7 @@ public class BaseMagazine extends Item {
             } else {
                 pTooltipComponents.add(Component.translatable("flintnpowder.magempty").withStyle(ChatFormatting.RED));
                 pTooltipComponents.add(Component.translatable("flintnpowder.ammo").append(
-                        String.valueOf(getAmmo(pStack))).append("/").append(String.valueOf(getMaxAmmo())).withStyle(ChatFormatting.GRAY));
+                        String.valueOf(getAmmo(pStack))).append("/").append(String.valueOf(getMaxAmmo(pStack))).withStyle(ChatFormatting.GRAY));
             }
             pTooltipComponents.add(Component.literal(""));
         }

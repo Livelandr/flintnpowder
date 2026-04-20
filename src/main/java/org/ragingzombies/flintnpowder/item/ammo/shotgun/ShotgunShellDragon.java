@@ -28,7 +28,7 @@ public class ShotgunShellDragon extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         Random rand = new Random();
         for (int i = 0; i < 20; i++) {
             float angle = rand.nextFloat((float) (2.0F*Math.PI));
@@ -38,8 +38,8 @@ public class ShotgunShellDragon extends BaseAmmo {
 
             proj.setOwner(shooter);
             proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
-                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 2F,5 * gun.accuracyModifier(shooter.getUUID()));
-            proj.SetDamage(0.0F * gun.damageModifier());
+                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 2F,5 * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
+            proj.SetDamage(0.0F * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun));
 
             level.addFreshEntity(proj);
         }
@@ -47,7 +47,7 @@ public class ShotgunShellDragon extends BaseAmmo {
         // Recoil
         if (shooter instanceof Player) {
             float angleX = rand.nextFloat(4.0F);
-            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
         }
     }
 

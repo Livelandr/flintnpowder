@@ -1,4 +1,4 @@
-package org.ragingzombies.flintnpowder.item.guns;
+package org.ragingzombies.flintnpowder.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -6,17 +6,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
-import org.ragingzombies.flintnpowder.item.ammo.CastIronRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.CopperRoundshot;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
-import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
-import org.ragingzombies.flintnpowder.item.attachments.Bayonet;
-import org.ragingzombies.flintnpowder.item.attachments.Silencer;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.BreakActionCoachgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.TrapdoorRifle;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.*;
+import org.ragingzombies.flintnpowder.item.guns.magfed.ClosedBoltBattleRifle;
+import org.ragingzombies.flintnpowder.item.guns.magfed.GasOperatedShotgun;
 import org.ragingzombies.flintnpowder.item.guns.magfed.OpenBoltSubmachineGun;
 import org.ragingzombies.flintnpowder.item.guns.magfed.SemiPistol;
 import org.ragingzombies.flintnpowder.item.guns.other.LogCannon;
@@ -46,9 +40,20 @@ public class ModItemsGuns {
     public static final RegistryObject<Item> ARQUEBUS = ITEMS.register("arquebus",
             () -> new Arquebus(new Arquebus.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> GREEKFIRE = ITEMS.register("greek_fire",
+            () -> new GreekFire(new GreekFire.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FLAMINGHALBERD = ITEMS.register("flaming_halberd",
+            () -> new FlamingHalberd(new FlamingHalberd.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HANDGONNE = ITEMS.register("hand_gonne",
+            () -> new Handgonne(new Handgonne.Properties().stacksTo(1)));
+
 
     public static final RegistryObject<Item> RIFLE = ITEMS.register("rifle",
             () -> new Rifle(new Rifle.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BIGGAMEGUN = ITEMS.register("big_game",
+            () -> new BigGameGun(new BigGameGun.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BRUTTBUSS = ITEMS.register("bruttbuss",
+            () -> new Bruttbuss(new Bruttbuss.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BOLTACTIONRIFLE = ITEMS.register("bolt_action_rifle",
             () -> new BoltActionRifle(new BoltActionRifle.Properties().stacksTo(1)));
@@ -67,6 +72,10 @@ public class ModItemsGuns {
             () -> new SemiPistol(new SemiPistol.Properties().stacksTo(1)));
     public static final RegistryObject<Item> OPENBOLTSUBMACHINEGUN = ITEMS.register("open_bolt_smg",
             () -> new OpenBoltSubmachineGun(new OpenBoltSubmachineGun.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CLOSEDBOLTBATTLERIFLE = ITEMS.register("closed_bolt_mag_rifle",
+            () -> new ClosedBoltBattleRifle(new ClosedBoltBattleRifle.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> GASOPERATEDSHOTGUN = ITEMS.register("gas_operated_shotgun",
+            () -> new GasOperatedShotgun(new GasOperatedShotgun.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

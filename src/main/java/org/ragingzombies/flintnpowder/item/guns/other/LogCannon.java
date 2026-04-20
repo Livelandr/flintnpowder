@@ -16,14 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.Tags;
-import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
 import org.ragingzombies.flintnpowder.core.guns.GunBase;
 import org.ragingzombies.flintnpowder.core.util.CameraWork;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.projectiles.CastIronRoundshotProjectile;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.TheRockProjectile;
-import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -39,8 +34,8 @@ public class LogCannon extends GunBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 3 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 3 * super.accuracyModifier(ply, gun);
     }
 
     @Override
@@ -111,10 +106,10 @@ public class LogCannon extends GunBase {
 
         TheRockProjectile proj = new TheRockProjectile(pLevel, pPlayer);
 
-        proj.damage = 15 * gun.damageModifier();
+        proj.damage = 15 * gun.damageModifier(pPlayer.getUUID(), gunStack);
         proj.setOwner(pPlayer);
 
-        proj.shootFromRotation(pPlayer, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer), 0.0F, 4F, 1.1F * gun.accuracyModifier(pPlayer.getUUID()));
+        proj.shootFromRotation(pPlayer, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer), 0.0F, 4F, 1.1F * gun.accuracyModifier(pPlayer.getUUID(), gunStack));
 
         // Recoil
         if (pPlayer instanceof Player) {

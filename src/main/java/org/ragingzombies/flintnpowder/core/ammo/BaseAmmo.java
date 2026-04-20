@@ -27,7 +27,19 @@ public class BaseAmmo extends Item {
         super(pProperties);
     }
 
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
+    }
+
+    public int ammoCountInOne(ItemStack ammo) {
+        return 1;
+    }
+
+    public ItemStack getAmmoItemStack(ItemStack ammo) {
+        return ammo;
+    }
+
+    public float PropellantMultiplier(LivingEntity shooter, ItemStack gun) {
+        return 1;
     }
 
     @Override

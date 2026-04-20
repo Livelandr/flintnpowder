@@ -33,6 +33,7 @@ public class FlamingBuckshotProjectile extends AbstractArrow implements ItemSupp
     }
     public FlamingBuckshotProjectile(Level pLevel, LivingEntity livingEntity) {
         super(ModProjectiles.BUCKSHOTPROJECTILE.get(), livingEntity, pLevel);
+        this.setSecondsOnFire(9999);
     }
 
     public void SetDamage(float _dmg) {
@@ -59,7 +60,7 @@ public class FlamingBuckshotProjectile extends AbstractArrow implements ItemSupp
 
         if (!level().isClientSide()) {
             Vec3 motion = this.getDeltaMovement();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 5; i++) {
                 double offset = i * 0.2;
                 ((ServerLevel) this.level()).sendParticles(
                         ParticleTypes.POOF,
@@ -71,7 +72,7 @@ public class FlamingBuckshotProjectile extends AbstractArrow implements ItemSupp
                         0.06
                 );
             }
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 7; i++) {
                 double offset = i * 0.2;
                 ((ServerLevel) this.level()).sendParticles(
                         ParticleTypes.FLAME,
@@ -117,7 +118,7 @@ public class FlamingBuckshotProjectile extends AbstractArrow implements ItemSupp
             collisionParticles();
             BlockPos abovePos = pResult.getBlockPos().above();
 
-            if (Math.random() < 0.1 && (this.level().isEmptyBlock(abovePos) || this.level().getBlockState(abovePos).canBeReplaced())) {
+            if (Math.random() < 0.75 && (this.level().isEmptyBlock(abovePos) || this.level().getBlockState(abovePos).canBeReplaced())) {
                 this.level().setBlock(abovePos, Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
             }
 

@@ -1,7 +1,5 @@
 package org.ragingzombies.flintnpowder.item.guns.flintlocks;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -9,20 +7,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.util.Lazy;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -36,23 +27,24 @@ public class Blunderbuss extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
 
-        addAllowedAmmo(ModItemsAmmo.CASTIRONROUNDSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.STEELROUNDSHOT.get());
+        addAllowedAmmo(ModItemsAmmo.CASTIRONBUCKSHOT.get());
+        addAllowedAmmo(ModItemsAmmo.STEELBUCKSHOT.get());
         addAllowedAmmo(ModItemsAmmo.FLAMINGBUCKSHOT.get());
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2.5F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2.5F * super.accuracyModifier(ply, gun);
     }
 
-    @Override
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
-                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1.0F, 0.8F, 0);
+                ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
+
+        setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
         }
     }
 

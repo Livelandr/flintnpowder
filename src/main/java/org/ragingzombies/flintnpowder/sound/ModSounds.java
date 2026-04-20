@@ -31,6 +31,11 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> RIFLEBOLTFORW = registerSoundEvents("rifleboltforward");
     public static final RegistryObject<SoundEvent> RIFLEBOLTBACK = registerSoundEvents("rifleboltbackward");
 
+    public static final RegistryObject<SoundEvent> BRBOLTFORW = registerSoundEvents("riflecockforward");
+    public static final RegistryObject<SoundEvent> BRBOLTBACK = registerSoundEvents("riflecockbackward");
+    public static final RegistryObject<SoundEvent> BRMAGOUT = registerSoundEvents("riflemagout");
+    public static final RegistryObject<SoundEvent> BRFIRE = registerSoundEvents("battlerifle");
+
     public static final RegistryObject<SoundEvent> PISTOLSHOOT = registerSoundEvents("pistol");
     public static final RegistryObject<SoundEvent> PISTOLDISTANTSHOOT = registerSoundEvents("distantpistolshot");
     public static final RegistryObject<SoundEvent> PISTOLCOCKBACKWARD = registerSoundEvents("pistolcockbackward");

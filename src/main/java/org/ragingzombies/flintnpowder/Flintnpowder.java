@@ -3,19 +3,18 @@ package org.ragingzombies.flintnpowder;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.ragingzombies.flintnpowder.core.util.PlayerSpecificModifiers;
+import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
 import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.item.ModCreativeModTabs;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.attachments.ModItemsAttachments;
-import org.ragingzombies.flintnpowder.item.guns.ModItemsGuns;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
+import org.ragingzombies.flintnpowder.item.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 import org.ragingzombies.flintnpowder.core.network.PacketHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
@@ -42,6 +41,7 @@ public class Flintnpowder {
 
         ModSounds.register(modEventBus);
         ModProjectiles.register(modEventBus);
+        ModEnchantments.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(PlayerSpecificModifiers.INSTANCE);

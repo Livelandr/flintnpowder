@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
@@ -76,13 +77,29 @@ public class BlazelockBase extends GunBase {
         return gun.getTag().getInt("Ammo");
     }
 
-    public void AddAmmo(ItemStack gun, ItemStack ammo) {
-        int curAmmo = gun.getTag().getInt("Ammo");
-        curAmmo++;
-        gun.getTag().putInt("Ammo", curAmmo);
+    public void AddAmmo(Player shooter, ItemStack gun, ItemStack ammo) {
+        BaseAmmo ammoType = (BaseAmmo) ammo.getItem();
+        int totalInClip = ammoType.ammoCountInOne(ammo);
 
-        CompoundTag ammoData = ammo.serializeNBT();
-        gun.getTag().put("AmmoType" + curAmmo, ammoData);
+        ItemStack ammoStack = ammoType.getAmmoItemStack(ammo);
+
+        for (int i = 0; i < ammoType.ammoCountInOne(ammo); i++) {
+            int curAmmo = gun.getTag().getInt("Ammo");
+            curAmmo++;
+
+            if (curAmmo > GetMaxAmmoAmount(gun)) continue;
+            totalInClip--;
+
+            gun.getTag().putInt("Ammo", curAmmo);
+
+            CompoundTag ammoData = ammoStack.serializeNBT();
+            gun.getTag().put("AmmoType" + curAmmo, ammoData);
+        }
+
+        if (totalInClip > 0) {
+            ammoStack.setCount(totalInClip);
+            shooter.getInventory().add(ammoStack);
+        }
 
         ammo.shrink(1);
     }
@@ -104,7 +121,7 @@ public class BlazelockBase extends GunBase {
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
         gunStack.getTag().putBoolean("IsCocked", false);
-        ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
 
         if (GetAmmoAmount(gunStack) == 0) gunStack.getTag().putBoolean("ShootReady", false);
     }
@@ -159,7 +176,7 @@ public class BlazelockBase extends GunBase {
                     // If ammo is less than max
                     if (GetAmmoAmount(gunStack) < GetMaxAmmoAmount(gunStack)) {
                         if (checkAmmo(secondItemStack.getItem())) {
-                            AddAmmo(gunStack, secondItemStack);
+                            AddAmmo(pPlayer, gunStack, secondItemStack);
                             onAmmoInsert(pLevel, pPlayer, gunStack, pUsedHand);
                         } else {
                             gunStack.getTag().putBoolean("ChamberOpen", false);

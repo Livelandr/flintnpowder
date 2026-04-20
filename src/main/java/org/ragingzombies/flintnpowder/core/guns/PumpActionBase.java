@@ -12,9 +12,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
+import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -25,6 +29,7 @@ public class PumpActionBase extends GunBase {
         super(pProperties);
     }
 
+    public boolean needCockToReload = true;
     public int maxAmmo = 6;
 
     public void OnCockStart(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
@@ -33,23 +38,55 @@ public class PumpActionBase extends GunBase {
         }
     }
 
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == ModEnchantments.GHOST_LOADING.get() || super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 22;
+    }
+
     public void OnCockEnd(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) { }
 
     public int GetMaxAmmoAmount(ItemStack gun) {
-        return ((PumpActionBase) gun.getItem()).maxAmmo;
+        int amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.GHOST_LOADING.get(), gun);
+        return ((PumpActionBase) gun.getItem()).maxAmmo + (int) (this.maxAmmo/4)*amoLevel;
     }
 
     public int GetAmmoAmount(ItemStack gun) {
         return gun.getTag().getInt("Ammo");
     }
 
-    public void AddAmmo(ItemStack gun, ItemStack ammo) {
-        int curAmmo = gun.getTag().getInt("Ammo");
-        curAmmo++;
-        gun.getTag().putInt("Ammo", curAmmo);
+    public void AddAmmo(Player shooter, ItemStack gun, ItemStack ammo) {
+        BaseAmmo ammoType = (BaseAmmo) ammo.getItem();
+        int totalInClip = ammoType.ammoCountInOne(ammo);
 
-        CompoundTag ammoData = ammo.serializeNBT();
-        gun.getTag().put("AmmoType" + curAmmo, ammoData);
+        ItemStack ammoStack = ammoType.getAmmoItemStack(ammo);
+
+        for (int i = 0; i < ammoType.ammoCountInOne(ammo); i++) {
+            int curAmmo = gun.getTag().getInt("Ammo");
+            curAmmo++;
+
+            if (curAmmo > GetMaxAmmoAmount(gun)) continue;
+            totalInClip--;
+
+            gun.getTag().putInt("Ammo", curAmmo);
+
+            CompoundTag ammoData = ammoStack.serializeNBT();
+            gun.getTag().put("AmmoType" + curAmmo, ammoData);
+        }
+
+        if (totalInClip > 0) {
+            ammoStack.setCount(totalInClip);
+            shooter.getInventory().add(ammoStack);
+        }
 
         ammo.shrink(1);
     }
@@ -77,7 +114,7 @@ public class PumpActionBase extends GunBase {
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
-        ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
     }
 
     @Override
@@ -102,7 +139,10 @@ public class PumpActionBase extends GunBase {
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pUsedHand));
             }
 
-            if (!gunStack.getTag().getBoolean("IsUncocked")) {
+            if (!needCockToReload && checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < GetMaxAmmoAmount(gunStack)) {
+                AddAmmo(pPlayer, gunStack, secondItemStack);
+                onAmmo(pLevel, pPlayer, gunStack, secondItemStack, pUsedHand);
+            } else if (!gunStack.getTag().getBoolean("IsUncocked")) {
                 if (gunStack.getTag().getBoolean("ReadyToShoot")) {
                     if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                         // Shoot
@@ -117,11 +157,10 @@ public class PumpActionBase extends GunBase {
                 } else {
                     gunStack.getTag().putBoolean("IsUncocked", true);
                     OnCockStart(pLevel, pPlayer, gunStack, pUsedHand);
-
                 }
             } else {
-                if (checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < maxAmmo) {
-                    AddAmmo(gunStack, secondItemStack);
+                if (needCockToReload && checkAmmo(secondItemStack.getItem()) && GetAmmoAmount(gunStack) < GetMaxAmmoAmount(gunStack)) {
+                    AddAmmo(pPlayer, gunStack, secondItemStack);
                     onAmmo(pLevel, pPlayer, gunStack, secondItemStack, pUsedHand);
                 } else {
                     gunStack.getTag().putBoolean("IsUncocked", false);
@@ -129,10 +168,8 @@ public class PumpActionBase extends GunBase {
 
                     OnCockEnd(pLevel, pPlayer, gunStack, pUsedHand);
                 }
-
             }
         }
-
 
         return InteractionResultHolder.consume(pPlayer.getItemInHand(pUsedHand));
     }

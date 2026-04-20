@@ -13,8 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.ragingzombies.flintnpowder.core.guns.BlazelockBase;
-import org.ragingzombies.flintnpowder.item.ammo.ModItemsAmmo;
-import org.ragingzombies.flintnpowder.item.ammo.PistolRound;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
@@ -60,8 +59,8 @@ public class SingleActionRevolver extends BlazelockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply){
-        return 2.5F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun){
+        return 2.5F * super.accuracyModifier(ply, gun);
     }
 
     @Override
