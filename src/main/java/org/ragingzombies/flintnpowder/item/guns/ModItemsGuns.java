@@ -45,12 +45,19 @@ public class ModItemsGuns {
 
     public static final RegistryObject<Item> ARQUEBUS = ITEMS.register("arquebus",
             () -> new Arquebus(new Arquebus.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> GREEKFIRE = ITEMS.register("greek_fire",
             () -> new GreekFire(new GreekFire.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> FLAMINGHALBERD = ITEMS.register("flaming_halberd",
+            () -> new FlamingHalberd(new FlamingHalberd.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> HANDGONNE = ITEMS.register("hand_gonne",
+            () -> new Handgonne(new Handgonne.Properties().stacksTo(1)));
 
 
     public static final RegistryObject<Item> RIFLE = ITEMS.register("rifle",
             () -> new Rifle(new Rifle.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BIGGAMEGUN = ITEMS.register("big_game",
+            () -> new BigGameGun(new BigGameGun.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> BOLTACTIONRIFLE = ITEMS.register("bolt_action_rifle",
             () -> new BoltActionRifle(new BoltActionRifle.Properties().stacksTo(1)));

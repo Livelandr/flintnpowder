@@ -29,6 +29,10 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsAmmo.COPPERROUNDSHOT.get());
                         pOutput.accept(ModItemsAmmo.FOOLSGOLDROUNDSHOT.get());
                         pOutput.accept(ModItemsAmmo.COPPERVOLLEYSHOT.get());
+                        pOutput.accept(ModItemsAmmo.HEAVYCASTIRONROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.HEAVYSTEELROUNDSHOT.get());
+                        pOutput.accept(ModItemsAmmo.CASTIRONBUCKSHOT.get());
+                        pOutput.accept(ModItemsAmmo.STEELBUCKSHOT.get());
                         pOutput.accept(ModItemsAmmo.FLAMINGBUCKSHOT.get());
                         pOutput.accept(ModItemsAmmo.FLAMINGGRAPESHOT.get());
                         pOutput.accept(ModItemsAmmo.OILFLAMESHOT.get());
@@ -48,14 +52,17 @@ public class ModCreativeModTabs {
                     .title(Component.translatable("fnp.creativetab.firearms"))
                     .displayItems(((pParameters, pOutput) -> {
                         pOutput.accept(ModItemsGuns.LOGCANNON.get());
-                        pOutput.accept(ModItemsGuns.MUSKET.get());
-                        pOutput.accept(ModItemsGuns.PISTOL.get());
-                        pOutput.accept(ModItemsGuns.FLINTER.get());
                         pOutput.accept(ModItemsGuns.VOLLEYGUN.get());
+                        pOutput.accept(ModItemsGuns.FLINTER.get());
+                        pOutput.accept(ModItemsGuns.GREEKFIRE.get());
+                        pOutput.accept(ModItemsGuns.FLAMINGHALBERD.get());
+                        pOutput.accept(ModItemsGuns.HANDGONNE.get());
+                        pOutput.accept(ModItemsGuns.PISTOL.get());
+                        pOutput.accept(ModItemsGuns.MUSKET.get());
                         pOutput.accept(ModItemsGuns.BLUNDERBUSS.get());
                         pOutput.accept(ModItemsGuns.ARQUEBUS.get());
-                        pOutput.accept(ModItemsGuns.GREEKFIRE.get());
                         pOutput.accept(ModItemsGuns.RIFLE.get());
+                        pOutput.accept(ModItemsGuns.BIGGAMEGUN.get());
                         pOutput.accept(ModItemsGuns.SINGLEACTIONREVOLVER.get());
                         pOutput.accept(ModItemsGuns.TRAPDOORRIFLE.get());
                         pOutput.accept(ModItemsGuns.BREAKACTIONCOACHGUN.get());

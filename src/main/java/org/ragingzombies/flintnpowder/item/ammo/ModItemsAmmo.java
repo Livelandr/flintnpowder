@@ -28,6 +28,15 @@ public class ModItemsAmmo {
     public static final RegistryObject<Item> FOOLSGOLDROUNDSHOT = ITEMS.register("golden_roundshot",
             () -> new FoolsGoldRoundshot(new FoolsGoldRoundshot.Properties().stacksTo(32)));
 
+    public static final RegistryObject<Item> HEAVYCASTIRONROUNDSHOT = ITEMS.register("heavy_cast_iron_roundshot",
+            () -> new HeavyCastIronRoundshot(new HeavyCastIronRoundshot.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> HEAVYSTEELROUNDSHOT = ITEMS.register("heavy_steel_roundshot",
+            () -> new HeavySteelRoundshot(new HeavySteelRoundshot.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> CASTIRONBUCKSHOT = ITEMS.register("cast_iron_buckshot",
+            () -> new CastIronBuckshot(new CastIronBuckshot.Properties().stacksTo(32)));
+    public static final RegistryObject<Item> STEELBUCKSHOT = ITEMS.register("steel_buckshot",
+            () -> new SteelBuckshot(new SteelBuckshot.Properties().stacksTo(32)));
     public static final RegistryObject<Item> FLAMINGBUCKSHOT = ITEMS.register("flaming_buckshot",
             () -> new FlamingBuckshot(new FlamingBuckshot.Properties().stacksTo(32)));
 
@@ -48,9 +57,9 @@ public class ModItemsAmmo {
     public static final RegistryObject<Item> SHOTGUNSHELLDRAGON = ITEMS.register("shotgunshelldragon",
             () -> new ShotgunShellDragon(new ShotgunShellDragon.Properties().stacksTo(32)));
 
-    public static final RegistryObject<Item> HANDGUNMAG = ITEMS.register("handgunmag",
+    public static final RegistryObject<Item> HANDGUNMAG = ITEMS.register("handgunmagazine",
             () -> new HandgunMag(new HandgunMag.Properties().stacksTo(1)));
-    public static final RegistryObject<Item> EXTENDEDHANDGUNMAG = ITEMS.register("extendedhandgunmag",
+    public static final RegistryObject<Item> EXTENDEDHANDGUNMAG = ITEMS.register("handgunmagazineextended",
             () -> new ExtendedHandgunMag(new ExtendedHandgunMag.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {

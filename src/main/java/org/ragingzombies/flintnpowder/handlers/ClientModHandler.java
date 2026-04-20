@@ -143,6 +143,22 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
                 }
         );
+        // Big Game
+        ItemProperties.register(
+                ModItemsGuns.BIGGAMEGUN.get(),
+                new ResourceLocation(MOD_ID, "big_game_primed"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
+                }
+        );
+        // Flaming Halberd
+        ItemProperties.register(
+                ModItemsGuns.FLAMINGHALBERD.get(),
+                new ResourceLocation(MOD_ID, "flaming_halberd_ready"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
+                }
+        );
 
         // Cast Iron Roundshot Projectile
         EntityRenderers.register(ModProjectiles.CASTIRONROUNDSHOTPROJECTILE.get(), ThrownItemRenderer::new);
@@ -158,6 +174,10 @@ public class ClientModHandler {
         EntityRenderers.register(ModProjectiles.DRAGONBREATHPROJECTILE.get(), ThrownItemRenderer::new);
         // Pistol Projectile
         EntityRenderers.register(ModProjectiles.PISTOLROUNDPROJECTILE.get(), ThrownItemRenderer::new);
+        //
+        EntityRenderers.register(ModProjectiles.THEROCKPROJECTILE.get(), ThrownItemRenderer::new);
+        //
+        EntityRenderers.register(ModProjectiles.HEAVYCASTIRONPROJECTILE.get(), ThrownItemRenderer::new);
 
 
     }

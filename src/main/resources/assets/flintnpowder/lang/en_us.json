@@ -10,8 +10,8 @@
   "flintnpowder.no_magazine": "No magazine",
   "flintnpowder.magempty": "Magazine empty",
 
-  "item.flintnpowder.handgunmag": "Handgun Magazine",
-  "item.flintnpowder.extendedhandgunmag": "Extended Handgun Magazine",
+  "item.flintnpowder.handgunmagazine": "Handgun Magazine",
+  "item.flintnpowder.handgunmagazineextended": "Extended Handgun Magazine",
 
   "flintnpowder.incendiary": "§6Incendiary: Sets blocks and entities on fire",
 
@@ -50,6 +50,8 @@
   "item.flintnpowder.lpoptic": "Low Profile Optic",
   "item.flintnpowder.lpoptic.description": "§2Allow too zoom to small distances",
 
+
+  "item.flintnpowder.big_game": "The Big Game Gun",
 
   "item.flintnpowder.log_cannon": "Log Cannon",
   "item.flintnpowder.log_cannon.description_0": "§6Hole and steel: Flint is required to fire",
@@ -91,6 +93,8 @@
   "item.flintnpowder.shotgunshelldragon": "12 Gauge Dragon Breath Shotgun Shell",
   "item.flintnpowder.shotgunshelldragon.description": "Shoots with burning powder",
 
+  "item.flintnpowder.cast_iron_buckshot": "Cast Iron Buckshot",
+  "item.flintnpowder.steel_buckshot": "Steel Buckshot",
   "item.flintnpowder.flaming_buckshot": "Flaming Buckshot",
 
   "item.flintnpowder.pistol_round": "Pistol Round",
@@ -110,14 +114,18 @@
   "item.flintnpowder.arquebus.description_0": "§6Matchlock: Requires flint and steel to fire",
   "item.flintnpowder.arquebus.description_1": "§4Unable to fire underwater",
 
+  "item.flintnpowder.flaming_halberd": "Flaming Halberd",
+  "item.flintnpowder.hand_gonne": "Handgonne",
   "item.flintnpowder.greek_fire": "Greek Fire",
   "item.flintnpowder.greek_fire.description_0": "§6Matchlock: Requires flint and steel to fire",
   "item.flintnpowder.greek_fire.description_1": "§4Unable to fire underwater",
   "item.flintnpowder.greek_fire.description_2": "§4Heavy weapon: Slows down on use",
   "item.flintnpowder.greek_fire.description_3": "§2Can be used as a hefty club",
 
-  "item.flintnpowder.greek_fire_buckshot": "Flaming Grapeshot",
+  "item.flintnpowder.heavy_cast_iron_roundshot": "Heavy Cast Iron Roundshot",
+  "item.flintnpowder.heavy_steel_roundshot": "Heavy Steel Roundshot",
 
+  "item.flintnpowder.greek_fire_buckshot": "Flaming Grapeshot",
   "item.flintnpowder.greek_fire_charge": "Oil Flameshot",
   "item.flintnpowder.greek_fire_charge.description_1": "§2Fires a short, rapid burst of flaming chunks",
 
