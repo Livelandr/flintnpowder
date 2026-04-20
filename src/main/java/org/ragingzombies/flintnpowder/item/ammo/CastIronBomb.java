@@ -27,20 +27,20 @@ public class CastIronBomb extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         CastIronBombProjectile proj = new CastIronBombProjectile(level, shooter);
 
-        proj.damage = this.damage * gun.damageModifier();
+        proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun);
         proj.setOwner(shooter);
 
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 3F, 1F * gun.accuracyModifier(shooter.getUUID()));
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 3F, 1F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
         // Recoil
 
         if (shooter instanceof Player) {
             Random rand = new Random();
             float angleX = rand.nextFloat(4.0F);
-            OffsetEntityCamera(shooter, (-7 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+            OffsetEntityCamera(shooter, (-7 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
         }
 
         level.addFreshEntity(proj);

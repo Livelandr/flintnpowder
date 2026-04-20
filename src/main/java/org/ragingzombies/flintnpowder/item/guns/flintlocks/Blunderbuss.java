@@ -33,8 +33,8 @@ public class Blunderbuss extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2.5F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2.5F * super.accuracyModifier(ply, gun);
     }
 
     @Override

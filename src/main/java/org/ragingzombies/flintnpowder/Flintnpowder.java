@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.ragingzombies.flintnpowder.core.util.PlayerSpecificModifiers;
+import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
 import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.item.ModCreativeModTabs;
 import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
@@ -40,6 +41,7 @@ public class Flintnpowder {
 
         ModSounds.register(modEventBus);
         ModProjectiles.register(modEventBus);
+        ModEnchantments.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(PlayerSpecificModifiers.INSTANCE);

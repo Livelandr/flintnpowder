@@ -79,8 +79,8 @@ public class FlamingHalberd extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 1 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 1 * super.accuracyModifier(ply, gun);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class FlamingHalberd extends FlintlockBase {
             ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
             BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
-            ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+            ammo.onAmmoShot(pPlayer, gunStack, pLevel);
         });
     }
 

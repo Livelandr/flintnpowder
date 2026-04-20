@@ -9,6 +9,7 @@ import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.BreakActionCoachgun;
 import org.ragingzombies.flintnpowder.item.guns.blazelocks.TrapdoorRifle;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.*;
+import org.ragingzombies.flintnpowder.item.guns.magfed.ClosedBoltBattleRifle;
 import org.ragingzombies.flintnpowder.item.guns.magfed.OpenBoltSubmachineGun;
 import org.ragingzombies.flintnpowder.item.guns.magfed.SemiPistol;
 import org.ragingzombies.flintnpowder.item.guns.other.LogCannon;
@@ -70,6 +71,8 @@ public class ModItemsGuns {
             () -> new SemiPistol(new SemiPistol.Properties().stacksTo(1)));
     public static final RegistryObject<Item> OPENBOLTSUBMACHINEGUN = ITEMS.register("open_bolt_smg",
             () -> new OpenBoltSubmachineGun(new OpenBoltSubmachineGun.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CLOSEDBOLTBATTLERIFLE = ITEMS.register("closed_bolt_mag_rifle",
+            () -> new ClosedBoltBattleRifle(new ClosedBoltBattleRifle.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

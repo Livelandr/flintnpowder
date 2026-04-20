@@ -34,8 +34,8 @@ public class LogCannon extends GunBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 3 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 3 * super.accuracyModifier(ply, gun);
     }
 
     @Override
@@ -106,10 +106,10 @@ public class LogCannon extends GunBase {
 
         TheRockProjectile proj = new TheRockProjectile(pLevel, pPlayer);
 
-        proj.damage = 15 * gun.damageModifier();
+        proj.damage = 15 * gun.damageModifier(pPlayer.getUUID(), gunStack);
         proj.setOwner(pPlayer);
 
-        proj.shootFromRotation(pPlayer, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer), 0.0F, 4F, 1.1F * gun.accuracyModifier(pPlayer.getUUID()));
+        proj.shootFromRotation(pPlayer, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer), 0.0F, 4F, 1.1F * gun.accuracyModifier(pPlayer.getUUID(), gunStack));
 
         // Recoil
         if (pPlayer instanceof Player) {

@@ -42,13 +42,14 @@ public class Rifle extends FlintlockBase {
     }
 
 
-    public float damageModifier() {
-        return 1.1F*super.damageModifier();
+    @Override
+    public float damageModifier(UUID shooter, ItemStack gun) {
+        return 1.1F*super.damageModifier(shooter, gun);
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2F * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2F * super.accuracyModifier(ply, gun);
     }
 
     @Override

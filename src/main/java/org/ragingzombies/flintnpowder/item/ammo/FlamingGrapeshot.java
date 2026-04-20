@@ -30,7 +30,7 @@ public class FlamingGrapeshot extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         if (shooter.level().isClientSide()) return;
 
         ServerLevel serverLevel = (ServerLevel) shooter.level();
@@ -48,16 +48,16 @@ public class FlamingGrapeshot extends BaseAmmo {
              FlamingBuckshotProjectile proj = new FlamingBuckshotProjectile(level, shooter);
 
              proj.setOwner(shooter);
-             proj.SetDamage(this.damage * gun.damageModifier());
+             proj.SetDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun));
 
              proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
-                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,2 * gun.accuracyModifier(shooter.getUUID()));
+                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,2 * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
 
              // Recoil
              if (shooter instanceof Player) {
                  float angleX = rand.nextFloat(4.0F);
-                 OffsetEntityCamera(shooter, (-7 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+                 OffsetEntityCamera(shooter, (-7 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
              }
 
              level.addFreshEntity(proj);

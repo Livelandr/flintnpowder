@@ -23,12 +23,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.util.Lazy;
 import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.attachments.AttachmentBase;
+import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
 import org.ragingzombies.flintnpowder.handlers.AttachmentRenderer;
 import org.ragingzombies.flintnpowder.handlers.ClientModHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
@@ -76,6 +79,18 @@ public class GunBase extends Item {
             return builder.build();
         });
     }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == ModEnchantments.QUALITY_PROPELLANT.get() || super.canApplyAtEnchantingTable(stack, enchantment);
+    }
+
+    @Override
+    public int getEnchantmentValue(ItemStack stack) {
+        return 22;
+    }
+
+    public void OnCockEnd(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) { }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
@@ -263,17 +278,18 @@ public class GunBase extends Item {
     }
 
 
-    public float damageModifier() {
-        return 1;
+    public float damageModifier(UUID shooter, ItemStack gun) {
+        int amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.QUALITY_PROPELLANT.get(), gun);
+        return 1 + amoLevel*0.10F;
     }
 
-    public float recoilModifierX(UUID id) {
+    public float recoilModifierX(UUID id, ItemStack gun) {
         return 1;
     }
-    public float recoilModifierY(UUID id) {
+    public float recoilModifierY(UUID id, ItemStack gun) {
         return 1;
     }
-    public float accuracyModifier(UUID id) {
+    public float accuracyModifier(UUID id, ItemStack gun) {
         return 1;
     }
 

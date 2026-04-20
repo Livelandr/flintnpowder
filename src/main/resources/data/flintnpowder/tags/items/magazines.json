@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "flintnpowder:handgunmagazine",
+    "flintnpowder:handgunmagazineextended",
+    "flintnpowder:battleriflemagazine"
+  ]
+}

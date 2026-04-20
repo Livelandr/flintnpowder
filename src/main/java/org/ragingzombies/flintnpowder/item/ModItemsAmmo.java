@@ -7,8 +7,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.item.ammo.*;
+import org.ragingzombies.flintnpowder.item.ammo.magazines.BattleRifleMag;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.ExtendedHandgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
+import org.ragingzombies.flintnpowder.item.ammo.magazines.ShotgunMag;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
@@ -62,6 +64,10 @@ public class ModItemsAmmo {
             () -> new HandgunMag(new HandgunMag.Properties().stacksTo(1)));
     public static final RegistryObject<Item> EXTENDEDHANDGUNMAG = ITEMS.register("handgunmagazineextended",
             () -> new ExtendedHandgunMag(new ExtendedHandgunMag.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> BATTLERIFLEMAGAZINE = ITEMS.register("battleriflemagazine",
+            () -> new BattleRifleMag(new BattleRifleMag.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SHOTGUNMAGAZINE = ITEMS.register("shotgun_magazine",
+            () -> new ShotgunMag(new ShotgunMag.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CASTIRONBOMB = ITEMS.register("cast_iron_bomb",
             () -> new CastIronBomb(new CastIronBomb.Properties().stacksTo(16)));

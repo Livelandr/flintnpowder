@@ -88,7 +88,7 @@ public class MagfedBase extends GunBase {
     public void InsertMagazine(Player ply, ItemStack gun, ItemStack mag) {
         if (gun.getTag().getBoolean("HaveMag")) return;
 
-        BaseMagazine.copyToGun(mag, gun);
+        ((BaseMagazine) mag.getItem()).copyToGun(mag, gun);
 
         CompoundTag magData = mag.serializeNBT();
         gun.getTag().put("Magazine", magData);
@@ -146,7 +146,7 @@ public class MagfedBase extends GunBase {
     public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
-        ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
 
         if (GetAmmoAmount(gunStack) <= 0) gunStack.getTag().putBoolean("ShootReady", false);
     }

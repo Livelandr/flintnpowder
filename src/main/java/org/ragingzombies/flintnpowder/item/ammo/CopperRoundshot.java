@@ -2,6 +2,7 @@ package org.ragingzombies.flintnpowder.item.ammo;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
@@ -20,19 +21,19 @@ public class CopperRoundshot extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         CastIronRoundshotProjectile proj = new CastIronRoundshotProjectile(level, shooter);
 
-        proj.damage = this.damage * gun.damageModifier();
+        proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun);
         proj.setOwner(shooter);
 
-        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * gun.accuracyModifier(shooter.getUUID()));
+        proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter), CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
         // Recoil
         if (shooter instanceof Player) {
             Random rand = new Random();
             float angleX = rand.nextFloat(4.0F);
-            OffsetEntityCamera(shooter, (-15 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+            OffsetEntityCamera(shooter, (-15 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
         }
 
         level.addFreshEntity(proj);

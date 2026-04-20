@@ -27,7 +27,7 @@ public class FlamingBuckshot extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         Random rand = new Random();
         for (int i = 0; i < 6; i++) {
             float angle = rand.nextFloat((float) (2.0F*Math.PI));
@@ -37,8 +37,8 @@ public class FlamingBuckshot extends BaseAmmo {
 
             proj.setOwner(shooter);
             proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
-                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,1.25F * gun.accuracyModifier(shooter.getUUID()));
-            proj.SetDamage(this.damage * gun.damageModifier());
+                    CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,1.25F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
+            proj.SetDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun));
 
             level.addFreshEntity(proj);
         }
@@ -47,7 +47,7 @@ public class FlamingBuckshot extends BaseAmmo {
         if (shooter instanceof Player) {
             // Recoil
             float angleX = rand.nextFloat(4.0F);
-            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
         }
     }
 

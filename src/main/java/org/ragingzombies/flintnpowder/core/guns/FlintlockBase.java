@@ -70,7 +70,7 @@ public class FlintlockBase extends GunBase {
         ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
         BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
-        ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
 
         gunStack.getTag().putInt("Gunpowder", 0);
         gunStack.getTag().putBoolean("HasAmmo", false);

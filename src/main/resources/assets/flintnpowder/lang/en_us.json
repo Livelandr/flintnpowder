@@ -99,6 +99,7 @@
 
   "item.flintnpowder.pistol_round": "Pistol Round",
   "item.flintnpowder.rifle_round": "Rifle Round",
+  "item.flintnpowder.battleriflemagazine": "Battle Rifle Magazine",
 
   "item.flintnpowder.flinter": "Flinter",
   "item.flintnpowder.flinter.description_0": "§6Hole and steel: Flint is required to fire",
@@ -163,5 +164,10 @@
 
   "item.flintnpowder.open_bolt_smg": "Open Bolt Submachine Gun",
   "item.flintnpowder.open_bolt_smg.description_0": "§6Endlock: No need for additional gunpowder or ramrod",
-  "item.flintnpowder.open_bolt_smg.description_1": "§4-20% Projectile damage"
+  "item.flintnpowder.open_bolt_smg.description_1": "§4-20% Projectile damage",
+
+  "item.flintnpowder.closed_bolt_mag_rifle": "Closed Bolt Battle Rifle",
+
+
+  "enchantment.flintnpowder.ghost_loading": "Ghost Loading"
 }

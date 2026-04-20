@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:rifle"
+    },
+    "title": {
+      "translate": "advancements.rifle_get.title"
+    },
+    "description": {
+      "translate": "advancements.rifle_get.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "rifle_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:rifle"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:bb_get"
+}

@@ -88,8 +88,8 @@ public class Musket extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 1 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 1 * super.accuracyModifier(ply, gun);
     }
 
     @Override

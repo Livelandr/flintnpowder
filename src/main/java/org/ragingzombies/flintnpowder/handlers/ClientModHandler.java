@@ -164,6 +164,14 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
                 }
         );
+        // CLOSED BOLT BATTLE RIFLE
+        ItemProperties.register(
+                ModItemsGuns.CLOSEDBOLTBATTLERIFLE.get(),
+                new ResourceLocation(MOD_ID, "closed_bolt_mag_rifle_unloaded"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveMag") ? 0.0F : 1.0F;
+                }
+        );
 
 
         // Cast Iron Roundshot Projectile

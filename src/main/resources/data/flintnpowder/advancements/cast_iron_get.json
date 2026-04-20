@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:cast_iron_ingot"
+    },
+    "title": {
+      "translate": "advancements.cast_iron_get.title"
+    },
+    "description": {
+      "translate": "advancements.cast_iron_get.descr"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cast_iron_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:cast_iron_alloy"
+            ],
+            "count": {
+              "min": 32,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:botg_get"
+}

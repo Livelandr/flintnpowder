@@ -31,8 +31,8 @@ public class Pistol extends FlintlockBase {
     }
 
     @Override
-    public float accuracyModifier(UUID ply) {
-        return 2 * super.accuracyModifier(ply);
+    public float accuracyModifier(UUID ply, ItemStack gun) {
+        return 2 * super.accuracyModifier(ply, gun);
     }
 
     @Override

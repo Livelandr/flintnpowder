@@ -30,7 +30,7 @@ public class OilFlameshot extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         if (shooter.level().isClientSide()) return;
 
         ServerLevel serverLevel = (ServerLevel) shooter.level();
@@ -46,10 +46,10 @@ public class OilFlameshot extends BaseAmmo {
 
                 FlamingBuckshotProjectile proj = new FlamingBuckshotProjectile(level, shooter);
 
-                proj.damage = this.damage * gun.damageModifier();
+                proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun);
                 proj.setOwner(shooter);
 
-                proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 2F, 2F * gun.accuracyModifier(shooter.getUUID()));
+                proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 2F, 2F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
                 level.addFreshEntity(proj);
             });

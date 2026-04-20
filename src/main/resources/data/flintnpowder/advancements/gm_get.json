@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:palladium_green"
+    },
+    "title": {
+      "translate": "advancements.gm_get.title"
+    },
+    "description": {
+      "translate": "advancements.gm_get.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "gm_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:gunmetal_alloy"
+            ],
+            "count": {
+              "min": 32,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:bb_get"
+}

@@ -32,7 +32,7 @@ public class CopperVolleyshot extends BaseAmmo {
     }
 
     @Override
-    public void onAmmoShot(LivingEntity shooter, GunBase gun, Level level) {
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
         if (shooter.level().isClientSide()) return;
 
         ServerLevel serverLevel = (ServerLevel) shooter.level();
@@ -46,16 +46,16 @@ public class CopperVolleyshot extends BaseAmmo {
 
                 CastIronRoundshotProjectile proj = new CastIronRoundshotProjectile(level, shooter);
 
-                proj.damage = this.damage * gun.damageModifier();
+                proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter.getUUID(), gun);
                 proj.setOwner(shooter);
 
-                proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * gun.accuracyModifier(shooter.getUUID()));
+                proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * ((GunBase) gun.getItem()).accuracyModifier(shooter.getUUID(), gun));
 
                 // Recoil
                 if (shooter instanceof Player) {
                     Random rand = new Random();
                     float angleX = rand.nextFloat(4.0F);
-                    OffsetEntityCamera(shooter, (-5 + (angleX - 2)) * gun.recoilModifierX(shooter.getUUID()), (angleX - 2) * gun.recoilModifierY(shooter.getUUID()));
+                    OffsetEntityCamera(shooter, (-5 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter.getUUID(), gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter.getUUID(), gun));
                 }
 
                 level.addFreshEntity(proj);

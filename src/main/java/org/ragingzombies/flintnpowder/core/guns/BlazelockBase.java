@@ -104,7 +104,7 @@ public class BlazelockBase extends GunBase {
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
         gunStack.getTag().putBoolean("IsCocked", false);
-        ammo.onAmmoShot(pPlayer, (GunBase) gunStack.getItem(), pLevel);
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
 
         if (GetAmmoAmount(gunStack) == 0) gunStack.getTag().putBoolean("ShootReady", false);
     }
