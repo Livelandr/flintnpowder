@@ -52,8 +52,14 @@
   "item.flintnpowder.lpoptic": "Low Profile Optic",
   "item.flintnpowder.lpoptic.description": "§2Allow too zoom to small distances",
 
+  "item.flintnpowder.pistolclip": "Pistol Clip",
 
   "item.flintnpowder.big_game": "The Big Game Gun",
+
+  "item.flintnpowder.antimaterielrifle": "Anti-Materiel Rifle",
+  "item.flintnpowder.50bmground": ".50 BMG Round",
+  "item.flintnpowder.sniperriflemagazine": "Sniper Rifle Magazine",
+
 
   "item.flintnpowder.log_cannon": "Log Cannon",
   "item.flintnpowder.log_cannon.description_0": "§6Hole and steel: Flint is required to fire",
@@ -73,6 +79,9 @@
   "item.flintnpowder.single_action_revolver.description_2": "§2Calibre: Pistol Round",
   "item.flintnpowder.single_action_revolver.description_1": "§2Two handed: Empty Offhand Required",
   "item.flintnpowder.single_action_revolver.description_3": "§26 Rounds capacity",
+
+  "item.flintnpowder.broomhandlepistol": "Broomhandle",
+  "item.flintnpowder.broomhandle.description_3": "§210 Rounds capacity",
 
   "item.flintnpowder.shotgun": "Pump Action Shotgun",
   "item.flintnpowder.shotgun.description_0": "§6Endlock: No need for additional gunpowder or ramrod",

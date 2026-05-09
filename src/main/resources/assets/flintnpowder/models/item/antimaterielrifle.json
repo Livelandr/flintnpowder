@@ -1,0 +1,59 @@
+{
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+	  "parent": "item/generated",
+	  "textures": {
+	    "layer0": "flintnpowder:item/antimaterielrifle_0"
+	  },
+	  "display": {
+        "ground": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 3, 0],
+            "scale":[ 1, 1, 1 ]
+        },
+        "fixed": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0, 0, 0],
+            "scale":[ 1, 1, 1 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 0, -90, 45 ],
+            "translation": [ 0, 2.75, -2.75 ],
+            "scale": [ 1.7, 1.7, 1 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 90, -45 ],
+            "translation": [ 0, 2.75, 1 ],
+            "scale": [ 1.7, 1.7, 1 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ -14, -90, 28 ],
+            "translation": [ 0, 3.75, -0.75 ],
+            "scale": [ 1.7, 1.7, 1 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ -14, 90, -28 ],
+            "translation": [ 0, 3.75, -0.75 ],
+            "scale": [ 1.7, 1.7, 1 ]
+        }
+	}
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/handheld",
+      "textures": {
+        "layer0": "flintnpowder:item/antimaterielrifle_0"
+      },
+      "gui_light": "front"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "flintnpowder:have_mag": 1
+      },
+      "model": "flintnpowder:item/antimaterielrifle_1"
+    }
+  ]
+}

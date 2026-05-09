@@ -42,6 +42,8 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> PISTOLCOCKFORWARD = registerSoundEvents("pistolcockforward");
     public static final RegistryObject<SoundEvent> PISTOLMAGIN = registerSoundEvents("pistolmagin");
 
+    public static final RegistryObject<SoundEvent> SNIPERSHOOT = registerSoundEvents("snipershoot");
+
 
     public static final RegistryObject<SoundEvent> GUNSHOTDISTANT = registerSoundEvents("distantgunshot");
 

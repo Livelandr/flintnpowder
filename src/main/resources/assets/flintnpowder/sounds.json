@@ -1,4 +1,12 @@
 {
+  "snipershoot": {
+    "sounds": [
+      {
+        "name": "flintnpowder:snipershoot",
+        "stream": false
+      }
+    ]
+  },
   "musketfire": {
     "subtitle": "subtitles.musketfire",
     "sounds": [

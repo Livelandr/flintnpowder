@@ -7,11 +7,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.item.ammo.*;
+import org.ragingzombies.flintnpowder.item.ammo.clips.PistolRoundClip;
 import org.ragingzombies.flintnpowder.item.ammo.clips.RifleRoundClip;
-import org.ragingzombies.flintnpowder.item.ammo.magazines.BattleRifleMag;
-import org.ragingzombies.flintnpowder.item.ammo.magazines.ExtendedHandgunMag;
-import org.ragingzombies.flintnpowder.item.ammo.magazines.HandgunMag;
-import org.ragingzombies.flintnpowder.item.ammo.magazines.ShotgunMag;
+import org.ragingzombies.flintnpowder.item.ammo.magazines.*;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShell;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellDragon;
 import org.ragingzombies.flintnpowder.item.ammo.shotgun.ShotgunShellSlug;
@@ -51,6 +49,8 @@ public class ModItemsAmmo {
 
     public static final RegistryObject<Item> RIFLEROUNDCLIP = ITEMS.register("rifle_round_clip",
             () -> new RifleRoundClip(new RifleRoundClip.Properties().stacksTo(4)));
+    public static final RegistryObject<Item> PISTOLROUNDCLIP = ITEMS.register("pistolclip",
+            () -> new PistolRoundClip(new PistolRoundClip.Properties().stacksTo(4)));
 
     public static final RegistryObject<Item> FLAMINGGRAPESHOT = ITEMS.register("greek_fire_buckshot",
             () -> new FlamingGrapeshot(new FlamingGrapeshot.Properties().stacksTo(32)));
@@ -72,6 +72,12 @@ public class ModItemsAmmo {
             () -> new BattleRifleMag(new BattleRifleMag.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SHOTGUNMAGAZINE = ITEMS.register("shotgun_magazine",
             () -> new ShotgunMag(new ShotgunMag.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> SNIPERRIFLEROUND = ITEMS.register("50bmground",
+            () -> new SniperRound(new SniperRound.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> SNIPERRIFLEMAGAZINE = ITEMS.register("sniperriflemagazine",
+            () -> new SniperRifleMag(new SniperRifleMag.Properties().stacksTo(1)));
+
 
     public static final RegistryObject<Item> CASTIRONBOMB = ITEMS.register("cast_iron_bomb",
             () -> new CastIronBomb(new CastIronBomb.Properties().stacksTo(16)));

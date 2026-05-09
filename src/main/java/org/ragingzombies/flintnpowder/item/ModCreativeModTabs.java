@@ -39,11 +39,15 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsAmmo.SHOTGUNSHELLDRAGON.get());
                         pOutput.accept(ModItemsAmmo.PISTOLROUND.get());
                         pOutput.accept(ModItemsAmmo.RIFLEROUND.get());
+                        pOutput.accept(ModItemsAmmo.SNIPERRIFLEROUND.get());
                         pOutput.accept(ModItemsAmmo.RIFLEROUNDCLIP.get());
+                        pOutput.accept(ModItemsAmmo.PISTOLROUNDCLIP.get());
                         pOutput.accept(ModItemsAmmo.HANDGUNMAG.get());
                         pOutput.accept(ModItemsAmmo.EXTENDEDHANDGUNMAG.get());
                         pOutput.accept(ModItemsAmmo.BATTLERIFLEMAGAZINE.get());
                         pOutput.accept(ModItemsAmmo.SHOTGUNMAGAZINE.get());
+                        pOutput.accept(ModItemsAmmo.SNIPERRIFLEMAGAZINE.get());
+
                         // Empty
                     }))
                     .build());
@@ -59,6 +63,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsGuns.FLAMINGHALBERD.get());
                         pOutput.accept(ModItemsGuns.HANDGONNE.get());
                         pOutput.accept(ModItemsGuns.PISTOL.get());
+                        pOutput.accept(ModItemsGuns.BROOMHANDLE.get());
                         pOutput.accept(ModItemsGuns.MUSKET.get());
                         pOutput.accept(ModItemsGuns.BLUNDERBUSS.get());
                         pOutput.accept(ModItemsGuns.ARQUEBUS.get());
@@ -74,6 +79,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItemsGuns.OPENBOLTSUBMACHINEGUN.get());
                         pOutput.accept(ModItemsGuns.CLOSEDBOLTBATTLERIFLE.get());
                         pOutput.accept(ModItemsGuns.GASOPERATEDSHOTGUN.get());
+                        pOutput.accept(ModItemsGuns.SNIPERRIFLE.get());
                         pOutput.accept(ModItems.RAMROD.get());
                         pOutput.accept(ModItemsAttachments.SILENCER.get());
                         pOutput.accept(ModItemsAttachments.BAYONET.get());

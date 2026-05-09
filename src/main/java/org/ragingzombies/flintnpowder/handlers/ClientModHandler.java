@@ -194,6 +194,14 @@ public class ClientModHandler {
                     return stack.getOrCreateTag().getBoolean("SlideCocked") ? 1.0F : 0.0F;
                 }
         );
+        // Sniper
+        ItemProperties.register(
+                ModItemsGuns.SNIPERRIFLE.get(),
+                new ResourceLocation(MOD_ID, "have_mag"),
+                (stack, level, entity, seed) -> {
+                    return stack.getOrCreateTag().getBoolean("HaveMag") ? 1.0F : 0.0F;
+                }
+        );
 
 
         // Cast Iron Roundshot Projectile

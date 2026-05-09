@@ -29,6 +29,7 @@ public class MagfedBase extends GunBase {
         super(pProperties);
     }
 
+    public boolean needSlideAfterShot = false;
     public List<Item> allowedMags = new ArrayList<>();
 
     public void addAllowedMagazine(Item mag) {
@@ -187,6 +188,11 @@ public class MagfedBase extends GunBase {
                         if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
                             Shoot(pLevel, pPlayer, gunStack);
                             onShoot(pLevel, pPlayer, gunStack);
+
+                            if (needSlideAfterShot) {
+                                gunStack.getTag().putBoolean("SlideCocked", false);
+                                gunStack.getTag().putBoolean("ShootReady", false);
+                            }
                         } else {
                             onTryFailure(pLevel, pPlayer, gunStack);
                             gunStack.getTag().putBoolean("ShootReady", false);
