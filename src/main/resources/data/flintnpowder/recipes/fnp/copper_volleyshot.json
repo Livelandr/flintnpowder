@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "II",
+    "II"
+  ],
+  "key": {
+    "I": {
+      "item": "flintnpowder:copper_roundshot"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:copper_volleyshot",
+    "count": 1
+  }
+}

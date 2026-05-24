@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "GGG",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/iron"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:50bmground",
+    "count": 2
+  }
+}

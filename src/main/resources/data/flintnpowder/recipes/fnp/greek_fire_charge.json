@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "POP",
+    "BP "
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "tag": "forge:ingots/cast_iron"
+    },
+    "O": {
+      "item": "flintnpowder:oil_flask"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:greek_fire_charge",
+    "count": 2
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " DP",
+    "DQD",
+    "GD "
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:dyes/orange"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "P": {
+      "item": "flintnpowder:flaming_buckshot"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:shotgunshelldragon",
+    "count": 1
+  }
+}

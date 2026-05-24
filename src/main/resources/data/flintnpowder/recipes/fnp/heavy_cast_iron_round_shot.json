@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "NIN",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:nuggets/cast_iron"
+    },
+    "I": {
+      "tag": "forge:ingots/cast_iron"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:heavy_cast_iron_roundshot",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " DP",
+    "DQD",
+    "GD "
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:dyes/blue"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "P": {
+      "item": "flintnpowder:castironroundshot"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:shotgunshellslug",
+    "count": 1
+  }
+}

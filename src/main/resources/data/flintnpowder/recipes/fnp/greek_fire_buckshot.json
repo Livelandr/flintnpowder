@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " PB",
+    "POP",
+    "BP "
+  ],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "item": "flintnpowder:cast_iron_buckshot"
+    },
+    "O": {
+      "item": "flintnpowder:oil_flask"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:greek_fire_buckshot",
+    "count": 2
+  }
+}

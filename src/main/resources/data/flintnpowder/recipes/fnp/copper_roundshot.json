@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "II",
+    "II"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:copper_roundshot",
+    "count": 8
+  }
+}

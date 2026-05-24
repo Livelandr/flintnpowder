@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " DP",
+    "DQD",
+    "GD "
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:dyes/red"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "P": {
+      "item": "flintnpowder:cast_iron_buckshot"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:shotgunshell",
+    "count": 4
+  }
+}

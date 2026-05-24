@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IOI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:nuggets/cast_iron"
+    },
+    "O": {
+      "item": "flintnpowder:oil_flask"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:flaming_buckshot",
+    "count": 2
+  }
+}

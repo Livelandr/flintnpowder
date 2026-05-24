@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "NIN",
+    " N "
+  ],
+  "key": {
+    "N": {
+      "tag": "forge:nuggets/gold"
+    },
+    "I": {
+      "item": "flintnpowder:blazing_brass"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:golden_roundshot",
+    "count": 4
+  }
+}
