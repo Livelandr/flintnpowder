@@ -1,23 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " I ",
-    "I I",
-    " I "
+    "III",
+    "III",
+    "III"
   ],
   "key": {
-    "I":
-[
-    {
-      "tag": "forge:nuggets/cast_iron"
-    },
-    {
+    "I": {
       "item": "flintnpowder:cast_iron_nugget"
     }
-]
   },
   "result": {
-    "item": "flintnpowder:castironroundshot",
+    "item": "flintnpowder:cast_iron_ingot",
     "count": 1
   }
 }

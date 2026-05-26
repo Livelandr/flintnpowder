@@ -6,9 +6,15 @@
     "III"
   ],
   "key": {
-    "I": {
+    "I":
+[
+    {
       "tag": "forge:nuggets/cast_iron"
     },
+    {
+      "item": "flintnpowder:cast_iron_nugget"
+    }
+],
     "O": {
       "item": "flintnpowder:oil_flask"
     }

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B ",
+    " M",
+    " P"
+  ],
+  "key": {
+    "B": {
+      "item": "flintnpowder:steel_barrel"
+    },
+    "M": {
+      "item": "flintnpowder:flintlock_mechanism"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:pistol",
+    "count": 1
+  }
+}

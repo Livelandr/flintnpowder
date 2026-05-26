@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B  ",
+    " B ",
+    "  F"
+  ],
+  "key": {
+    "B": {
+      "item": "flintnpowder:cast_iron_barrel"
+    },
+    "M": {
+      "item": "flintnpowder:matchlock_mechanism"
+    },
+    "F": {
+      "item": "flintnpowder:wooden_gun_furniture"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:arquebus",
+    "count": 1
+  }
+}

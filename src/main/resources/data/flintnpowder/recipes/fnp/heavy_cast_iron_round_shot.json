@@ -6,12 +6,19 @@
     " N "
   ],
   "key": {
-    "N": {
-      "tag": "forge:nuggets/cast_iron"
-    },
-    "I": {
-      "tag": "forge:ingots/cast_iron"
-    }
+    "N":
+      {
+        "item": "flintnpowder:cast_iron_nugget"
+      },
+    "I":
+      [
+          {
+            "tag": "forge:ingots/cast_iron"
+          },
+          {
+            "item": "flintnpowder:cast_iron_ingot"
+          }
+      ]
   },
   "result": {
     "item": "flintnpowder:heavy_cast_iron_roundshot",

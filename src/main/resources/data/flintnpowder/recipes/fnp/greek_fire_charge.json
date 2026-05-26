@@ -9,9 +9,15 @@
     "P": {
       "tag": "minecraft:planks"
     },
-    "B": {
+    "B":
+[
+    {
       "tag": "forge:ingots/cast_iron"
     },
+    {
+      "item": "flintnpowder:cast_iron_ingot"
+    }
+],
     "O": {
       "item": "flintnpowder:oil_flask"
     }

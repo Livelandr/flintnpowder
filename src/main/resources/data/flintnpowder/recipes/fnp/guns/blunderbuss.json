@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B  ",
+    " M ",
+    "  F"
+  ],
+  "key": {
+    "B": {
+      "item": "flintnpowder:steel_heavy_barrel"
+    },
+    "M": {
+      "item": "flintnpowder:flintlock_mechanism"
+    },
+    "F": {
+      "item": "flintnpowder:wooden_gun_furniture"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:blunderbuss",
+    "count": 1
+  }
+}

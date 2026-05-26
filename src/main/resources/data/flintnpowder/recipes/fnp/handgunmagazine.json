@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " N ",
-    "NIN",
-    " N "
+    "BB",
+    "BB",
+    "PP"
   ],
   "key": {
-    "N": {
-      "tag": "forge:nuggets/iron"
+    "P": {
+      "tag": "minecraft:planks"
     },
-    "I": {
+    "B": {
       "item": "flintnpowder:steel_nugget"
     }
   },
   "result": {
-    "item": "flintnpowder:steel_roundshot",
-    "count": 3
+    "item": "flintnpowder:handgunmagazine",
+    "count": 1
   }
 }

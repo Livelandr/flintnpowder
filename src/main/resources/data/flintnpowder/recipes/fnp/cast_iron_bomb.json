@@ -6,9 +6,15 @@
     "NNN"
   ],
   "key": {
-    "N": {
+    "N":
+[
+    {
       "tag": "forge:nuggets/cast_iron"
     },
+    {
+      "item": "flintnpowder:cast_iron_nugget"
+    }
+],
     "G": {
       "item": "minecraft:gunpowder"
     },

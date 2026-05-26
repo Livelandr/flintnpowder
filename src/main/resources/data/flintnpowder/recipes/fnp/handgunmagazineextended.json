@@ -1,20 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "NNN",
-    "NIN",
-    "NNN"
+    "BBB",
+    "BMB"
   ],
   "key": {
-    "N": {
-      "tag": "forge:nuggets/iron"
+    "M": {
+      "item": "flintnpowder:handgunmagazine"
     },
-    "I": {
+    "B": {
       "item": "flintnpowder:steel_nugget"
     }
   },
   "result": {
-    "item": "flintnpowder:heavy_steel_roundshot",
+    "item": "flintnpowder:handgunmagazineextended",
     "count": 1
   }
 }

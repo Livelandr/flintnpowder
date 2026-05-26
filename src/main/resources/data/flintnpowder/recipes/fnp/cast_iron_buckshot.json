@@ -6,9 +6,10 @@
     "III"
   ],
   "key": {
-    "I": {
-      "tag": "forge:nuggets/cast_iron"
-    }
+    "I":
+      {
+            "tag": "forge:nuggets/cast_iron"
+      }
   },
   "result": {
     "item": "flintnpowder:cast_iron_buckshot",

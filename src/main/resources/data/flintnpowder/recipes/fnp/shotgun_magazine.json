@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " N ",
-    "NIN",
-    " N "
+    " II",
+    "INI",
+    "II "
   ],
   "key": {
-    "N": {
-      "tag": "forge:nuggets/iron"
-    },
     "I": {
+      "item": "flintnpowder:steel_nugget"
+    },
+    "N": {
       "item": "flintnpowder:steel_nugget"
     }
   },
   "result": {
-    "item": "flintnpowder:steel_roundshot",
-    "count": 3
+    "item": "flintnpowder:shotgun_magazine",
+    "count": 1
   }
 }

@@ -85,6 +85,7 @@ public class Flintnpowder {
             event.accept(ModItems.GUNMETAL_INGOT);
             event.accept(ModItems.GUNMETAL_ALLOY);
 
+            event.accept(ModItems.BLAZING_POWDER);
             event.accept(ModItems.BLAZING_BRASS);
             event.accept(ModItems.BLAZING_BRASS_ALLOY);
 

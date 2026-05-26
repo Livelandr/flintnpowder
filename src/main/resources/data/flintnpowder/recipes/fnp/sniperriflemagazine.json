@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " N ",
-    "NIN",
-    " N "
+    "SIS",
+    "SIS",
+    "SSS"
   ],
   "key": {
-    "N": {
-      "tag": "forge:nuggets/iron"
-    },
     "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
       "item": "flintnpowder:steel_nugget"
     }
   },
   "result": {
-    "item": "flintnpowder:steel_roundshot",
-    "count": 3
+    "item": "flintnpowder:sniperriflemagazine",
+    "count": 1
   }
 }

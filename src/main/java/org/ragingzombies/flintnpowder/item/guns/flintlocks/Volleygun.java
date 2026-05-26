@@ -89,6 +89,8 @@ public class Volleygun extends FlintlockBase {
         if (shooter instanceof Player ply) {
             ply.getCooldowns().addCooldown(this, 35);
         }
+
+        this.setAimAnimation(gun);
     }
 
     @Override

@@ -56,6 +56,8 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BLAZING_BRASS = ITEMS.register("blazing_brass",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BLAZING_POWDER = ITEMS.register("blazing_powder",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CAST_IRON_BARREL = ITEMS.register("cast_iron_barrel",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CAST_IRON_HEAVY_BARREL = ITEMS.register("cast_iron_heavy_barrel",

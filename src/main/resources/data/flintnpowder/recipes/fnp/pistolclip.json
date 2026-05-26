@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CI",
+    "PI",
+    "GI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:nuggets/iron"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
+    },
+    "P": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "flintnpowder:pistolclip",
+    "count": 1
+  }
+}

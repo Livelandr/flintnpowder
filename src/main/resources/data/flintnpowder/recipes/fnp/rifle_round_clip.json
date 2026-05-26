@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ISI",
-    "S S",
-    "ISI"
+    " AI",
+    "AAI",
+    " AI"
   ],
   "key": {
     "I": {
       "tag": "forge:nuggets/iron"
     },
-    "S": {
-      "item": "flintnpowder:steel_nugget"
+    "A": {
+      "item": "flintnpowder:rifle_round"
     }
   },
   "result": {
-    "item": "flintnpowder:steel_buckshot",
-    "count": 2
+    "item": "flintnpowder:rifle_round_clip",
+    "count": 1
   }
 }
