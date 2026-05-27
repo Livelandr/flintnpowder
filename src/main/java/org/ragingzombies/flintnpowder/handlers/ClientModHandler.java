@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -27,6 +27,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import org.ragingzombies.flintnpowder.core.guns.GunBase;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.item.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 
@@ -70,7 +72,7 @@ public class ClientModHandler {
                 ModItemsGuns.MUSKET.get(),
                 new ResourceLocation(MOD_ID, "musket_bayonet"),
                 (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
+                    return GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get()) ? 1.0F : 0.0F;
                 }
         );
         // Bolt Action Rifle
@@ -85,7 +87,7 @@ public class ClientModHandler {
                 ModItemsGuns.BOLTACTIONRIFLE.get(),
                 new ResourceLocation(MOD_ID, "bolt_action_bayonet"),
                 (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("HaveBayonet") ? 1.0F : 0.0F;
+                    return GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get()) ? 1.0F : 0.0F;
                 }
         );
         // Blunderbuss

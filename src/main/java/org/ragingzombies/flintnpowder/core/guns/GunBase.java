@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -20,14 +20,11 @@ package org.ragingzombies.flintnpowder.core.guns;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -46,40 +43,79 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.util.Lazy;
-import org.ragingzombies.flintnpowder.Flintnpowder;
+import org.ragingzombies.flintnpowder.core.FlintcoreHook;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core.attachments.AttachmentBase;
 import org.ragingzombies.flintnpowder.core.util.PlayerSpecificModifiers;
 import org.ragingzombies.flintnpowder.enchantments.ModEnchantments;
-import org.ragingzombies.flintnpowder.handlers.AttachmentRenderer;
 import org.ragingzombies.flintnpowder.handlers.ClientModHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
-import org.spongepowered.asm.mixin.Mutable;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
-
-import static java.lang.System.currentTimeMillis;
-import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
 
 public class GunBase extends Item {
 
     protected final Lazy<Multimap<Attribute, AttributeModifier>> lazyAttributeMap;
 
+    // Tier-Tag system stuff
+    public boolean showTier = false;
+    public int weaponTier = -1;
+    public Set<String> allowedCalibersTags = new HashSet<>();
+    public Set<String> allowedAttachmentsTags = new HashSet<>();
+    public Set<String> attachmentSlots = new HashSet<>();
+
     public int cooldownTicks = 20;
     public int shootCooldownTicks = 20;
     public int ammoCooldownTicks = 20;
-    public int reloadPitch = 1;
 
-    public List<Item> allowedAmmo = new ArrayList<>();
-    public List<Item> allowedAttachments = new ArrayList<>();
+    // HOOKS SYSTEM
+    public static Map<String, List<FlintcoreHook>> hooks = new HashMap<>();
+    static {
+        hooks.put("calculateDamageModifier", new ArrayList<>());
+        hooks.put("calculateRecoilModifierX", new ArrayList<>());
+        hooks.put("calculateRecoilModifierY", new ArrayList<>());
+        hooks.put("calculatePropellantModifier", new ArrayList<>());
+        hooks.put("calculateAccuracyModifier", new ArrayList<>());
+
+        hooks.put("onShoot", new ArrayList<>());
+    }
+    public static float calculateHookSum(String hookName, LivingEntity shooter, ItemStack gun, float baseValue) {
+        List<FlintcoreHook> funcs = hooks.get(hookName);
+        if (funcs == null || funcs.isEmpty()) {
+            return 1;
+        }
+
+        float baseVal = baseValue;
+
+        for (FlintcoreHook hook : funcs) {
+            baseVal *= hook.process(shooter, gun, baseVal);
+        }
+
+        return baseVal;
+    };
+    public static void triggerHooks(String hookName, LivingEntity shooter, ItemStack gun) {
+        List<FlintcoreHook> funcs = hooks.get(hookName);
+        if (funcs == null || funcs.isEmpty()) {
+            return;
+        }
+
+        for (FlintcoreHook hook : funcs) {
+            hook.process(shooter, gun, 0);
+        }
+    }
+    // HOOKS SYSTEM END
+
+
+    public static GunBase getGunBase(ItemStack gun) {
+        return (GunBase) gun.getItem();
+    }
 
     public GunBase(Properties pProperties) {
         super(pProperties);
 
+        // INITIALIZING HOOKS
         this.lazyAttributeMap = Lazy.of(() -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(Attributes.ATTACK_DAMAGE,
@@ -100,6 +136,107 @@ public class GunBase extends Item {
             return builder.build();
         });
     }
+
+    // Tier-Tag
+    public int getWeaponTier() {
+        return weaponTier;
+    }
+
+    // -1 Weapon tier = inf
+    public boolean checkTier(int requiredTier) {
+        if (getWeaponTier() == -1) return true;
+        return (getWeaponTier() >= requiredTier);
+    }
+    public Set<String> getAllCaliberTags() {return allowedCalibersTags;}
+    public Set<String> getAllAttachmentsTags() {return allowedAttachmentsTags;}
+    public void addCompatibleCaliberTag(String caliber) {
+        allowedCalibersTags.add(caliber);
+    }
+    public void addCompatibleAttachmentTag(String tag) {
+        allowedAttachmentsTags.add(tag);
+    }
+    public void addAttachmentSlot(String slot) {
+        attachmentSlots.add(slot);
+    }
+    public boolean haveAttachmentSlot(String slot) {
+        return attachmentSlots.contains(slot);
+    }
+    public boolean checkCaliberCompatibility(Set<String> requiredTags) {
+        if (requiredTags.isEmpty()) return false;
+        if (requiredTags.contains("universal")) return true;
+        return getAllCaliberTags().containsAll(requiredTags);
+    }
+    public boolean checkAttachmentCompatibility(Set<String> requiredTags, String slot) {
+        return haveAttachmentSlot(slot) && getAllAttachmentsTags().containsAll(requiredTags);
+    }
+    public boolean checkAmmoCompatibility(BaseAmmo ammo) {
+        if (!checkTier(ammo.tier)) return false;
+        return checkCaliberCompatibility(ammo.requiredCaliberTags);
+    }
+    public boolean checkAmmo(Item ammo) {
+        if (!(ammo instanceof BaseAmmo)) return false;
+        return checkAmmoCompatibility((BaseAmmo) ammo);
+    }
+    public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
+        if (!(attachment instanceof AttachmentBase)) return false;
+        AttachmentBase atch = (AttachmentBase) attachment;
+
+        if (!haveAttachmentSlot(atch.getSlot())) return false;
+        return getAllAttachmentsTags().containsAll(atch.getTags());
+    }
+    public void setAttachment(Player ply, ItemStack gun, ItemStack attachment) {
+        CompoundTag attachmentData = gun.getTag().getCompound("Attachments");
+        String attachType = ((AttachmentBase) attachment.getItem()).getSlot();
+        // Return old attachment
+        if (isAttachmentValidAndEnabled(gun, attachType)) {
+            detachAttachment(ply, gun, attachType);
+        }
+        CompoundTag newAttachments = new CompoundTag();
+        newAttachments.putBoolean("enabled", true);
+
+        CompoundTag attachItem = attachment.serializeNBT();
+        newAttachments.put("item", attachItem);
+        attachmentData.put(attachType, newAttachments);
+
+        ((AttachmentBase) attachment.getItem()).onAttach(ply, attachment, gun);
+
+        gun.getTag().put("Attachments", attachmentData);
+    }
+    public void detachAttachment(Player ply, ItemStack gun, String type) {
+        ItemStack detached = getAttachmentStack(gun, type);
+        ((AttachmentBase) detached.getItem()).onDetach(ply, detached, gun);
+        if (!ply.getInventory().add(detached)) {
+            ply.drop(detached, false);
+        }
+        gun.getOrCreateTag().getCompound("Attachments").getCompound(type).putBoolean("enabled", false);
+    }
+    public ItemStack getAttachmentStack(ItemStack gun, String type) {
+        CompoundTag attachmentsData = gun.getOrCreateTag().getCompound("Attachments");
+
+        if (!attachmentsData.getCompound(type).getBoolean("enabled")) {
+            return new ItemStack(Items.AIR);
+        }
+
+        CompoundTag item = attachmentsData.getCompound(type).getCompound("item");
+        ItemStack deserializedAttachment = ItemStack.of( item );
+        deserializedAttachment.deserializeNBT(attachmentsData.getCompound(type).getCompound("item"));
+
+        return deserializedAttachment;
+    }
+    public boolean isAttachmentValidAndEnabled(ItemStack gun, String slot) {
+        return (getAttachmentStack(gun, slot).getItem() != Items.AIR);
+    }
+    public boolean isAttachmentSpecific(ItemStack gun, String slot, Item attachment) {
+        return (getAttachmentStack(gun, slot).getItem() == attachment);
+    }
+    public Item getAttachmentItem(ItemStack gun, String type) {
+        return getAttachmentStack(gun, type).getItem();
+    }
+    public String getAttachmentName(ItemStack gun, String type) {
+        return getAttachmentStack(gun, type).getDisplayName().getString();
+    }
+
+    // Weapon Tier system end
 
     @Override
     public boolean isEnchantable(ItemStack stack) {
@@ -209,98 +346,6 @@ public class GunBase extends Item {
         return shootCooldownTicks - (int) (shootCooldownTicks/4F) * amoLevel;
     }
 
-    public void addAllowedAmmo(Item ammo) {
-        allowedAmmo.add(ammo);
-    }
-
-    public void addAllowedAttachment(Item attach) {
-        allowedAttachments.add(attach);
-    }
-
-    public boolean checkAmmo(Item ammo) {
-        for (Item a : allowedAmmo) {
-            if (ammo.getClass() == a.getClass()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean checkAttachmentComparability(Player ply, ItemStack gun, Item attachment) {
-        for (Item a : allowedAttachments) {
-            if (attachment.getClass() == a.getClass()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void setAttachment(Player ply, ItemStack gun, ItemStack attachment) {
-        CompoundTag attachmentData = gun.getTag().getCompound("Attachments");
-        String attachType = ((AttachmentBase) attachment.getItem()).getType();
-
-        // Return old attachment
-        if (isAttachmentValidAndEnabled(gun, attachType)) {
-            detachAttachment(ply, gun, attachType);
-        }
-
-        CompoundTag newAttachments = new CompoundTag();
-        newAttachments.putBoolean("enabled", true);
-
-        CompoundTag attachItem = attachment.serializeNBT();
-        newAttachments.put("item", attachItem);
-        attachmentData.put(attachType, newAttachments);
-
-        ((AttachmentBase) attachment.getItem()).onAttach(ply, attachment, gun);
-
-        onAttachmentAttach(ply, gun, attachment);
-
-        gun.getTag().put("Attachments", attachmentData);
-    }
-
-    public void detachAttachment(Player ply, ItemStack gun, String type) {
-        ItemStack detached = getAttachmentStack(gun, type);
-        ((AttachmentBase) detached.getItem()).onDetach(ply, detached, gun);
-        onAttachmentDetach(ply, gun, type);
-        if (!ply.getInventory().add(detached)) {
-            ply.drop(detached, false);
-        }
-        gun.getOrCreateTag().getCompound("Attachments").getCompound(type).putBoolean("enabled", false);
-    }
-
-    public ItemStack getAttachmentStack(ItemStack gun, String type) {
-        CompoundTag attachmentsData = gun.getOrCreateTag().getCompound("Attachments");
-
-        if (!attachmentsData.getCompound(type).getBoolean("enabled")) {
-            return new ItemStack(Items.AIR);
-        }
-
-        CompoundTag item = attachmentsData.getCompound(type).getCompound("item");
-        ItemStack deserializedAttachment = ItemStack.of( item );
-        deserializedAttachment.deserializeNBT(attachmentsData.getCompound(type).getCompound("item"));
-
-        return deserializedAttachment;
-    }
-
-    public boolean isAttachmentValidAndEnabled(ItemStack gun, String type) {
-        return (getAttachmentStack(gun, type).getItem() != Items.AIR);
-    }
-
-    public Item getAttachmentItem(ItemStack gun, String type) {
-        return getAttachmentStack(gun, type).getItem();
-    }
-
-    public String getAttachmentName(ItemStack gun, String type) {
-        return getAttachmentStack(gun, type).getDisplayName().getString();
-    }
-
-    public void onAttachmentAttach(Player ply, ItemStack gun, ItemStack attachment) {}
-    public void onAttachmentDetach(Player ply, ItemStack gun, String type) {}
-    //
-
-
     public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
         return true;
     }
@@ -314,24 +359,64 @@ public class GunBase extends Item {
                 ModSounds.FLINTSTRIKE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F, 0);
     }
 
+    public float getModifier(ItemStack gun, String modifierName) {
+        if (!gun.getOrCreateTag().contains(modifierName)) {
+            gun.getTag().putFloat(modifierName, 1.0F);
+        }
+        return gun.getTag().getFloat(modifierName);
+    }
+    public void multiplyModifier(ItemStack gun, String modifierName, float n) {
+        float current = gun.getOrCreateTag().contains(modifierName) ? gun.getTag().getFloat(modifierName) : 1.0F;
+
+        gun.getTag().putFloat(modifierName, current * n);
+    }
+
+    public float propellantModifier(LivingEntity shooter, ItemStack gun) {
+        int amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.QUALITY_PROPELLANT.get(), gun);
+        float baseValue = getModifier(gun, "propellantModifier") * (1 + amoLevel * 0.10F) * PlayerSpecificModifiers.getPSMDamage(shooter.getUUID());
+        return calculateHookSum("calculatePropellantModifier", shooter, gun, baseValue);
+    }
 
     public float damageModifier(LivingEntity shooter, ItemStack gun) {
         int amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.QUALITY_PROPELLANT.get(), gun);
-        return (1 + amoLevel*0.10F) * PlayerSpecificModifiers.getPSMDamage(shooter.getUUID());
+        float baseValue = getModifier(gun, "damageModifier") * (1 + amoLevel * 0.10F) * PlayerSpecificModifiers.getPSMDamage(shooter.getUUID());
+        return calculateHookSum("calculateDamageModifier", shooter, gun, baseValue);
     }
 
     public float recoilModifierX(LivingEntity id, ItemStack gun) {
-        return 1 * PlayerSpecificModifiers.getPSMRecoil(id.getUUID());
+        float baseValue = getModifier(gun, "recoilX") * PlayerSpecificModifiers.getPSMRecoil(id.getUUID());
+        return calculateHookSum("calculateRecoilModifierX", id, gun, baseValue);
     }
+
     public float recoilModifierY(LivingEntity id, ItemStack gun) {
-        return 1 * PlayerSpecificModifiers.getPSMRecoil(id.getUUID());
+        float baseValue = getModifier(gun, "recoilY") * PlayerSpecificModifiers.getPSMRecoil(id.getUUID());
+        return calculateHookSum("calculateRecoilModifierY", id, gun, baseValue);
     }
+
     public float accuracyModifier(LivingEntity id, ItemStack gun) {
-        return 1 * PlayerSpecificModifiers.getPSMAccuracy(id.getUUID());
+        float baseValue = getModifier(gun, "accuracy") * PlayerSpecificModifiers.getPSMAccuracy(id.getUUID());
+        return calculateHookSum("calculateAccuracyModifier", id, gun, baseValue);
     }
 
+    public void multiplyPropellantModifier(ItemStack gun, float n) {
+        multiplyModifier(gun, "propellantModifier", n);
+    }
+    public void multiplyDamageModifier(ItemStack gun, float n) {
+        multiplyModifier(gun, "damageModifier", n);
+    }
+    public void multiplyRecoilModifierX(ItemStack gun, float n) {
+        multiplyModifier(gun, "recoilModifierX", n);
+    }
+    public void multiplyRecoilModifierY(ItemStack gun, float n) {
+        multiplyModifier(gun, "recoilModifierY", n);
+    }
+    public void multiplyAccuracyModifier(ItemStack gun, float n) {
+        multiplyModifier(gun, "accuracyModifier", n);
+    }
 
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {}
+    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+        triggerHooks("onShoot", pPlayer, gunStack);
+    }
 
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
         pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
@@ -354,10 +439,17 @@ public class GunBase extends Item {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        if (showTier) {
+            if (this.getWeaponTier() == -1) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.weapontieruniversal"));
+            } else {
+                pTooltipComponents.add(Component.translatable("flintnpowder.weapontier").append(Integer.toString(this.getWeaponTier())));
+            }
+        }
         pTooltipComponents.add(Component.literal(""));
 
         int totalAttach = 0;
-        for (String type : attachmentTypes) {
+        for (String type : attachmentSlots) {
             if (isAttachmentValidAndEnabled(pStack, type)) {
                 ItemStack item = getAttachmentStack(pStack, type);
                 pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
@@ -376,16 +468,20 @@ public class GunBase extends Item {
             pTooltipComponents.add(Component.literal(""));
         } else {
             pTooltipComponents.add(Component.translatable("flintnpowder.guninfoammo"));
-            for (Item ammo : allowedAmmo) {
-                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            for (String ammo : allowedCalibersTags) {
+                pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.calibernames." + ammo)));
             }
 
             pTooltipComponents.add(Component.literal(""));
 
-            if (!allowedAttachments.isEmpty()) {
-                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachment"));
-                for (Item ammo : allowedAttachments) {
-                    pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            if (!attachmentSlots.isEmpty()) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmentslots"));
+                for (String slot : attachmentSlots) {
+                    pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.slotnames." + slot)));
+                }
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmenttags"));
+                for (String slot : this.allowedAttachmentsTags) {
+                    pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.attachmenttag." + slot)));
                 }
             } else {
                 pTooltipComponents.add(Component.translatable("flintnpowder.guninfonoattachment"));

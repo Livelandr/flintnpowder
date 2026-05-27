@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -40,6 +40,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.Lazy;
+import org.ragingzombies.flintnpowder.core.guns.GunBase;
 import org.ragingzombies.flintnpowder.core.guns.PumpActionBase;
 import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
@@ -63,12 +64,15 @@ public class BoltActionRifle extends PumpActionBase {
         this.maxAmmo = 4;
         this.shootCooldownTicks = 20;
 
-        addAllowedAmmo(ModItemsAmmo.RIFLEROUND.get());
-        addAllowedAmmo(ModItemsAmmo.RIFLEROUNDCLIP.get());
 
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.BAYONET.get());
+        addCompatibleCaliberTag("rifleround");
+        addCompatibleCaliberTag("rifleroundclip");
+
+        addAttachmentSlot("underbarrel");
+        addAttachmentSlot("optic");
+
+        addCompatibleAttachmentTag("sniper");
+        addCompatibleAttachmentTag("bayonet");
 
         this.lazyAttributeMap = Lazy.of(() -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -100,7 +104,7 @@ public class BoltActionRifle extends PumpActionBase {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        if (slot == EquipmentSlot.MAINHAND && stack.getOrCreateTag().getBoolean("HaveBayonet")) {
+        if (slot == EquipmentSlot.MAINHAND && GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get())) {
             return lazyAttributeMap.get();
         }
         return super.getAttributeModifiers(slot, stack);

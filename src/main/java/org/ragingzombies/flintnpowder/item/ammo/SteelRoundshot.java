@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -37,6 +37,9 @@ public class SteelRoundshot extends BaseAmmo {
     public SteelRoundshot(Properties pProperties) {
         super(pProperties);
         this.damage = 21;
+
+        this.tier = 1;
+        this.requiredCaliberTags.add("roundshot");
     }
 
     @Override

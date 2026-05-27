@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -29,10 +29,8 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
@@ -138,7 +136,9 @@ public class BlazelockBase extends GunBase {
     }
 
     @Override
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+
+
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
         gunStack.getTag().putBoolean("IsCocked", false);
@@ -180,7 +180,7 @@ public class BlazelockBase extends GunBase {
                 if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                     if (!needCocking || gunStack.getTag().getBoolean("IsCocked")) {
                         if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
-                            Shoot(pLevel, pPlayer, gunStack);
+                            shoot(pLevel, pPlayer, gunStack);
                             onShoot(pLevel, pPlayer, gunStack);
                         } else {
                             onTryFailure(pLevel, pPlayer, gunStack);

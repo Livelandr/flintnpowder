@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -37,6 +37,8 @@ public class ShotgunShellSlug extends BaseAmmo {
     public ShotgunShellSlug(Properties pProperties) {
         super(pProperties);
         this.damage = 25;
+
+        this.requiredCaliberTags.add("12gauge");
     }
 
     @Override

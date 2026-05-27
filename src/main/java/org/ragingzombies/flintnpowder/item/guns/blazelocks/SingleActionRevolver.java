@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -45,7 +45,7 @@ public class SingleActionRevolver extends BlazelockBase {
         shootCooldownTicks = 15;
         needCocking = true;
 
-        addAllowedAmmo(ModItemsAmmo.PISTOLROUND.get());
+        addCompatibleCaliberTag("9mm");
     }
 
     @Override

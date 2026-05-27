@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -36,6 +36,9 @@ public class CopperRoundshot extends BaseAmmo {
     public CopperRoundshot(Properties pProperties) {
         super(pProperties);
         this.damage = 15;
+
+        this.tier = 0;
+        this.requiredCaliberTags.add("roundshot");
     }
 
     @Override

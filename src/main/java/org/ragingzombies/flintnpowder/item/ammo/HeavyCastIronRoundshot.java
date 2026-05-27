@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -36,6 +36,8 @@ public class HeavyCastIronRoundshot extends BaseAmmo {
     public HeavyCastIronRoundshot(Properties pProperties) {
         super(pProperties);
         this.damage = 24;
+
+        this.requiredCaliberTags.add("heavyroundshot");
     }
 
     @Override

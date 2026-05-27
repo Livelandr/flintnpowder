@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -42,6 +42,8 @@ public class FlamingBuckshot extends BaseAmmo {
         super(pProperties);
         this.damage = 3F;
         this.customDescription = true;
+
+        this.requiredCaliberTags.add("buckshot");
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -46,9 +46,7 @@ public class BreakActionCoachgun extends BlazelockBase {
         shootCooldownTicks = 5;
         needCocking = false;
 
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELL.get());
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLSLUG.get());
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLDRAGON.get());
+        addCompatibleCaliberTag("12gauge");
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -45,9 +45,7 @@ public class Blunderbuss extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
 
-        addAllowedAmmo(ModItemsAmmo.CASTIRONBUCKSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.STEELBUCKSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.FLAMINGBUCKSHOT.get());
+        addCompatibleCaliberTag("buckshot");
     }
 
     @Override

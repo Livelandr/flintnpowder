@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -46,10 +46,10 @@ public class GasOperatedShotgun extends MagfedBase {
         super(pProperties);
         shootCooldownTicks = 15;
 
-        addAllowedMagazine(ModItemsAmmo.SHOTGUNMAGAZINE.get());
+        addCompatibleCaliberTag("shotgunmag");
 
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
+        addAttachmentSlot("optic");
+        addCompatibleAttachmentTag("sniper");
     }
 
     @Override

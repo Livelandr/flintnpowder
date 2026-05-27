@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -18,30 +18,51 @@
  */
 package org.ragingzombies.flintnpowder.core.attachments;
 
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class AttachmentBase extends Item {
-    public static final List<String> attachmentTypes = new ArrayList<>(Arrays.asList("Underbarrel","Silencer","Muzzle","Optic"));
-
-    protected String type = "Misc";
+    protected String slot = "unique";
+    public Set<String> requiredTags = new HashSet<>();
 
     public AttachmentBase(Properties pProperties) {
         super(pProperties);
     }
-    public static void RegisterAttachmentType(String type) {
-        attachmentTypes.add(type);
-    }
 
-    public String getType() {
-        return type;
+    public String getSlot() {
+        return slot;
+    }
+    public void setSlot(String _slot) {
+        this.slot = _slot;
+    }
+    public Set<String> getTags() {
+        return requiredTags;
+    }
+    public void addTags(String tag) {
+        requiredTags.add(tag);
     }
 
     public void onAttach(LivingEntity player, ItemStack attachment, ItemStack gun) {}
     public void onDetach(LivingEntity player, ItemStack attachment, ItemStack gun) {}
+
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+        if (Screen.hasAltDown()) {
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmentslots").append(Component.translatable("flintnpowder.slotnames." + slot)));
+
+            pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmenttags"));
+            for (String slot : this.requiredTags) {
+                pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.attachmenttag." + slot)));
+            }
+        }
+    }
 }

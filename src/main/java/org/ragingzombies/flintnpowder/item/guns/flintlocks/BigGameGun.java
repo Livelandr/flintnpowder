@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -59,8 +59,7 @@ public class BigGameGun extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 30;
 
-        addAllowedAmmo(ModItemsAmmo.HEAVYCASTIRONROUNDSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.HEAVYSTEELROUNDSHOT.get());
+        addCompatibleCaliberTag("heavyroundshot");
 
         this.lazyAttributeMap = Lazy.of(() -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

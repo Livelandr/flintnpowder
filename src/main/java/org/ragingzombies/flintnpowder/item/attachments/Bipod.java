@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -23,30 +23,45 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.core.attachments.AttachmentBase;
+import org.ragingzombies.flintnpowder.core.guns.GunBase;
+import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+@Mod.EventBusSubscriber(modid = Flintnpowder.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class Bipod extends AttachmentBase {
     public Bipod(Properties pProperties) {
         super(pProperties);
-        type = "Underbarrel";
+        setSlot("underbarrel");
+
+        GunBase.hooks.get("calculateRecoilModifierX").add((shooter, gun, current) -> {
+            if (shooter.isCrouching() && GunBase.getGunBase(gun).isAttachmentSpecific(gun, "underbarrel", ModItemsAttachments.BIPOD.get())) {
+                return 0.025F;
+            };
+            return 1F;
+        });
+        GunBase.hooks.get("calculateRecoilModifierY").add((shooter, gun, current) -> {
+            if (shooter.isCrouching() && GunBase.getGunBase(gun).isAttachmentSpecific(gun, "underbarrel", ModItemsAttachments.BIPOD.get())) {
+                return 0.025F;
+            };
+            return 1F;
+        });
     }
 
     @Override
     public void onAttach(LivingEntity player, ItemStack attachment, ItemStack gun) {
-        gun.getOrCreateTag().putBoolean("HaveBipod", true);
         attachment.shrink(1);
-    }
-
-    @Override
-    public void onDetach(LivingEntity player, ItemStack attachment, ItemStack gun) {
-        gun.getOrCreateTag().putBoolean("HaveBipod", false);
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("item.flintnpowder.bipod.description"));
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

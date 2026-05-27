@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -40,10 +40,17 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BaseMagazine extends Item {
     public List<Item> allowedAmmo = new ArrayList<>();
+
+    // Guns requirements
+    public Set<String> requiredMagazineTags = new HashSet<>();
+    // Ammo possibilities
+    public Set<String> allowedCalibersTags = new HashSet<>();
 
     public int maxAmmo = 30;
 
@@ -55,14 +62,19 @@ public class BaseMagazine extends Item {
         allowedAmmo.add(ammo);
     }
 
-    public boolean allowAmmo(ItemStack ammo) {
-        for (Item a : allowedAmmo) {
-            if (ammo.getItem().getClass() == a.getClass()) {
-                return true;
-            }
-        }
+    public Set<String> getAllCaliberTags() {return allowedCalibersTags;}
+    public boolean checkCaliberCompatibility(Set<String> requiredTags) {
+        if (requiredTags.isEmpty()) return false;
+        if (requiredTags.contains("universal")) return true;
+        return getAllCaliberTags().containsAll(requiredTags);
+    }
 
-        return false;
+    public boolean allowAmmo(ItemStack ammo) {
+        if (!(ammo.getItem() instanceof BaseAmmo)) return false;
+        return checkAmmoCompatibility((BaseAmmo) ammo.getItem());
+    }
+    public boolean checkAmmoCompatibility(BaseAmmo ammo) {
+        return checkCaliberCompatibility(ammo.requiredCaliberTags);
     }
 
     @Override
@@ -213,8 +225,8 @@ public class BaseMagazine extends Item {
             pTooltipComponents.add(Component.literal(""));
         } else {
             pTooltipComponents.add(Component.translatable("flintnpowder.guninfoammo"));
-            for (Item ammo : allowedAmmo) {
-                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            for (String ammo : allowedCalibersTags) {
+                pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.calibernames." + ammo)));
             }
 
             pTooltipComponents.add(Component.literal(""));

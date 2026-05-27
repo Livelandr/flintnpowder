@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -48,8 +48,8 @@ public class Broomhandle extends BlazelockBase {
         shootCooldownTicks = 11;
         needCocking = false;
 
-        addAllowedAmmo(ModItemsAmmo.PISTOLROUND.get());
-        addAllowedAmmo(ModItemsAmmo.PISTOLROUNDCLIP.get());
+        addCompatibleCaliberTag("9mm");
+        addCompatibleCaliberTag("9mmclip");
     }
 
     @Override

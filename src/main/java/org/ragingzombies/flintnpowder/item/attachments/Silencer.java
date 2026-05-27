@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -31,7 +31,7 @@ import java.util.List;
 public class Silencer extends AttachmentBase {
     public Silencer(Properties pProperties) {
         super(pProperties);
-        type = "Silencer";
+        setSlot("silencer");
     }
 
     @Override
@@ -42,5 +42,6 @@ public class Silencer extends AttachmentBase {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("item.flintnpowder.silencer.description"));
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

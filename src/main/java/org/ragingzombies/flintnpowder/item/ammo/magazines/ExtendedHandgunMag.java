@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -27,5 +27,10 @@ public class ExtendedHandgunMag extends BaseMagazine {
         super(pProperties);
         maxAmmo = 27;
         addAllowedAmmo(ModItemsAmmo.PISTOLROUND.get());
+
+        this.requiredMagazineTags.add("extendedpistolmag");
+        this.requiredMagazineTags.add("9mmmag");
+
+        this.allowedCalibersTags.add("9mm");
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -22,7 +22,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -40,28 +39,21 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.ragingzombies.flintnpowder.core.attachments.AttachmentBase.attachmentTypes;
-
 public class MagfedBase extends GunBase {
     public MagfedBase(Properties pProperties) {
         super(pProperties);
     }
 
     public boolean needSlideAfterShot = false;
-    public List<Item> allowedMags = new ArrayList<>();
 
-    public void addAllowedMagazine(Item mag) {
-        allowedMags.add(mag);
+    public boolean checkMagCompatibility(BaseMagazine mag) {
+        return checkCaliberCompatibility(mag.requiredMagazineTags);
     }
 
     public boolean checkMagazine(ItemStack mag) {
-        for (Item a : allowedMags) {
-            if (mag.getItem().getClass() == a.getClass()) {
-                return true;
-            }
-        }
+        if (!(mag.getItem() instanceof BaseMagazine)) return false;
 
-        return false;
+        return checkMagCompatibility((BaseMagazine) mag.getItem());
     }
 
     public void onSlideStart(Level pLevel, LivingEntity shooter, ItemStack gun) {
@@ -164,7 +156,8 @@ public class MagfedBase extends GunBase {
     }
 
     @Override
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+        super.shoot(pLevel, pPlayer, gunStack);
         BaseAmmo ammo = GetFirstAmmo(gunStack);
 
         ammo.onAmmoShot(pPlayer, gunStack, pLevel);
@@ -204,7 +197,7 @@ public class MagfedBase extends GunBase {
                 if (gunStack.getTag().getBoolean("HaveMag")) {
                     if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                         if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
-                            Shoot(pLevel, pPlayer, gunStack);
+                            shoot(pLevel, pPlayer, gunStack);
                             onShoot(pLevel, pPlayer, gunStack);
 
                             if (needSlideAfterShot) {
@@ -246,11 +239,17 @@ public class MagfedBase extends GunBase {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         //super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-
         pTooltipComponents.add(Component.literal(""));
+        if (showTier) {
+            if (this.getWeaponTier() == -1) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.weapontieruniversal"));
+            } else {
+                pTooltipComponents.add(Component.translatable("flintnpowder.weapontier").append(Integer.toString(this.getWeaponTier())));
+            }
+        }
 
         int totalAttach = 0;
-        for (String type : attachmentTypes) {
+        for (String type : attachmentSlots) {
             if (isAttachmentValidAndEnabled(pStack, type)) {
                 ItemStack item = getAttachmentStack(pStack, type);
                 pTooltipComponents.add(Component.translatable("flintnpowder.attachment").append(item.getDisplayName()));
@@ -269,16 +268,20 @@ public class MagfedBase extends GunBase {
             pTooltipComponents.add(Component.literal(""));
         } else {
             pTooltipComponents.add(Component.translatable("flintnpowder.guninfoammo"));
-            for (Item ammo : allowedMags) {
-                pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            for (String ammo : allowedCalibersTags) {
+                pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.calibernames." + ammo)));
             }
 
             pTooltipComponents.add(Component.literal(""));
 
-            if (!allowedAttachments.isEmpty()) {
-                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachment"));
-                for (Item ammo : allowedAttachments) {
-                    pTooltipComponents.add(Component.literal("   ").append((new ItemStack(ammo)).getDisplayName()));
+            if (!attachmentSlots.isEmpty()) {
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmentslots"));
+                for (String slot : attachmentSlots) {
+                    pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.slotnames." + slot)));
+                }
+                pTooltipComponents.add(Component.translatable("flintnpowder.guninfoattachmenttags"));
+                for (String slot : this.allowedAttachmentsTags) {
+                    pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.attachmenttag." + slot)));
                 }
             } else {
                 pTooltipComponents.add(Component.translatable("flintnpowder.guninfonoattachment"));

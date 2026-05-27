@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -49,11 +49,13 @@ public class SniperRifle extends MagfedBase {
         shootCooldownTicks = 10;
         needSlideAfterShot = true;
 
-        addAllowedMagazine(ModItemsAmmo.SNIPERRIFLEMAGAZINE.get());
+        addCompatibleCaliberTag("snipermag");
 
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.BIPOD.get());
+        addAttachmentSlot("underbarrel");
+        addAttachmentSlot("optic");
+
+        addCompatibleAttachmentTag("sniper");
+        addCompatibleAttachmentTag("fixable");
     }
 
     @Override
@@ -123,9 +125,6 @@ public class SniperRifle extends MagfedBase {
 
     @Override
     public float recoilModifierX(LivingEntity id, ItemStack gun) {
-        if (gun.getOrCreateTag().getBoolean("HaveBipod") && id.isCrouching() ) {
-            return 0.2F;
-        }
         return 3F*super.recoilModifierX(id, gun);
     }
 

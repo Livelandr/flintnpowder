@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -34,6 +34,8 @@ public class PistolRoundClip extends BaseAmmo {
     public PistolRoundClip(Properties pProperties) {
         super(pProperties);
         damage = 6;
+
+        this.requiredCaliberTags.add("9mmclip");
     }
 
     @Override

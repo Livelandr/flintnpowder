@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -43,11 +43,9 @@ public class PumpActionShotgun extends PumpActionBase {
         super(pProperties);
         needCockToReload = false;
 
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELL.get());
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLSLUG.get());
-        addAllowedAmmo(ModItemsAmmo.SHOTGUNSHELLDRAGON.get());
-
-        addAllowedAttachment(ModItemsAttachments.SILENCER.get());
+        addCompatibleCaliberTag("12gauge");
+        addAttachmentSlot("silencer");
+        addAttachmentSlot("optic");
     }
 
     @Override
@@ -109,7 +107,7 @@ public class PumpActionShotgun extends PumpActionBase {
             ((Player) shooter).getCooldowns().addCooldown(this, shootCooldown(shooter, gunStack));
         }
 
-        if (!isAttachmentValidAndEnabled(gunStack, "Silencer")) {
+        if (!isAttachmentValidAndEnabled(gunStack, "silencer")) {
             pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                     ModSounds.SHOTGUNSHOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F, 0);
             pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),

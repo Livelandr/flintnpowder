@@ -27,11 +27,16 @@
   "flintnpowder.ammo": "Ammo: ",
   "flintnpowder.projectile_damage": "Projectile damage: ",
 
+  "flintnpowder.magazinetier": "§2Weapon tier: ",
+  "flintnpowder.weapontier": "§2Weapon tier: ",
+  "flintnpowder.weapontieruniversal": "§6Universal weapon tier.",
   "flintnpowder.guninfoshift": "§6Hold [SHIFT] to view information about comparable ammo and attachments.",
   "flintnpowder.guninfoctrl": "§6Hold [CTRL] to view information about inserted ammo.",
-  "flintnpowder.guninfoattachment": "§2Comparable attachment: ",
-  "flintnpowder.guninfonoattachment": "§4No comparable attachments",
-  "flintnpowder.guninfoammo": "§2Comparable ammo: ",
+  "flintnpowder.guninfoattachmentslots": "§2Attachment slots: ",
+  "flintnpowder.guninfoattachmenttags": "§2Attachment tags: ",
+  "flintnpowder.guninfonoattachment": "§4No attachment slots",
+  "flintnpowder.guninfoammo": "§2Compatible ammunition tags: ",
+  "flintnpowder.ammoinfotags": "§2Required ammunition tags: ",
 
   "fnp.creativetab.firearms": "Flint'N'Powder - Firearms",
   "fnp.creativetab.ammunition": "Flint'N'Powder - Ammunition",
@@ -216,5 +221,9 @@
   "enchantment.flintnpowder.ghost_loading": "Ghost Loading",
   "enchantment.flintnpowder.quality_propellant": "Quality Propellant",
   "enchantment.flintnpowder.swift_reload": "Swift Reload",
-  "enchantment.flintnpowder.ramrod_mastery": "Ramrod Mastery"
+  "enchantment.flintnpowder.ramrod_mastery": "Ramrod Mastery",
+
+  "flintnpowder.slotnames.optic": "Optical slot",
+  "flintnpowder.slotnames.underbarrel": "Underbarrel fastening",
+  "flintnpowder.calibernames.roundshot": "Roundshots"
 }

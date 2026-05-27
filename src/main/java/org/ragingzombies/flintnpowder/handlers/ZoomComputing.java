@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -43,7 +43,7 @@ public class ZoomComputing {
 
         if (item instanceof GunBase) {
             GunBase gun = (GunBase) item;
-            if (gun.getAttachmentItem(stack, "Optic") != Items.AIR) {
+            if (gun.getAttachmentItem(stack, "optic") != Items.AIR) {
                 return true;
             }
         }
@@ -56,7 +56,7 @@ public class ZoomComputing {
 
         if (item instanceof GunBase) {
             GunBase gun = (GunBase) item;
-            if (gun.getAttachmentItem(stack, "Optic") != Items.AIR) {
+            if (gun.getAttachmentItem(stack, "optic") != Items.AIR) {
                 return stack.getOrCreateTag().getFloat("OpticZoom");
             }
         }

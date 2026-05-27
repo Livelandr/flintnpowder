@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -45,6 +45,8 @@ public class OilFlameshot extends BaseAmmo {
     public OilFlameshot(Properties pProperties) {
         super(pProperties);
         this.damage = 2;
+
+        this.requiredCaliberTags.add("flaming");
     }
 
     @Override

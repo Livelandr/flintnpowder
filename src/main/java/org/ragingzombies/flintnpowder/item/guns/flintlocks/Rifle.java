@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -47,11 +47,15 @@ public class Rifle extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
 
-        addAllowedAmmo(ModItemsAmmo.STEELROUNDSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.FOOLSGOLDROUNDSHOT.get());
+        this.weaponTier = 2;
 
-        addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
+        addCompatibleCaliberTag("roundshot");
+
+        addCompatibleAttachmentTag("sniper");
+        addCompatibleAttachmentTag("fixable");
+
+        addAttachmentSlot("underbarrel");
+        addAttachmentSlot("optic");
     }
 
     @Override

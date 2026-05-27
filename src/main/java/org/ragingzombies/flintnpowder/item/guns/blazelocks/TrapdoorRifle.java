@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -48,10 +48,12 @@ public class TrapdoorRifle extends BlazelockBase {
         shootCooldownTicks = 15;
         needCocking = true;
 
-        addAllowedAmmo(ModItemsAmmo.RIFLEROUND.get());
+        addCompatibleCaliberTag("rifleround");
 
-        addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
+        addAttachmentSlot("optic");
+        addAttachmentSlot("underbarrel");
+
+        addCompatibleAttachmentTag("sniper");
     }
 
     @Override

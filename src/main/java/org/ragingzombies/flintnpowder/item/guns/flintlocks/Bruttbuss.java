@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -46,8 +46,8 @@ public class Bruttbuss extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
 
-        addAllowedAmmo(ModItemsAmmo.CASTIRONBOMB.get());
-        addAllowedAmmo(ModItemsAmmo.STEELBUCKSHOT.get());
+        addCompatibleCaliberTag("buckshot");
+        addCompatibleCaliberTag("bigbomb");
     }
 
     @Override

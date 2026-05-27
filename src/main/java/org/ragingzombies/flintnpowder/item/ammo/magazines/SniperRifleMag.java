@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -26,6 +26,9 @@ public class SniperRifleMag extends BaseMagazine {
     public SniperRifleMag(Properties pProperties) {
         super(pProperties);
         maxAmmo = 10;
-        addAllowedAmmo(ModItemsAmmo.SNIPERRIFLEROUND.get());
+
+        this.requiredMagazineTags.add("snipermag");
+
+        this.allowedCalibersTags.add("50bmg");
     }
 }

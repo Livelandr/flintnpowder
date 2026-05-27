@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -44,10 +44,11 @@ public class SemiPistol extends MagfedBase {
         super(pProperties);
         shootCooldownTicks = 10;
 
-        addAllowedMagazine(ModItemsAmmo.HANDGUNMAG.get());
+        addCompatibleCaliberTag("pistolmag");
+        addCompatibleCaliberTag("9mmmag");
 
-        addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
-        addAllowedAttachment(ModItemsAttachments.SILENCER.get());
+        addAttachmentSlot("optic");
+        addAttachmentSlot("silencer");
     }
 
     @Override
@@ -80,7 +81,7 @@ public class SemiPistol extends MagfedBase {
     @Override
     public void onShoot(Level pLevel, LivingEntity shooter, ItemStack gunStack) {
 
-        if (!isAttachmentValidAndEnabled(gunStack, "Silencer")) {
+        if (!isAttachmentValidAndEnabled(gunStack, "silencer")) {
             pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                     ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 3.0F, 1.0F, 0);
             pLevel.playSeededSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),

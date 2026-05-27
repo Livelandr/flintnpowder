@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -33,10 +33,15 @@ import org.ragingzombies.flintnpowder.core.guns.GunBase;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class BaseAmmo extends Item {
+
+    public int tier = 0;
+    public Set<String> requiredCaliberTags = new HashSet<>();
 
     public float damage = 0;
     public boolean customDescription = false;
@@ -45,24 +50,25 @@ public class BaseAmmo extends Item {
         super(pProperties);
     }
 
-    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {
-    }
+    public void onAmmoShot(LivingEntity shooter, ItemStack gun, Level level) {}
 
     public int ammoCountInOne(ItemStack ammo) {
         return 1;
     }
-
     public ItemStack getAmmoItemStack(ItemStack ammo) {
         return ammo;
-    }
-
-    public float PropellantMultiplier(LivingEntity shooter, ItemStack gun) {
-        return 1;
     }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (!customDescription) {
+            pTooltipComponents.add(Component.literal(""));
+            pTooltipComponents.add(Component.translatable("flintnpowder.weapontier").append(Integer.toString(tier)));
+            pTooltipComponents.add(Component.translatable("flintnpowder.ammoinfotags"));
+            for (String ammo : this.requiredCaliberTags) {
+                pTooltipComponents.add(Component.literal("   ").append(Component.translatable("flintnpowder.calibernames." + ammo)));
+            }
+
             pTooltipComponents.add(Component.literal(""));
             pTooltipComponents.add(Component.translatable("flintnpowder.bullet_description"));
             pTooltipComponents.add(Component.translatable("flintnpowder.projectile_damage")

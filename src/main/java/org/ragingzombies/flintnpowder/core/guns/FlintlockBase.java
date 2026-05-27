@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -99,7 +99,8 @@ public class FlintlockBase extends GunBase {
     }
 
     @Override
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+        super.shoot(pLevel, pPlayer, gunStack);
 
         ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
@@ -142,7 +143,7 @@ public class FlintlockBase extends GunBase {
             if (gunStack.getTag().getBoolean("IsCocked") || (noCock && gunStack.getTag().getBoolean("IsStuffed"))) {
                 if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                     if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
-                        Shoot(pLevel, pPlayer, gunStack);
+                        shoot(pLevel, pPlayer, gunStack);
                         onShoot(pLevel, pPlayer, gunStack);
                     } else {
                         onTryFailure(pLevel, pPlayer, gunStack);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -39,6 +39,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import org.ragingzombies.flintnpowder.core.guns.FlintlockBase;
+import org.ragingzombies.flintnpowder.core.guns.GunBase;
 import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.item.ModItemsAttachments;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
@@ -62,13 +63,27 @@ public class Musket extends FlintlockBase {
         gunpowderCooldownTicks = 20;
         ramrodCooldownTicks = 60;
 
+        this.showTier = true;
+        this.weaponTier = 1;
+        addCompatibleCaliberTag("roundshot");
+
+        addAttachmentSlot("underbarrel");
+        addAttachmentSlot("optic");
+
+        addCompatibleAttachmentTag("sniper");
+        addCompatibleAttachmentTag("fixable");
+        addCompatibleAttachmentTag("bayonet");
+
+        /*
         addAllowedAmmo(ModItemsAmmo.CASTIRONROUNDSHOT.get());
         addAllowedAmmo(ModItemsAmmo.STEELROUNDSHOT.get());
 
         addAllowedAttachment(ModItemsAttachments.BAYONET.get());
         addAllowedAttachment(ModItemsAttachments.HIGHPROFILEOPTIC.get());
         addAllowedAttachment(ModItemsAttachments.LOWPROFILEOPTIC.get());
+        *?
 
+         */
         this.lazyAttributeMap = Lazy.of(() -> {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
             builder.put(ForgeMod.ENTITY_REACH.get(),
@@ -99,7 +114,7 @@ public class Musket extends FlintlockBase {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        if (slot == EquipmentSlot.MAINHAND && stack.getOrCreateTag().getBoolean("HaveBayonet")) {
+        if (slot == EquipmentSlot.MAINHAND && GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get())) {
             return lazyAttributeMap.get();
         }
         return super.getAttributeModifiers(slot, stack);

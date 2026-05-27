@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -41,7 +41,6 @@ import org.ragingzombies.flintnpowder.item.ammo.projectiles.TheRockProjectile;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 import static org.ragingzombies.flintnpowder.core.util.CameraWork.OffsetEntityCamera;
 
@@ -119,7 +118,8 @@ public class LogCannon extends GunBase {
     }
 
     @Override
-    public void Shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+
         GunBase gun = (GunBase) gunStack.getItem();
 
         TheRockProjectile proj = new TheRockProjectile(pLevel, pPlayer);
@@ -155,7 +155,7 @@ public class LogCannon extends GunBase {
 
             if (allowPressingTrigger(pLevel, pPlayer, gunStack, pUsedHand)) {
                 if (tryShoot(pLevel, pPlayer, gunStack, pUsedHand)) {
-                    Shoot(pLevel, pPlayer, gunStack);
+                    shoot(pLevel, pPlayer, gunStack);
                     onShoot(pLevel, pPlayer, gunStack);
                 } else {
                     onTryFailure(pLevel, pPlayer, gunStack);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -44,8 +44,9 @@ public class Pistol extends FlintlockBase {
         gunpowderCooldownTicks = 15;
         ramrodCooldownTicks = 40;
 
-        addAllowedAmmo(ModItemsAmmo.CASTIRONROUNDSHOT.get());
-        addAllowedAmmo(ModItemsAmmo.COPPERROUNDSHOT.get());
+        this.showTier = true;
+        this.weaponTier = 1;
+        addCompatibleCaliberTag("roundshot");
     }
 
     @Override

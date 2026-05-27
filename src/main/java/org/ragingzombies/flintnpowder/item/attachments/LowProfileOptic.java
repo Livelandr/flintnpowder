@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -31,7 +31,7 @@ import java.util.List;
 public class LowProfileOptic extends AttachmentBase {
     public LowProfileOptic(Properties pProperties) {
         super(pProperties);
-        type = "Optic";
+        setSlot("optic");
     }
 
     @Override
@@ -46,5 +46,6 @@ public class LowProfileOptic extends AttachmentBase {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         pTooltipComponents.add(Component.translatable("item.flintnpowder.lpoptic.description"));
+        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

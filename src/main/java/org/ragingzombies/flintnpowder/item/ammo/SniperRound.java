@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -42,6 +42,8 @@ public class SniperRound extends BaseAmmo {
         super(pProperties);
 
         damage = 30;
+
+        this.requiredCaliberTags.add("50bmg");
     }
 
     @Override

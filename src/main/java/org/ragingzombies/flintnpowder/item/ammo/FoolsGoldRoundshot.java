@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -42,6 +42,9 @@ public class FoolsGoldRoundshot extends BaseAmmo {
     public FoolsGoldRoundshot(Properties pProperties) {
         super(pProperties);
         this.damage = 24;
+
+        this.tier = 2;
+        this.requiredCaliberTags.add("roundshot");
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 RagingZombies
+ * Copyright (C) 2026 Livelandr
  *
  * This file is part of Flint'N'Powder.
  *
@@ -47,7 +47,7 @@ public class Volleygun extends FlintlockBase {
         shootCooldownTicks = 25;
         noCock = true;
 
-        addAllowedAmmo(ModItemsAmmo.COPPERVOLLEYSHOT.get());
+        addCompatibleAttachmentTag("volleyshot");
     }
 
     @Override
