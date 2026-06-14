@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:blunderbuss"
+    },
+    "title": {
+      "translate": "advancements.blunderbuss_get.title"
+    },
+    "description": {
+      "translate": "advancements.blunderbuss_get.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "blunderbuss_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:blunderbuss"
+            ],
+            "count": {
+              "min": 1,
+              "max": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:steel_get"
+}

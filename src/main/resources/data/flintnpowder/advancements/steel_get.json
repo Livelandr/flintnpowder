@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:steel_ingot"
+    },
+    "title": {
+      "translate": "advancements.steel_get.title"
+    },
+    "description": {
+      "translate": "advancements.steel_get.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "steel_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:steel_alloy"
+            ],
+            "count": {
+              "min": 32,
+              "max": 64
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:cast_iron_get"
+}

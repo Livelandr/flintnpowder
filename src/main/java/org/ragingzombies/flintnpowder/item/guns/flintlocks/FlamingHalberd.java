@@ -20,6 +20,7 @@ package org.ragingzombies.flintnpowder.item.guns.flintlocks;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.livelandr.flintcore.core.guns.MatchlockBase;
 import com.livelandr.flintcore.core.util.CameraWork;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -42,13 +43,14 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Lazy;
 import com.livelandr.flintcore.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core_modified.guns.FlintlockBaseEnchantable;
+import org.ragingzombies.flintnpowder.core_modified.guns.MatchlockBaseEnchantable;
 import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FlamingHalberd extends FlintlockBaseEnchantable {
+public class FlamingHalberd extends MatchlockBaseEnchantable {
 
     protected final Lazy<Multimap<Attribute, AttributeModifier>> lazyAttributeMap;
 
@@ -118,19 +120,18 @@ public class FlamingHalberd extends FlintlockBaseEnchantable {
                 );
             }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override
     public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
-        ItemStack gunStack = pPlayer.getItemInHand(pUsedHand);
+        return !pPlayer.isUnderWater();
+    }
 
-        ItemStack secondItemStack;
-        if (pUsedHand == InteractionHand.MAIN_HAND)
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.OFF_HAND);
-        else
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
-
-        return secondItemStack.is(Items.FLINT_AND_STEEL) && !pPlayer.isUnderWater();
+    @Override
+    public void onIgnition(Level pLevel, LivingEntity pPlayer, ItemStack gun) {
+        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+                SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
     }
 
     @Override
@@ -140,16 +141,12 @@ public class FlamingHalberd extends FlintlockBaseEnchantable {
         gunStack.getTag().putBoolean("HasAmmo", false);
         gunStack.getTag().putBoolean("IsCocked", false);
 
+        super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
         pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
+                SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
 
-        ServerTickHandler.createTask(25, () -> {
-            super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
-            pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                    SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
+        setReloadAnimation(gunStack);
 
-            setReloadAnimation(gunStack);
-        });
     }
 
     @Override

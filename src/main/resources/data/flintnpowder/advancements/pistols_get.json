@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "flintnpowder:pistols_achievement_icon"
+    },
+    "title": {
+      "translate": "advancements.pistols_get.title"
+    },
+    "description": {
+      "translate": "advancements.pistols_get.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "pistols_get_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "flintnpowder:pistol"
+            ],
+            "count": {
+              "min": 6,
+              "max": 6
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "flintnpowder:pistol_get"
+}

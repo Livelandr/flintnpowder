@@ -35,13 +35,14 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import com.livelandr.flintcore.core.ammo.BaseAmmo;
 import org.ragingzombies.flintnpowder.core_modified.guns.FlintlockBaseEnchantable;
+import org.ragingzombies.flintnpowder.core_modified.guns.MatchlockBaseEnchantable;
 import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class GreekFire extends FlintlockBaseEnchantable {
+public class GreekFire extends MatchlockBaseEnchantable {
 
     public GreekFire(Properties pProperties) {
         super(pProperties);
@@ -83,19 +84,19 @@ public class GreekFire extends FlintlockBaseEnchantable {
                 );
             }
         }
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override
     public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
-        ItemStack gunStack = pPlayer.getItemInHand(pUsedHand);
+        return !pPlayer.isUnderWater();
+    }
 
-        ItemStack secondItemStack;
-        if (pUsedHand == InteractionHand.MAIN_HAND)
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.OFF_HAND);
-        else
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
 
-        return secondItemStack.is(Items.FLINT_AND_STEEL) && !pPlayer.isUnderWater();
+    @Override
+    public void onIgnition(Level pLevel, LivingEntity pPlayer, ItemStack gun) {
+        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+                SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
     }
 
     @Override
@@ -105,16 +106,10 @@ public class GreekFire extends FlintlockBaseEnchantable {
         gunStack.getTag().putBoolean("IsCocked", false);
         gunStack.getTag().putBoolean("IsStuffed", false);
 
+        super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
         pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
-
-        ServerTickHandler.createTask(25, () -> {
-            super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
-            pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                    SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
-
-            setReloadAnimation(gunStack);
-        });
+                SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
+        setReloadAnimation(gunStack);
     }
 
     @Override
