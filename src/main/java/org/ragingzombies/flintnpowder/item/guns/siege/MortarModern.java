@@ -67,7 +67,7 @@ public class MortarModern extends GunBase {
 
     @Override
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.MORTAR_FIRE.get(), SoundSource.NEUTRAL, 5.0F, 1.0F + Mth.nextFloat(shooter.getRandom(),-0.25F, 0.25F));
 
         // Particles

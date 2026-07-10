@@ -99,7 +99,7 @@ public class FlamingHalberd extends FlintlockBaseEnchantable {
     @Override
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
         setAimAnimation(gun);
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1.0F, 0.8F);
 
         if (shooter instanceof Player ply) {

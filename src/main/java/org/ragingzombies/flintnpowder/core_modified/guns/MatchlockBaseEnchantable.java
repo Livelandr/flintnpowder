@@ -54,7 +54,7 @@ public class MatchlockBaseEnchantable extends MatchlockBase {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo ,InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onAmmo(pLevel, shooter, gun, ammo, pUsedHand);
@@ -98,7 +98,7 @@ public class MatchlockBaseEnchantable extends MatchlockBase {
 
     @Override
     public void onGunpowder(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.SAND_BREAK, SoundSource.NEUTRAL, 1F, 1.0F);
 
         super.onGunpowder(pLevel, shooter, gun, pUsedHand);
@@ -106,7 +106,7 @@ public class MatchlockBaseEnchantable extends MatchlockBase {
 
     @Override
     public void onStuff(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1F, 1.0F);
 
         super.onStuff(pLevel, shooter, gun, pUsedHand);
@@ -114,7 +114,7 @@ public class MatchlockBaseEnchantable extends MatchlockBase {
 
     @Override
     public void onCock(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.FLINTPRIME.get(), SoundSource.NEUTRAL, 0.15F, 1.0F);
 
         super.onCock(pLevel, shooter, gun, pUsedHand);

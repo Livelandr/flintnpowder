@@ -54,7 +54,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo ,InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onAmmo(pLevel, shooter, gun, ammo, pUsedHand);
@@ -82,7 +82,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
 
     @Override
     public void onCocking(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onCocking(pLevel, shooter, gun);
@@ -90,7 +90,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
 
     @Override
     public void onChamberOpen(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onChamberOpen(pLevel, shooter, gun);
@@ -98,7 +98,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
 
     @Override
     public void onChamberClose(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onChamberClose(pLevel, shooter, gun);
@@ -106,7 +106,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
 
     @Override
     public void onAmmoInsert(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onAmmoInsert(pLevel, shooter, gun, pUsedHand);

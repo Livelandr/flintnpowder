@@ -55,7 +55,7 @@ public class MagfedBaseEnchantable extends MagfedBase {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo , InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onAmmo(pLevel, shooter, gun, ammo, pUsedHand);
@@ -83,7 +83,7 @@ public class MagfedBaseEnchantable extends MagfedBase {
 
     @Override
     public void onSlideStart(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideStart(pLevel, shooter, gun);
@@ -91,7 +91,7 @@ public class MagfedBaseEnchantable extends MagfedBase {
 
     @Override
     public void onSlideEnd(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSWING.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideEnd(pLevel, shooter, gun);
@@ -99,7 +99,7 @@ public class MagfedBaseEnchantable extends MagfedBase {
 
     @Override
     public void onMagExtract(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.PISTOLMAGIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onMagExtract(pLevel, shooter, gun);
@@ -107,7 +107,7 @@ public class MagfedBaseEnchantable extends MagfedBase {
 
     @Override
     public void onMagInsert(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.PISTOLMAGIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onMagInsert(pLevel, shooter, gun);

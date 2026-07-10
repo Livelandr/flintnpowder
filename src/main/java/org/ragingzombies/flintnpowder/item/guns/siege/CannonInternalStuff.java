@@ -84,7 +84,7 @@ public class CannonInternalStuff extends FlintlockBaseEnchantable {
 
     @Override
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 2.0F, 0.75F);
 
         setReloadAnimation(gunStack);

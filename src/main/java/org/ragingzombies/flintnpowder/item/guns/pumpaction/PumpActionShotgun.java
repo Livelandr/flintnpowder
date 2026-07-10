@@ -69,7 +69,7 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
 
     @Override
     public void OnCockStart(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.SHOTGUNPUMPBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player) {
@@ -79,7 +79,7 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
 
     @Override
     public void OnCockEnd(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand){
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.SHOTGUNPUMPFORW.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         setAimAnimation(gun);
@@ -104,9 +104,9 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
         }
 
         if (!isAttachmentValidAndEnabled(gunStack, "silencer")) {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.SHOTGUNSHOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 10.0F, 1.0F);
 
             // Particles
@@ -145,7 +145,7 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
                 }
             }
         } else {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.SHOTGUNSHOTSILENCED.get(), SoundSource.NEUTRAL, 1.5F, 1.0F);
 
             if (!pLevel.isClientSide()) {
@@ -172,7 +172,7 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.SHOTGUNRELOAD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
 
         setReloadAnimation(gun);

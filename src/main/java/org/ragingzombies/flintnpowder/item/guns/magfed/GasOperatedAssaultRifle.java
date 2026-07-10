@@ -64,7 +64,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
     }
 
     public void onMagExtract(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         setReloadAnimation(gun);
@@ -76,7 +76,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
 
     public void onMagInsert(Level pLevel, LivingEntity shooter, ItemStack gun) {
         gun.getTag().putInt("shootCount", 0);
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
@@ -86,7 +86,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
 
     @Override
     public void onSlideStart(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRBOLTBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideStart(pLevel, shooter, gun);
@@ -95,7 +95,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
     @Override
     public void onSlideEnd(Level pLevel, LivingEntity shooter, ItemStack gun) {
         gun.getTag().putInt("shootCount", 0);
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRBOLTFORW.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideEnd(pLevel, shooter, gun);
@@ -126,9 +126,9 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
 
     @Override
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRFIRE.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F);
 
         gunStack.getTag().putInt("shootCount", (gunStack.getTag().getInt("shootCount") + 1));

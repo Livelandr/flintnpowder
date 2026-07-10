@@ -54,7 +54,7 @@ public class OpenBoltSubmachineGun extends MagfedBaseEnchantable {
 
     @Override
     public void onSlideStart(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.PISTOLCOCKBACKWARD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideStart(pLevel, shooter, gun);
@@ -62,7 +62,7 @@ public class OpenBoltSubmachineGun extends MagfedBaseEnchantable {
 
     @Override
     public void onSlideEnd(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.PISTOLCOCKFORWARD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onSlideEnd(pLevel, shooter, gun);
@@ -82,12 +82,12 @@ public class OpenBoltSubmachineGun extends MagfedBaseEnchantable {
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
 
         if (!isAttachmentValidAndEnabled(gunStack, "silencer")) {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.PISTOLSHOOT.get(), SoundSource.NEUTRAL, 3.0F, 1.0F);
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.PISTOLDISTANTSHOOT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F);
         } else {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.SHOTGUNSHOTSILENCED.get(), SoundSource.NEUTRAL, 2.0F, 1.0F);
         }
 
