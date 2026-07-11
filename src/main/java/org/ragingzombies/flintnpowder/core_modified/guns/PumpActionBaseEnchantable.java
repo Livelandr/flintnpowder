@@ -56,7 +56,7 @@ public class PumpActionBaseEnchantable extends PumpActionBase {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo ,InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.ITEM_PICKUP, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onAmmo(pLevel, shooter, gun, ammo, pUsedHand);
@@ -64,7 +64,7 @@ public class PumpActionBaseEnchantable extends PumpActionBase {
 
     @Override
     public void onTryFailure(Level pLevel, LivingEntity pPlayer, ItemStack gun) {
-        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+        pLevel.playSound(null, pPlayer,
                 ModSounds.FLINTSTRIKE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onTryFailure(pLevel, pPlayer, gun);

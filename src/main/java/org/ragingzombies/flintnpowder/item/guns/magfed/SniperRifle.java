@@ -59,44 +59,44 @@ public class SniperRifle extends MagfedBaseEnchantable {
     }
 
     public void onMagExtract(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            setCooldown(ply, gun,  35);
         }
     }
 
     public void onMagInsert(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            setCooldown(ply, gun,  35);
         }
     }
 
     @Override
     public void onSlideStart(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRBOLTBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 10);
+            setCooldown(ply, gun,  10);
         }
     }
 
     @Override
     public void onSlideEnd(Level pLevel, LivingEntity shooter, ItemStack gun) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.BRBOLTFORW.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 10);
+            setCooldown(ply, gun,  10);
         }
     }
 
@@ -128,9 +128,9 @@ public class SniperRifle extends MagfedBaseEnchantable {
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
 
         if (!isAttachmentValidAndEnabled(gunStack, "silencer")) {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.SNIPERSHOOT.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F);
 
             // Particles
@@ -152,7 +152,7 @@ public class SniperRifle extends MagfedBaseEnchantable {
                 }
             }
         } else {
-            pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+            pLevel.playSound(null, shooter,
                     ModSounds.SHOTGUNSHOTSILENCED.get(), SoundSource.NEUTRAL, 2.0F, 1.0F);
         }
 

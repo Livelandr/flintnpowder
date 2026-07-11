@@ -133,7 +133,7 @@ public class BoltActionRifle extends PumpActionBaseEnchantable {
 
     @Override
     public void OnCockStart(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.RIFLEBOLTBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player) {
@@ -143,7 +143,7 @@ public class BoltActionRifle extends PumpActionBaseEnchantable {
 
     @Override
     public void OnCockEnd(Level pLevel, LivingEntity shooter, ItemStack gun, InteractionHand pUsedHand){
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.RIFLEBOLTFORW.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         setAimAnimation(gun);
@@ -167,7 +167,7 @@ public class BoltActionRifle extends PumpActionBaseEnchantable {
             setCooldown(shooter, gunStack, shootCooldown(shooter, gunStack));
         }
 
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.RIFLESHOOT.get(), SoundSource.NEUTRAL, 4.0F, 1.0F);
 
 
@@ -211,7 +211,7 @@ public class BoltActionRifle extends PumpActionBaseEnchantable {
 
     @Override
     public void onAmmo(Level pLevel, LivingEntity shooter, ItemStack gun, ItemStack ammo, InteractionHand pUsedHand) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 ModSounds.SHOTGUNRELOAD.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
 
         setReloadAnimation(gun);

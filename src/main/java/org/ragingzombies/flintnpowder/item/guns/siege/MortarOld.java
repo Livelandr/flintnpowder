@@ -65,7 +65,7 @@ public class MortarOld extends FlintlockBaseEnchantable {
         ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
         BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
-        ammo.onAmmoShot((float) (-angleX+Math.toRadians(180.0)), angleY, pPlayer, gunStack, pLevel);
+        ammo.onAmmoShot( 180F-angleX, angleY, pPlayer, gunStack, pLevel);
 
         onShoot(rotationX, rotationY, pLevel, pPlayer, gunStack);
 
@@ -96,7 +96,7 @@ public class MortarOld extends FlintlockBaseEnchantable {
 
     @Override
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
-        pLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
+        pLevel.playSound(null, shooter,
                 SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 2.0F, 0.75F);
 
 
