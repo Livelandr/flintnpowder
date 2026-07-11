@@ -57,7 +57,7 @@ public class Blunderbuss extends FlintlockBaseEnchantable {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
+            setCooldown(ply, gun,  ramrodCooldown(ply, gun));
         }
     }
 

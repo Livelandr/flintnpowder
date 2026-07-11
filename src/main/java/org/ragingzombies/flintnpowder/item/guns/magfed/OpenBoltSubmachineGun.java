@@ -38,7 +38,7 @@ import java.util.List;
 public class OpenBoltSubmachineGun extends MagfedBaseEnchantable {
     public OpenBoltSubmachineGun(Properties pProperties) {
         super(pProperties);
-        shootCooldownTicks = 1;
+        shootCooldownTicks = 3;
 
         addCompatibleCaliberTag("extendedpistolmag");
         addCompatibleCaliberTag("9mmmag");

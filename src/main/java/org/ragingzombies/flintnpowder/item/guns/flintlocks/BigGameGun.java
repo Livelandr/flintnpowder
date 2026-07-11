@@ -109,7 +109,7 @@ public class BigGameGun extends FlintlockBaseEnchantable {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
+            setCooldown(ply, gun,  ramrodCooldown(ply, gun));
         }
     }
 
@@ -122,6 +122,8 @@ public class BigGameGun extends FlintlockBaseEnchantable {
                 );
             }
         }
+
+        super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
     @Override

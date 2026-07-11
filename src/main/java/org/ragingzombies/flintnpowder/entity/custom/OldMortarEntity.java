@@ -44,6 +44,7 @@ public class OldMortarEntity extends Mob {
         if (this.getXRot() == 0) {
             aimAngleX(-147);
         }
+        aimAngleY(0);
     }
 
     @Override

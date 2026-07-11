@@ -66,7 +66,7 @@ public class GreekFire extends FlintlockBaseEnchantable {
                 ModSounds.RAMROD.get(), SoundSource.NEUTRAL, 1.0F, 0.8F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 40);
+            setCooldown(ply, gun,  40);
         }
     }
 
@@ -89,7 +89,7 @@ public class GreekFire extends FlintlockBaseEnchantable {
 
     @Override
     public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
-        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+        pLevel.playSound(null, pPlayer,
                 SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
 
         gunStack.getTag().putInt("Gunpowder", 0);
@@ -99,7 +99,7 @@ public class GreekFire extends FlintlockBaseEnchantable {
 
         ServerTickHandler.createTask(30, () -> {
             super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
-            pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+            pLevel.playSound(null, pPlayer,
                     SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
             setReloadAnimation(gunStack);
         });

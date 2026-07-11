@@ -38,7 +38,7 @@ import java.util.List;
 public class MachineGun extends MagfedBaseEnchantable {
     public MachineGun(Properties pProperties) {
         super(pProperties);
-        this.shootCooldownTicks = 1;
+        this.shootCooldownTicks = 5;
         this.addCompatibleCaliberTag("machinegunmag");
         this.addAttachmentSlot("optic");
         this.addAttachmentSlot("underbarrel");

@@ -76,7 +76,7 @@ public class TrapdoorRifle extends BlazelockBaseEnchantable {
                 ModSounds.RIFLERELOAD.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 5);
+            setCooldown(ply, gun,  5);
         }
     }
 

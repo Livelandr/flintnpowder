@@ -61,7 +61,7 @@ public class FlintlockBaseEnchantable extends FlintlockBase {
 
     @Override
     public void onTryFailure(Level pLevel, LivingEntity pPlayer, ItemStack gun) {
-        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+        pLevel.playSound(null, pPlayer,
                 ModSounds.FLINTSTRIKE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         super.onTryFailure(pLevel, pPlayer, gun);

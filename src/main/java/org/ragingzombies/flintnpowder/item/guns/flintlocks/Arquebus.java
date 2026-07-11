@@ -39,7 +39,7 @@ import org.ragingzombies.flintnpowder.sound.ModSounds;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class Arquebus extends FlintlockBaseEnchantable {
+public class Arquebus extends MatchlockBaseEnchantable {
 
     public Arquebus(Properties pProperties) {
         super(pProperties);
@@ -68,54 +68,42 @@ public class Arquebus extends FlintlockBaseEnchantable {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, ramrodCooldown(ply, gun));
+            setCooldown(ply, gun,  ramrodCooldown(ply, gun));
         }
     }
 
-    @Override
-    public boolean allowPressingTrigger(Level pLevel, LivingEntity pPlayer, ItemStack gun, InteractionHand pUsedHand) {
-        ItemStack gunStack = pPlayer.getItemInHand(pUsedHand);
-
-        ItemStack secondItemStack;
-        if (pUsedHand == InteractionHand.MAIN_HAND)
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.OFF_HAND);
-        else
-            secondItemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
-
-        return secondItemStack.is(Items.FLINT_AND_STEEL) && !pPlayer.isUnderWater();
-    }
-
+    /*
     @Override
     public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+        super.shoot(pLevel, pPlayer, gunStack);
+
         gunStack.getTag().putInt("Gunpowder", 0);
         gunStack.getTag().putBoolean("HasAmmo", false);
         gunStack.getTag().putBoolean("IsCocked", false);
         gunStack.getTag().putBoolean("IsStuffed", false);
+        gunStack.getTag().putBoolean("IsIgnited", false);
 
-        pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
+        pLevel.playSound(null, pPlayer,
                 SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
-        ServerTickHandler.createTask(25, () -> {
-            triggerHooks("onShoot", pPlayer, gunStack);
+        triggerHooks("onShoot", pPlayer, gunStack);
 
-            pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                    ModSounds.MUSKETFIRE.get(), SoundSource.NEUTRAL, 3.0F, 1.0F);
-            pLevel.playSound(null, pPlayer.getBlockX(), pPlayer.getBlockY(), pPlayer.getBlockZ(),
-                    ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F);
+        ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
-            ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
-
-            BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
-            ammo.onAmmoShot(pPlayer, gunStack, pLevel);
-
-            setReloadAnimation(gunStack);
-        });
+        BaseAmmo ammo = (BaseAmmo) ammoData.getItem();
+        ammo.onAmmoShot(pPlayer, gunStack, pLevel);
+        setReloadAnimation(gunStack);
     }
+     */
 
     @Override
     public void onShoot(float rotationX, float rotationY, Level pLevel, LivingEntity shooter, ItemStack gunStack) {
         pLevel.playSound(null, shooter,
                 ModSounds.FLINTSTRIKE.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+        pLevel.playSound(null, shooter,
+                ModSounds.MUSKETFIRE.get(), SoundSource.NEUTRAL, 3.0F, 1.0F);
+        pLevel.playSound(null, shooter,
+                ModSounds.GUNSHOTDISTANT.get(), SoundSource.NEUTRAL, 9.0F, 1.0F);
 
         setReloadAnimation(gunStack);
 

@@ -70,7 +70,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
         setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 45);
+            setCooldown(ply, gun,  45);
         }
     }
 
@@ -80,7 +80,7 @@ public class GasOperatedAssaultRifle extends MagfedBaseEnchantable {
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 45);
+            setCooldown(ply, gun,  45);
         }
     }
 

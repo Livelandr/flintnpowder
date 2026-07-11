@@ -65,7 +65,7 @@ public class SniperRifle extends MagfedBaseEnchantable {
         setReloadAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            setCooldown(ply, gun,  35);
         }
     }
 
@@ -74,7 +74,7 @@ public class SniperRifle extends MagfedBaseEnchantable {
                 ModSounds.BRMAGOUT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 35);
+            setCooldown(ply, gun,  35);
         }
     }
 
@@ -84,7 +84,7 @@ public class SniperRifle extends MagfedBaseEnchantable {
                 ModSounds.BRBOLTBACK.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 10);
+            setCooldown(ply, gun,  10);
         }
     }
 
@@ -96,7 +96,7 @@ public class SniperRifle extends MagfedBaseEnchantable {
         setAimAnimation(gun);
 
         if (shooter instanceof Player ply) {
-            ply.getCooldowns().addCooldown(this, 10);
+            setCooldown(ply, gun,  10);
         }
     }
 
