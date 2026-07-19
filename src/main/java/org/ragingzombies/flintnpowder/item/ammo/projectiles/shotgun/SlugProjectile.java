@@ -28,103 +28,28 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.ragingzombies.flintnpowder.item.ammo.projectiles.BaseProjectile;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
+public class SlugProjectile extends BaseProjectile {
 
-public class SlugProjectile extends AbstractArrow implements ItemSupplier {
-
-    public float damage = 1;
-
-    public SlugProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
-    public SlugProjectile(Level pLevel) {
-        super(ModProjectiles.SLUGPROJECTILE.get(), pLevel);
+    public SlugProjectile(EntityType<? extends AbstractArrow> pEntityType, Level level) {
+        super(pEntityType, level);
     }
     public SlugProjectile(Level pLevel, LivingEntity livingEntity) {
         super(ModProjectiles.SLUGPROJECTILE.get(), livingEntity, pLevel);
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
-        if (!level().isClientSide()) {
-            Vec3 motion = this.getDeltaMovement();
-            for (int i = 0; i < 5; i++) {
-                double offset = i * 0.2;
-                ((ServerLevel) this.level()).sendParticles(
-                        ParticleTypes.POOF,
-                        this.getX() - motion.x * offset,
-                        this.getY() - motion.y * offset + 0.1,
-                        this.getZ() - motion.z * offset,
-                        1,
-                        motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
-                        0.06
-                );
-            }
-        }
+    protected Item getDefaultItem() {
+        return ModItemsAmmo.CASTIRONROUNDSHOT.get();
     }
-
-    @Override
-    protected ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return ItemStack.EMPTY;
-    }
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.EMPTY;
-    }
-
-    void collisionParticles() {
-        ((ServerLevel) this.level()).sendParticles(
-                ParticleTypes.LARGE_SMOKE,
-                this.getX(),
-                this.getY(),
-                this.getZ(),
-                5,
-                0.05, 0.05, 0.05,
-                0.06
-        );
-
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
-                ModSounds.BULLETHIT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
-    }
-
-
-    @Override
-    protected void onHitBlock(BlockHitResult pResult) {
-        if (!this.level().isClientSide()) {
-            collisionParticles();
-            this.discard();
-        }
-
-        super.onHitBlock(pResult);
-    }
-
-    @Override
-    protected void onHitEntity(EntityHitResult pResult) {
-    pResult.getEntity().invulnerableTime = 0;
-        if (!this.level().isClientSide()) {
-            DamageSource dmg = this.damageSources().arrow( this, this.getOwner());
-
-            double speed = this.getDeltaMovement().length();
-            pResult.getEntity().hurt(dmg, damage + (float) (speed*speed));
-
-            collisionParticles();
-            this.discard();
-        }
-
-        
-    }
-
 }
+

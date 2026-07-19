@@ -40,6 +40,6 @@ public class SteelCannonball extends BaseAmmo {
 
         proj.shootFromRotation(shooter,xRotation, yRotation, 0.0F, 6.5F, 2F * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
     }
 }

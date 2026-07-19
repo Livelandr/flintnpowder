@@ -66,7 +66,7 @@ public class FlamingGrapeshot extends BaseAmmo {
              FlamingBuckshotProjectile proj = new FlamingBuckshotProjectile(level, shooter);
 
              proj.setOwner(shooter);
-             proj.SetDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
+             proj.setDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
 
              proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
                     CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,2 * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
@@ -78,7 +78,7 @@ public class FlamingGrapeshot extends BaseAmmo {
                  OffsetEntityCamera(shooter, (-7 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
              }
 
-             level.addFreshEntity(proj);
+             if (!level.isClientSide()) level.addFreshEntity(proj);
         }
     }
 

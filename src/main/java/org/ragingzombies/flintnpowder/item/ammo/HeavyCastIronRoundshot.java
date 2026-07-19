@@ -57,6 +57,6 @@ public class HeavyCastIronRoundshot extends BaseAmmo {
             OffsetEntityCamera(shooter, (-15 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
         }
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
     }
 }

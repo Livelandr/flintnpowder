@@ -29,6 +29,7 @@ import com.livelandr.flintcore.core.ammo.BaseAmmo;
 import com.livelandr.flintcore.core.guns.GunBase;
 import com.livelandr.flintcore.core.util.CameraWork;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.FlamingBuckshotProjectile;
+import org.ragingzombies.flintnpowder.item.ammo.projectiles.shotgun.DragonBreathProjectile;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -51,14 +52,14 @@ public class ShotgunShellDragon extends BaseAmmo {
             float angle = rand.nextFloat((float) (2.0F*Math.PI));
             float radius = rand.nextFloat(5);
 
-            FlamingBuckshotProjectile proj = new FlamingBuckshotProjectile(level, shooter);
+            DragonBreathProjectile proj = new DragonBreathProjectile(level, shooter);
 
             proj.setOwner(shooter);
             proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
                     CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 2.5F,2 * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
-            proj.SetDamage(2F * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
+            proj.setDamage(2F * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
 
-            level.addFreshEntity(proj);
+            if (!level.isClientSide()) level.addFreshEntity(proj);
         }
 
         // Recoil

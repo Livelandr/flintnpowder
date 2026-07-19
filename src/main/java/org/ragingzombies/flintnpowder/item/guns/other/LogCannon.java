@@ -132,7 +132,7 @@ public class LogCannon extends GunBase {
             OffsetEntityCamera(pPlayer, -50, 0);
         }
 
-        pLevel.addFreshEntity(proj);
+        if (!pLevel.isClientSide()) pLevel.addFreshEntity(proj);
 
         super.shoot(pLevel, pPlayer, gunStack);
     }

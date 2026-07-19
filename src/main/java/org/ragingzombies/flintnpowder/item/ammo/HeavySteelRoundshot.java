@@ -60,7 +60,7 @@ public class HeavySteelRoundshot extends BaseAmmo {
             OffsetEntityCamera(shooter, (-15 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
         }
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
     }
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {

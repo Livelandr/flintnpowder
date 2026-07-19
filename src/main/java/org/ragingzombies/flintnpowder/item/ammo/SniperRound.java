@@ -61,7 +61,7 @@ public class SniperRound extends BaseAmmo {
             OffsetEntityCamera(shooter, (-13 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
         }
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
     }
 
     @Override

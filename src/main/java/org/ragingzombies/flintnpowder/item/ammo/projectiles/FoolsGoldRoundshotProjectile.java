@@ -31,31 +31,33 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
+import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemSupplier {
-
-    public float damage = 1;
+public class FoolsGoldRoundshotProjectile extends BaseProjectile {
     public int piercedEnts = 0;
 
     public FoolsGoldRoundshotProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public FoolsGoldRoundshotProjectile(Level pLevel) {
-        super(ModProjectiles.FOOLSGOLD.get(), pLevel);
+
+    @Override
+    protected Item getDefaultItem() {
+        return ModItemsAmmo.CASTIRONROUNDSHOT.get();
     }
+
     public FoolsGoldRoundshotProjectile(Level pLevel, LivingEntity livingEntity) {
         super(ModProjectiles.FOOLSGOLD.get(), livingEntity, pLevel);
 
         this.setPierceLevel((byte) 1);
     }
-
 
     @Override
     public void tick() {
@@ -105,48 +107,6 @@ public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemS
     }
 
     @Override
-    protected ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return ItemStack.EMPTY;
-    }
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.EMPTY;
-    }
-
-    void collisionParticles(BlockPos pos) {
-        ((ServerLevel) this.level()).sendParticles(
-                ParticleTypes.LARGE_SMOKE,
-                pos.getX(),
-                pos.getY(),
-                pos.getZ(),
-                10,
-                0.05, 0.05, 0.05,
-                0.06
-        );
-
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
-                ModSounds.BULLETHIT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
-    }
-
-
-
-
-    @Override
-    protected void onHitBlock(BlockHitResult pResult) {
-        //super.onHitBlock(pResult);
-
-        if (!this.level().isClientSide()) {
-            collisionParticles(pResult.getBlockPos());
-        }
-        this.discard();
-    }
-
-    @Override
     protected void onHitEntity(EntityHitResult pResult) {
         pResult.getEntity().invulnerableTime = 0;
 
@@ -159,7 +119,7 @@ public class FoolsGoldRoundshotProjectile extends AbstractArrow implements ItemS
                 double speed = this.getDeltaMovement().length();
                 pResult.getEntity().hurt(dmg, damage);
 
-                collisionParticles(pResult.getEntity().getOnPos());
+                spawnCollisionParticles(pResult.getEntity().getOnPos());
                 damage /= 1.25;
             }
         }

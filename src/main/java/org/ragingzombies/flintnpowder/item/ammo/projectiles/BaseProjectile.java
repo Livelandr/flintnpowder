@@ -18,8 +18,13 @@
  */
 package org.ragingzombies.flintnpowder.item.ammo.projectiles;
 
+import com.livelandr.flintcore.Flintcore;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -27,77 +32,101 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
+import org.jetbrains.annotations.NotNull;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
-public class FlamingBuckshotProjectile extends BaseProjectile {
+public abstract class BaseProjectile extends AbstractArrow implements ItemSupplier {
+    public float damage;
 
-    public FlamingBuckshotProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
+    public BaseProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    public FlamingBuckshotProjectile(Level pLevel, LivingEntity livingEntity) {
-        super(ModProjectiles.FLAMINGBUCKSHOTPROJECTILE.get(), livingEntity, pLevel);
-        this.setSecondsOnFire(9999);
+    public BaseProjectile(EntityType<? extends AbstractArrow> pEntityType, LivingEntity livingEntity, Level pLevel) {
+        super(pEntityType, livingEntity, pLevel);
     }
 
+    public void setDamage(float damage) {
+        this.damage = damage;
+    }
+
+    protected abstract Item getDefaultItem();
 
     @Override
-    protected Item getDefaultItem() {
-        return ModItemsAmmo.CASTIRONROUNDSHOT.get();
+    public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 
     @Override
+    public ItemStack getItem() {
+        return new ItemStack(getDefaultItem());
+    }
+    @Override
+    protected ItemStack getPickupItem() {
+        return ItemStack.EMPTY;
+    }
+    @Override
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.EMPTY;
+    }
+
+    public ParticleOptions getTrailParticleType() {
+        return ParticleTypes.SMOKE;
+    }
+
     public void spawnTrailParticles() {
         Vec3 motion = this.getDeltaMovement();
         for (int i = 0; i < 5; i++) {
             double offset = i * 0.2;
             this.level().addParticle(
-                    ParticleTypes.POOF,
+                    getTrailParticleType(),
                     this.getX() - motion.x * offset,
                     this.getY() - motion.y * offset + 0.1,
                     this.getZ() - motion.z * offset,
                     motion.x * 0.05, motion.y * 0.05, motion.z * 0.05
             );
         }
-        for (int i = 0; i < 7; i++) {
-            double offset = i * 0.2;
-            this.level().addParticle(
-                    ParticleTypes.FLAME,
-                    this.getX() - motion.x * offset,
-                    this.getY() - motion.y * offset + 0.1,
-                    this.getZ() - motion.z * offset,
-                    motion.x * 0.05, motion.y * 0.05, motion.z * 0.05
-            );
-        }
-        this.level().addParticle(
-                ParticleTypes.FLASH,
-                this.getX() - motion.x,
-                this.getY() - motion.y + 0.1,
-                this.getZ() - motion.z,
-                motion.x * 0.05, motion.y * 0.05, motion.z * 0.05
-        );
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (level().isClientSide()) {
+            spawnTrailParticles();
+        }
+    }
+
+    public ParticleOptions getCollisionParticleType() {
+        return ParticleTypes.POOF;
+    }
+
+    public void spawnCollisionParticles(BlockPos pos) {
+        ((ServerLevel) this.level()).sendParticles(
+                getCollisionParticleType(),
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                10,
+                0.05, 0.05, 0.05,
+                0.06
+        );
+
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                ModSounds.BULLETHIT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
+    }
+
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
             spawnCollisionParticles(pResult.getBlockPos());
-            BlockPos abovePos = pResult.getBlockPos().above();
-
-            if (Math.random() < 0.75 && (this.level().isEmptyBlock(abovePos) || this.level().getBlockState(abovePos).canBeReplaced())) {
-                this.level().setBlock(abovePos, Blocks.FIRE.defaultBlockState(), Block.UPDATE_ALL_IMMEDIATE);
-            }
-
             this.discard();
         }
 
@@ -106,20 +135,17 @@ public class FlamingBuckshotProjectile extends BaseProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-    pResult.getEntity().invulnerableTime = 0;
+        pResult.getEntity().invulnerableTime = 0;
         if (!this.level().isClientSide()) {
-            DamageSource dmg = this.damageSources().mobProjectile(this, (LivingEntity ) this.getOwner());
-            if (pResult.getEntity() instanceof LivingEntity) {
-            ((LivingEntity) pResult.getEntity()).invulnerableTime = 0;}
+            DamageSource dmg = this.damageSources().arrow( this, this.getOwner());
 
-            pResult.getEntity().hurt(dmg, damage);
-            pResult.getEntity().setSecondsOnFire(12);
+            double speed = this.getDeltaMovement().length();
+            pResult.getEntity().hurt(dmg, this.damage);
+            Flintcore.LOGGER.info( Float.toString(this.damage) );
 
             spawnCollisionParticles(pResult.getEntity().getOnPos());
         }
         this.discard();
-
-        
     }
 
 }

@@ -29,6 +29,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -38,75 +39,25 @@ import org.ragingzombies.flintnpowder.ModItems;
 import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
 
-public class CastIronCannonballProjectile extends AbstractArrow implements ItemSupplier {
-
-    public float damage = 1;
-
-    public CastIronCannonballProjectile(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
+public class CastIronCannonballProjectile extends BaseProjectile {
+    public CastIronCannonballProjectile(EntityType<? extends AbstractArrow> pEntityType, LivingEntity livingEntity, Level pLevel) {
+        super(pEntityType, livingEntity, pLevel);
     }
-    public CastIronCannonballProjectile(Level pLevel) {
-        super(ModProjectiles.CASTIRONCANNONBALL.get(), pLevel);
-    }
-    public CastIronCannonballProjectile(Level pLevel, LivingEntity livingEntity) {
-        super(ModProjectiles.CASTIRONCANNONBALL.get(), livingEntity, pLevel);
+
+    public CastIronCannonballProjectile(EntityType<? extends AbstractArrow> pEntityType, Level level) {
+        super(pEntityType, level);
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
-        if (!level().isClientSide()) {
-            Vec3 motion = this.getDeltaMovement();
-            for (int i = 0; i < 5; i++) {
-                double offset = i * 0.2;
-                ((ServerLevel) this.level()).sendParticles(
-                        ParticleTypes.POOF,
-                        this.getX() - motion.x * offset,
-                        this.getY() - motion.y * offset + 0.1,
-                        this.getZ() - motion.z * offset,
-                        1,
-                        motion.x * 0.05, motion.y * 0.05, motion.z * 0.05,
-                        0.06
-                );
-            }
-        }
-    }
-
-    @Override
-    protected ItemStack getPickupItem() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return new ItemStack(ModItemsAmmo.CASTIRONCANNONBALL.get());
-    }
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.EMPTY;
-    }
-
-    void collisionParticles(BlockPos pos) {
-        ((ServerLevel) this.level()).sendParticles(
-                ParticleTypes.LARGE_SMOKE,
-                pos.getX(),
-                pos.getY(),
-                pos.getZ(),
-                10,
-                0.05, 0.05, 0.05,
-                0.06
-        );
-
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
-                ModSounds.BULLETHIT.get(), SoundSource.NEUTRAL, 0.5F, 1.0F);
+    public Item getDefaultItem() {
+        return ModItemsAmmo.CASTIRONCANNONBALL.get();
     }
 
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         if (!this.level().isClientSide()) {
-            collisionParticles(pResult.getBlockPos());
+            spawnCollisionParticles(pResult.getBlockPos());
 
             this.level().explode(this, pResult.getBlockPos().getX(), pResult.getBlockPos().getY(), pResult.getBlockPos().getZ(), 4F, false, Level.ExplosionInteraction.TNT);
             this.level().explode(this, pResult.getBlockPos().getX(), pResult.getBlockPos().getY(), pResult.getBlockPos().getZ(), 7F, false, Level.ExplosionInteraction.NONE);
@@ -133,7 +84,7 @@ public class CastIronCannonballProjectile extends AbstractArrow implements ItemS
 
             this.level().explode(this, pResult.getEntity().getX(), pResult.getEntity().getY(), pResult.getEntity().getZ(), 4F, Level.ExplosionInteraction.TNT);
             this.level().explode(this, pResult.getEntity().getX(), pResult.getEntity().getY(), pResult.getEntity().getZ(), 7F, Level.ExplosionInteraction.NONE);
-            collisionParticles(pResult.getEntity().getOnPos());
+            spawnCollisionParticles(pResult.getEntity().getOnPos());
             this.discard();
         }
 

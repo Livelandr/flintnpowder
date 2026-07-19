@@ -67,7 +67,7 @@ public class OilFlameshot extends BaseAmmo {
 
                 proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 2F, 2F * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
 
-                level.addFreshEntity(proj);
+                if (!level.isClientSide()) level.addFreshEntity(proj);
             });
         }
     }

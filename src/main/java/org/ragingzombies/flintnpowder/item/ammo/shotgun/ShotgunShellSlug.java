@@ -49,7 +49,7 @@ public class ShotgunShellSlug extends BaseAmmo {
         proj.setOwner(shooter);
         proj.shootFromRotation(shooter,xRotation, yRotation, 0.0F, 3F, 0.1F * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
 
         // Recoil
 

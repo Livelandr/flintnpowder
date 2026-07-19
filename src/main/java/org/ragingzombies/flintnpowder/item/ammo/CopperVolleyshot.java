@@ -30,6 +30,8 @@ import com.livelandr.flintcore.core.guns.GunBase;
 import com.livelandr.flintcore.core.util.CameraWork;
 import org.ragingzombies.flintnpowder.handlers.ServerTickHandler;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.CastIronRoundshotProjectile;
+import org.ragingzombies.flintnpowder.item.ammo.projectiles.CopperRoundshotProjectile;
+import org.ragingzombies.flintnpowder.item.ammo.projectiles.ModProjectiles;
 
 import java.util.Random;
 
@@ -56,9 +58,9 @@ public class CopperVolleyshot extends BaseAmmo {
                 serverLevel.playSound(null, shooter.getBlockX(), shooter.getBlockY(), shooter.getBlockZ(),
                         SoundEvents.FIREWORK_ROCKET_BLAST, SoundSource.NEUTRAL, 9.0F, 1.0F);
 
-                CastIronRoundshotProjectile proj = new CastIronRoundshotProjectile(level, shooter);
+                CopperRoundshotProjectile proj = new CopperRoundshotProjectile(ModProjectiles.COPPERROUNDSHOTPROJECTILE.get(), shooter, level);
 
-                proj.damage = this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun);
+                proj.setDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
                 proj.setOwner(shooter);
 
                 proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
@@ -70,7 +72,7 @@ public class CopperVolleyshot extends BaseAmmo {
                     OffsetEntityCamera(shooter, (-5 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
                 }
 
-                level.addFreshEntity(proj);
+                if (!level.isClientSide()) level.addFreshEntity(proj);
             });
         }
     }

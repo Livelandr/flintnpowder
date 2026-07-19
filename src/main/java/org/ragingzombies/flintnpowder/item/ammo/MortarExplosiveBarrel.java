@@ -43,7 +43,7 @@ public class MortarExplosiveBarrel extends BaseAmmo {
         proj.setOwner(shooter);
         proj.shootFromRotation(shooter, xRotation, yRotation, 0.0F, 4F, 0);
 
-        level.addFreshEntity(proj);
+        if (!level.isClientSide()) level.addFreshEntity(proj);
     }
 
     @Override
