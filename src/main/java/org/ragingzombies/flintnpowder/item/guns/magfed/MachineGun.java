@@ -77,7 +77,7 @@ public class MachineGun extends MagfedBaseEnchantable {
     }
     @Override
     public float recoilModifierY(LivingEntity id, ItemStack gun) {
-        return 3F*super.recoilModifierX(id, gun);
+        return 3F*super.recoilModifierY(id, gun);
     }
 
     @Override

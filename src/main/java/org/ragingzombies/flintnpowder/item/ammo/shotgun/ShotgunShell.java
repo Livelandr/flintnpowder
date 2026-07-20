@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import com.livelandr.flintcore.core.ammo.BaseAmmo;
 import com.livelandr.flintcore.core.guns.GunBase;
 import com.livelandr.flintcore.core.util.CameraWork;
+import org.ragingzombies.flintnpowder.Flintnpowder;
 import org.ragingzombies.flintnpowder.item.ammo.projectiles.shotgun.BuckshotProjectile;
 
 import javax.annotation.Nullable;
@@ -55,7 +56,7 @@ public class ShotgunShell extends BaseAmmo {
             BuckshotProjectile proj = new BuckshotProjectile(level, shooter);
 
             proj.setOwner(shooter);
-        proj.moveTo(shooter.getX(), shooter.getEyeY()-0.1, shooter.getZ(), shooter.getXRot(), shooter.getYRot());
+            proj.moveTo(shooter.getX(), shooter.getEyeY()-0.1, shooter.getZ(), shooter.getXRot(), shooter.getYRot());
             proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter) + (float)(Math.cos(angle)*radius),
                     CameraWork.getPlayerViewY(shooter) + (float)(Math.sin(angle)*radius), 0.0F, 5F,2 * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
             proj.setDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
@@ -64,11 +65,9 @@ public class ShotgunShell extends BaseAmmo {
         }
 
 
-        if (shooter instanceof Player) {
-            // Recoil
-            float angleX = rand.nextFloat(4.0F);
-            OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
-        }
+        // Recoil
+        float angleX = rand.nextFloat(4.0F);
+        OffsetEntityCamera(shooter, (-25 + (angleX - 2)) * ((GunBase) gun.getItem()).recoilModifierX(shooter, gun), (angleX - 2) * ((GunBase) gun.getItem()).recoilModifierY(shooter, gun));
     }
 
 

@@ -45,6 +45,7 @@ public class PumpActionBaseEnchantable extends PumpActionBase {
         return enchantment == ModEnchantments.QUALITY_PROPELLANT.get() ||
                 enchantment == ModEnchantments.TRIGGER_FINGER.get() ||
                 enchantment == ModEnchantments.SWIFT_RELOAD.get() ||
+                enchantment == ModEnchantments.COMPRENSATOR.get() ||
                 enchantment == ModEnchantments.GHOST_LOADING.get() ||
                 super.canApplyAtEnchantingTable(stack, enchantment);
     }

@@ -44,6 +44,7 @@ public class BlazelockBaseEnchantable extends BlazelockBase {
         return enchantment == ModEnchantments.QUALITY_PROPELLANT.get() ||
                 enchantment == ModEnchantments.TRIGGER_FINGER.get() ||
                 enchantment == ModEnchantments.SWIFT_RELOAD.get() ||
+                enchantment == ModEnchantments.COMPRENSATOR.get() ||
                 super.canApplyAtEnchantingTable(stack, enchantment);
     }
 

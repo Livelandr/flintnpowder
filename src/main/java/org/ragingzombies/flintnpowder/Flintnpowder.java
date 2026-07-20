@@ -18,8 +18,13 @@
  */
 package org.ragingzombies.flintnpowder;
 
+import com.livelandr.flintcore.core.util.HookSystem;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -70,6 +75,18 @@ public class Flintnpowder {
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+
+        HookSystem.addHook(HookSystem.CALCULATE_RECOIL_MODIFIER_X, context1 -> {
+            LivingEntity shooter = context1.getShooter();
+            ItemStack gun = context1.getGun();
+            float amoLevel = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.COMPRENSATOR.get(), gun);
+
+            if (amoLevel > 0) {
+                shooter.addDeltaMovement(shooter.getLookAngle().multiply(-0.25F * amoLevel, -0.25F * amoLevel, -0.25F * amoLevel) );
+                return 1F-0.25F*amoLevel;
+            }
+            return 1F;
+        });
     }
 
     // Add the example block item to the building blocks tab

@@ -46,7 +46,7 @@ public class PumpActionShotgun extends PumpActionBaseEnchantable {
 
     @Override
     public float accuracyModifier(LivingEntity ply, ItemStack gun) {
-        return 2 * super.accuracyModifier(ply, gun);
+        return 2F * super.accuracyModifier(ply, gun);
     }
 
     @Override

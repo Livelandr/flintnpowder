@@ -144,6 +144,29 @@ public class ModEnchantments {
             });
 
 
+    public static final RegistryObject<Enchantment> COMPRENSATOR =
+            ENCHANTMENTS.register("compensator", () -> new Enchantment(
+                    Enchantment.Rarity.RARE,
+                    EnchantmentCategory.WEAPON,
+                    new EquipmentSlot[]{EquipmentSlot.MAINHAND}
+            ) {
+                @Override
+                public int getMaxLevel() {
+                    return 3;
+                }
+
+                @Override
+                public int getMinCost(int level) {
+                    return 10 + (level - 1) * 8;
+                }
+
+                @Override
+                public int getMaxCost(int level) {
+                    return getMinCost(level) + 15;
+                }
+            });
+
+
     public static void register(IEventBus eventBus) {
         ENCHANTMENTS.register(eventBus);
     }
