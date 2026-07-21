@@ -36,8 +36,6 @@ import org.ragingzombies.flintnpowder.item.guns.flintlocks.Flinter;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Musket;
 
 public class HyperSkeletonEntity extends AbstractSkeleton {
-    private final RangedBowAttackGoal<AbstractSkeleton> bowGoal = new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F);
-
     public HyperSkeletonEntity(EntityType<? extends HyperSkeletonEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }

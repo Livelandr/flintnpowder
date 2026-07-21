@@ -60,7 +60,7 @@ public class MortarOld extends FlintlockBaseEnchantable {
 
 
     @Override
-    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, float rotationX, float rotationY) {
+    public void __internal_shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, float rotationX, float rotationY) {
         //super.shoot(pLevel, pPlayer, gunStack, rotationX, rotationY);
         ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 

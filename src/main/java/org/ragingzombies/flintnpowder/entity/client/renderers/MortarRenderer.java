@@ -17,7 +17,7 @@ public class MortarRenderer extends MobRenderer<MortarEntity, MortarModel<Mortar
 
     @Override
     public ResourceLocation getTextureLocation(MortarEntity pEntity) {
-        return new ResourceLocation(Flintnpowder.MOD_ID, "textures/entities/mortar.png");
+        return ResourceLocation.fromNamespaceAndPath(Flintnpowder.MOD_ID, "textures/entities/mortar.png");
     }
 
     @Override

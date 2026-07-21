@@ -77,6 +77,11 @@ public class Flinter extends FlintlockBaseEnchantable {
         }
 
         Random generator = new Random();
+
+        if (!(pPlayer instanceof Player)) {
+            return generator.nextDouble() <= 0.45;
+        }
+
         return generator.nextDouble() <= 0.2;
     }
 

@@ -62,7 +62,7 @@ public class CopperVolleyshot extends BaseAmmo {
 
                 proj.setDamage(this.damage * ((GunBase) gun.getItem()).damageModifier(shooter, gun));
                 proj.setOwner(shooter);
-        proj.moveTo(shooter.getX(), shooter.getEyeY()-0.1, shooter.getZ(), shooter.getXRot(), shooter.getYRot());
+            proj.moveTo(shooter.getX(), shooter.getEyeY()-0.1, shooter.getZ(), shooter.getXRot(), shooter.getYRot());
 
                 proj.shootFromRotation(shooter, CameraWork.getPlayerViewX(shooter)-5, CameraWork.getPlayerViewY(shooter), 0.0F, 10F, 4F * ((GunBase) gun.getItem()).accuracyModifier(shooter, gun));
 

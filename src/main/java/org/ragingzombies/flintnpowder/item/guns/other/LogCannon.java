@@ -19,14 +19,12 @@
 package org.ragingzombies.flintnpowder.item.guns.other;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -117,7 +115,7 @@ public class LogCannon extends GunBase {
     }
 
     @Override
-    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void __internal_shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
         GunBase gun = (GunBase) gunStack.getItem();
 
         TheRockProjectile proj = new TheRockProjectile(pLevel, pPlayer);
@@ -134,7 +132,7 @@ public class LogCannon extends GunBase {
 
         if (!pLevel.isClientSide()) pLevel.addFreshEntity(proj);
 
-        super.shoot(pLevel, pPlayer, gunStack);
+        super.__internal_shoot(pLevel, pPlayer, gunStack);
     }
 
     @Override

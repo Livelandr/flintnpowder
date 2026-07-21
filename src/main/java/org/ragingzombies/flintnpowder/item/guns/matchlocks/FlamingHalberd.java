@@ -124,7 +124,7 @@ public class FlamingHalberd extends FlintlockBaseEnchantable {
     }
 
     @Override
-    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
+    public void __internal_shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack) {
         pLevel.playSound(null, pPlayer,
                 SoundEvents.TNT_PRIMED, SoundSource.NEUTRAL, 1.0F, 0.75F);
 
@@ -134,7 +134,7 @@ public class FlamingHalberd extends FlintlockBaseEnchantable {
         gunStack.getTag().putBoolean("IsStuffed", false);
 
         ServerTickHandler.createTask(30, () -> {
-            super.shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
+            super.__internal_shoot(pLevel, pPlayer, gunStack, CameraWork.getPlayerViewX(pPlayer), CameraWork.getPlayerViewY(pPlayer));
             pLevel.playSound(null, pPlayer,
                     SoundEvents.GENERIC_EXPLODE, SoundSource.NEUTRAL, 8.0F, 0.5F);
             setReloadAnimation(gunStack);

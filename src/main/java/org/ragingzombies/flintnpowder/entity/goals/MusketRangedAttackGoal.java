@@ -1,20 +1,15 @@
 package org.ragingzombies.flintnpowder.entity.goals;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
-import org.ragingzombies.flintnpowder.Flintnpowder;
-import org.ragingzombies.flintnpowder.ModItems;
 import org.ragingzombies.flintnpowder.entity.custom.HyperSkeletonEntity;
 import org.ragingzombies.flintnpowder.item.ModItemsAmmo;
 import org.ragingzombies.flintnpowder.item.ModItemsGuns;
 import org.ragingzombies.flintnpowder.item.guns.flintlocks.Flinter;
-import org.ragingzombies.flintnpowder.item.guns.flintlocks.Musket;
 
 import java.util.EnumSet;
 
@@ -86,22 +81,22 @@ public class MusketRangedAttackGoal<T extends HyperSkeletonEntity & RangedAttack
         if (gun.getOrCreateTag().getInt("Gunpowder") < ((Flinter) gun.getItem()).gunpowderRequired) {
 
             mob.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GUNPOWDER));
-            ((Flinter) (gun.getItem())).interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
+            ((Flinter) (gun.getItem())).__internal_interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
 
         } else if (!gun.getTag().getBoolean("HasAmmo")) {
 
             mob.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(ModItemsAmmo.COPPERROUNDSHOT.get()));
-            ((Flinter) (gun.getItem())).interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
+            ((Flinter) (gun.getItem())).__internal_interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
 
         } else if (!gun.getTag().getBoolean("IsStuffed")) {
 
             mob.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.STICK));
-            ((Flinter) (gun.getItem())).interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
+            ((Flinter) (gun.getItem())).__internal_interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
             ((Flinter) (gun.getItem())).setAimAnimation(gun);
 
         } else if (allowShooting) {
             mob.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.FLINT));
-            ((Flinter) (gun.getItem())).interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
+            ((Flinter) (gun.getItem())).__internal_interaction(mob.level(), mob, gun, InteractionHand.MAIN_HAND,false, 0, 0, null);
         }
     }
 
@@ -150,9 +145,9 @@ public class MusketRangedAttackGoal<T extends HyperSkeletonEntity & RangedAttack
 
             interactMusket(true);
 
-            this.attackDelay = 30;
+            this.attackDelay = 10;
         } else if (this.attackDelay < 0) {
-            this.attackDelay = 30;
+            this.attackDelay = 5;
         }
     }
 }

@@ -19,7 +19,7 @@ public class CannonRenderer extends MobRenderer<CannonEntity, CannonModel<Cannon
 
     @Override
     public ResourceLocation getTextureLocation(CannonEntity pEntity) {
-        return new ResourceLocation(Flintnpowder.MOD_ID, "textures/entities/cannon.png");
+        return ResourceLocation.fromNamespaceAndPath(Flintnpowder.MOD_ID, "textures/entities/cannon.png");
     }
 
     @Override

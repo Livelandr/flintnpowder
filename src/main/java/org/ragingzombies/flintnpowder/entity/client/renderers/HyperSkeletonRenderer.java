@@ -20,7 +20,7 @@ import org.ragingzombies.flintnpowder.entity.custom.HyperSkeletonEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class HyperSkeletonRenderer extends HumanoidMobRenderer<HyperSkeletonEntity, HyperSkeletonModel<HyperSkeletonEntity>> {
-    private static final ResourceLocation SKELETON_LOCATION = new ResourceLocation(Flintnpowder.MOD_ID, "textures/entities/cultist.png");
+    private static final ResourceLocation SKELETON_LOCATION = ResourceLocation.fromNamespaceAndPath(Flintnpowder.MOD_ID, "textures/entities/cultist.png");
 
     public HyperSkeletonRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new HyperSkeletonModel<>(pContext.bakeLayer(ModModelLayers.HYPER_SKELETON_LAYER)), 0.5F);

@@ -25,24 +25,15 @@ import com.livelandr.flintcore.core.util.HookSystem;
 import com.livelandr.flintcore.core.util.ServerTickHandler;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.ragingzombies.flintnpowder.Flintnpowder;
-import org.ragingzombies.flintnpowder.core_modified.guns.FlintlockBaseEnchantable;
 import org.ragingzombies.flintnpowder.sound.ModSounds;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class MortarModern extends GunBase {
     public float angleX = 0;
@@ -99,8 +90,8 @@ public class MortarModern extends GunBase {
 
 
     @Override
-    public void shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, float rotationX, float rotationY) {
-        super.shoot(pLevel, pPlayer, gunStack, rotationX, rotationY);
+    public void __internal_shoot(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, float rotationX, float rotationY) {
+        super.__internal_shoot(pLevel, pPlayer, gunStack, rotationX, rotationY);
 
         ItemStack ammoData = ItemStack.of((CompoundTag) gunStack.getTag().get("AmmoType"));
 
@@ -121,9 +112,9 @@ public class MortarModern extends GunBase {
     }
 
     @Override
-    public boolean interaction(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, InteractionHand pUsedHand, boolean proxy, float proxyX, float proxyY, LivingEntity proxyUser) {
-        if (!checkCooldown(gunStack)) {
-            return false;
+    public void __internal_interaction(Level pLevel, LivingEntity pPlayer, ItemStack gunStack, InteractionHand pUsedHand, boolean proxy, float proxyX, float proxyY, LivingEntity proxyUser) {
+        if (!__internal_checkCooldown(gunStack)) {
+            return;
         }
 
         ItemStack secondItemStack;
@@ -153,12 +144,11 @@ public class MortarModern extends GunBase {
 
                 ServerTickHandler.createTask(10, () -> {
                     if (gunStack == null || pPlayer == null) return;
-                    shoot(pLevel, pPlayer, gunStack, proxyX, proxyY);
+                    __internal_shoot(pLevel, pPlayer, gunStack, proxyX, proxyY);
                 });
             }
 
         }
 
-        return true;
     }
 }
