@@ -141,7 +141,6 @@ public abstract class BaseProjectile extends AbstractArrow implements ItemSuppli
 
             double speed = this.getDeltaMovement().length();
             pResult.getEntity().hurt(dmg, this.damage);
-            Flintcore.LOGGER.info( Float.toString(this.damage) );
 
             spawnCollisionParticles(pResult.getEntity().getOnPos());
         }

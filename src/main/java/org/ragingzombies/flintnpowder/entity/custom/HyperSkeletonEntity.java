@@ -110,8 +110,7 @@ public class HyperSkeletonEntity extends AbstractSkeleton {
                     this.level(),
                     this,
                     0,
-                    true)
-            ;
+                    true);
         }
     }
 
