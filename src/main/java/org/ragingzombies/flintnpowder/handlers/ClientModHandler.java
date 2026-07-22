@@ -72,22 +72,7 @@ public class ClientModHandler {
         EntityRenderers.register(ModEntities.HYPER_SKELETON.get(), HyperSkeletonRenderer::new);
 
         // GUNS
-        // Shotgun
-        ItemProperties.register(
-                ModItemsGuns.PUMPACTIONSHOTGUN.get(),
-                fromNamespaceAndPath(MOD_ID, "shotgun_pumping"),
-                (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("IsUncocked") ? 1.0F : 0.0F;
-                }
-        );
         // Musket
-        ItemProperties.register(
-                ModItemsGuns.MUSKET.get(),
-                fromNamespaceAndPath(MOD_ID, "musket_primed"),
-                (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("IsCocked") ? 1.0F : 0.0F;
-                }
-        );
         ItemProperties.register(
                 ModItemsGuns.MUSKET.get(),
                 fromNamespaceAndPath(MOD_ID, "musket_bayonet"),
@@ -95,20 +80,20 @@ public class ClientModHandler {
                     return GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get()) ? 1.0F : 0.0F;
                 }
         );
-        // Flinter
         ItemProperties.register(
-                ModItemsGuns.FLINTER.get(),
-                fromNamespaceAndPath(MOD_ID, "flinter_ready"),
+                ModItemsGuns.BOLTACTIONRIFLE.get(),
+                fromNamespaceAndPath(MOD_ID, "bolt_action_bayonet"),
                 (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("onStuff") ? 1.0F : 0.0F;
+                    return GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get()) ? 1.0F : 0.0F;
                 }
         );
+
         // Arquebus
         ItemProperties.register(
                 ModItemsGuns.FLINTER.get(),
                 fromNamespaceAndPath(MOD_ID, "arquebus_ready"),
                 (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("onStuff") ? 1.0F : 0.0F;
+                    return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
                 }
         );
         // Donderbuss
@@ -116,7 +101,7 @@ public class ClientModHandler {
                 ModItemsGuns.DONDERBUSS.get(),
                 fromNamespaceAndPath(MOD_ID, "donderbuss_ready"),
                 (stack, level, entity, seed) -> {
-                    return stack.getOrCreateTag().getBoolean("onStuff") ? 1.0F : 0.0F;
+                    return stack.getOrCreateTag().getBoolean("IsStuffed") ? 1.0F : 0.0F;
                 }
         );
         // Bolt Action Rifle
@@ -125,13 +110,6 @@ public class ClientModHandler {
                 fromNamespaceAndPath(MOD_ID, "bolt_action_rifle_bolting"),
                 (stack, level, entity, seed) -> {
                     return stack.getOrCreateTag().getBoolean("IsUncocked") ? 1.0F : 0.0F;
-                }
-        );
-        ItemProperties.register(
-                ModItemsGuns.BOLTACTIONRIFLE.get(),
-                fromNamespaceAndPath(MOD_ID, "bolt_action_bayonet"),
-                (stack, level, entity, seed) -> {
-                    return GunBase.getGunBase(stack).isAttachmentSpecific(stack, "underbarrel", ModItemsAttachments.BAYONET.get()) ? 1.0F : 0.0F;
                 }
         );
         // Blunderbuss

@@ -51,7 +51,7 @@
   "overrides": [
     {
       "predicate": {
-        "flintnpowder:arquebus_ready": 1
+        "flintcore:isstuffed": 1
       },
       "model": "flintnpowder:item/arquebus_0"
     }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "flintnpowder:item/50bmground"
+    "layer0": "flintnpowder:item/50bmgroundsubsonic"
   }
 }

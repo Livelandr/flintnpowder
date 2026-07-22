@@ -43,7 +43,7 @@
   "overrides": [
     {
       "predicate": {
-        "flintnpowder:flinter_ready": 1
+        "flintnpowder:isstuffed": 1
       },
       "model": "flintnpowder:item/flinter_0"
     }

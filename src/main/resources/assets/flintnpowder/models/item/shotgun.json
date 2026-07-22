@@ -51,7 +51,7 @@
   "overrides": [
     {
       "predicate": {
-        "flintnpowder:shotgun_pumping": 1
+        "flintcore:isuncocked": 1
       },
       "model": "flintnpowder:item/shotgun_0"
     }
