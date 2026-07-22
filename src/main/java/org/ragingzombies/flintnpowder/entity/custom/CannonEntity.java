@@ -76,6 +76,11 @@ public class CannonEntity extends Mob {
     }
 
     @Override
+    public boolean shouldShowName() {
+        return false;
+    }
+
+    @Override
     public boolean isNoGravity() {
         if (isAiming) return true;
 

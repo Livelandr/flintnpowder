@@ -77,6 +77,10 @@ public class OldMortarEntity extends Mob {
     public void setOwnerName(Component name) {
         this.setCustomName(Component.translatable("entity.flintnpowder.mortar").append(" [").append(name).append("]"));
     }
+    @Override
+    public boolean shouldShowName() {
+        return false;
+    }
 
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes()
